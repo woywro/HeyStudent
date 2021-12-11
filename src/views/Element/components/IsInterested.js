@@ -1,11 +1,11 @@
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { dataContext } from "../../App";
+import { dataContext } from "../../../App";
 import { useContext, useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db } from "../../../firebase/firebase";
 import { Box } from "@mui/system";
-import { defineSuffix } from "../../utils/defineSuffix";
+import { defineSuffix } from "../../../utils/defineSuffix";
 import { useCallback } from "react";
 
 export const IsInterested = () => {

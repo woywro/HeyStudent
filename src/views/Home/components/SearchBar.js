@@ -1,7 +1,7 @@
 import { Paper } from "@mui/material";
-import { dataContext } from "../../App";
+import { dataContext } from "../../../App";
 import { useContext, useState } from "react";
-import { NameSearch } from "../molecules/NameSearch";
+import { NameSearch } from "./NameSearch";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";

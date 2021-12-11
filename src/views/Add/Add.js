@@ -1,26 +1,15 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import MobileStepper from "@mui/material/MobileStepper";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import { Stack } from "@mui/material";
-import { ErrorMessage } from "@hookform/error-message";
+import { db } from "../../firebase/firebase";
 import { Container } from "@mui/material";
-import { PageTopBar } from "../components/molecules/PageTopBar";
-import { generalInfoInputs } from "../utils/inputsData";
-import { subjectInputs } from "../utils/inputsData";
-import { CourseInfoAdd } from "../components/organisms/CourseInfoAdd";
-import { CourseSubjectsAdd } from "../components/organisms/CourseSubjectsAdd";
-import { CourseSubmit } from "../components/organisms/CourseSubmit";
+import { PageTopBar } from "../../components/PageTopBar";
+import { CourseInfoAdd } from "./components/CourseInfoAdd";
+import { CourseSubjectsAdd } from "./components/CourseSubjectsAdd";
+import { CourseSubmit } from "./components/CourseSubmit";
 
 export const Add = () => {
   const [activeStep, setActiveStep] = useState(0);

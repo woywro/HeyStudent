@@ -1,16 +1,12 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 import { Stack } from "@mui/material";
-import { ErrorMessage } from "@hookform/error-message";
-import { generalInfoInputs } from "../../utils/inputsData";
 import { Button } from "@mui/material";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { subjectInputs } from "../../utils/inputsData";
+import { subjectInputs } from "../../../utils/inputsData";
 
 export const CourseSubjectsAdd = ({
   registerSubjects,

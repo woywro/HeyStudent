@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
-import { ObservedList } from "../components/organisms/ObservedList";
+import { ObservedList } from "./components/ObservedList";
 import { Container } from "@mui/material";
-import { PageTopBar } from "../components/molecules/PageTopBar";
+import { PageTopBar } from "../../components/PageTopBar";
 
 export const Observed = () => {
   return (

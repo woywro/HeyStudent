@@ -4,9 +4,8 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
-import { Stack } from "@mui/material";
 import { ErrorMessage } from "@hookform/error-message";
-import { generalInfoInputs } from "../../utils/inputsData";
+import { generalInfoInputs } from "../../../utils/inputsData";
 
 export const CourseInfoAdd = ({ register, errors, handleSubmit, onSubmit }) => {
   return (

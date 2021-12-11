@@ -1,9 +1,9 @@
-import { ListItem } from "../molecules/ListItem";
-import { dataContext } from "../../App";
+import { ListItem } from "../../../components/ListItem";
+import { dataContext } from "../../../App";
 import { useContext, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
-import { db } from "../../firebase/firebase";
+import { db } from "../../../firebase/firebase";
 import { Container } from "@mui/material";
 import {
   collection,
@@ -15,7 +15,7 @@ import {
 } from "firebase/firestore";
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { ElementCard } from "../molecules/ElementCard";
+import { ElementCard } from "../../../components/ElementCard";
 
 export const HomeList = () => {
   const context = useContext(dataContext);

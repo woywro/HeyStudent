@@ -1,15 +1,12 @@
-import styled from "styled-components";
-import { collection, query, where, getDocs, doc } from "firebase/firestore";
 import { useContext, useState } from "react";
-import { dataContext } from "../../App";
-import { db } from "../../firebase/firebase";
+import { dataContext } from "../../../App";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import { LikedItem } from "../molecules/LikedItem";
+import { LikedItem } from "./LikedItem";
 import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import { Container } from "@mui/material";
-import { search } from "../../utils/search";
+import { search } from "../../../utils/search";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Grid } from "@mui/material";
 

@@ -1,20 +1,18 @@
-import "./App.css";
-import { Home } from "./views/Home";
+import { Home } from "./views/Home/Home";
 import { GlobalStyle } from "./theme/globalStyles";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Element } from "./views/Element";
+import { Element } from "./views/Element/Element";
 import { ThemeProvider } from "@mui/system";
 import { defaultTheme } from "./theme/theme";
-import { TopBar } from "./components/organisms/TopBar";
-import { Add } from "./views/Add";
+import { TopBar } from "./components/TopBar";
+import { Add } from "./views/Add/Add";
 import { createContext } from "react";
-import { Login } from "./views/Login";
+import { Login } from "./views/Login/Login";
 import { auth, db } from "./firebase/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { doc, getDocs, getDoc, setDoc, collection } from "firebase/firestore";
-import { Observed } from "./views/Observed";
-import { handleAdd } from "./utils/handleAdd";
+import { Observed } from "./views/Observed/Observed";
 export const dataContext = createContext();
 
 function App() {

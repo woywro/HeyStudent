@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
-import { dataContext } from "../../App";
+import { dataContext } from "../App";
 import { useContext, useCallback } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 

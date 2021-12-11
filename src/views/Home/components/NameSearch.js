@@ -3,9 +3,9 @@ import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { dataContext } from "../../App";
+import { dataContext } from "../../../App";
 import { useContext } from "react";
-import { search } from "../../utils/search";
+import { search } from "../../../utils/search";
 export const NameSearch = () => {
   const context = useContext(dataContext);
   const [input, setInput] = useState("");

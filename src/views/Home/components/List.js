@@ -1,11 +1,11 @@
-import { ListItem } from "../molecules/ListItem";
-import { dataContext } from "../../App";
+import { ListItem } from "../../../components/ListItem";
+import { dataContext } from "../../../App";
 import { useContext } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
-import { defineSuffix } from "../../utils/defineSuffix";
+import { defineSuffix } from "../../../utils/defineSuffix";
 import Grid from "@mui/material/Grid";
 
 export const List = () => {

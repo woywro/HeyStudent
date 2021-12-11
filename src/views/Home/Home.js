@@ -1,12 +1,11 @@
-import { List } from "../components/organisms/List";
-import { SearchBar } from "../components/organisms/SearchBar";
+import { List } from "./components/List";
+import { SearchBar } from "./components/SearchBar";
 import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { Container } from "@mui/material";
-import { HomeList } from "../components/organisms/HomeList";
+import { HomeList } from "./components/HomeList";
 import { useContext } from "react";
-import { dataContext } from "../App";
-import { PageTopBar } from "../components/molecules/PageTopBar";
+import { dataContext } from "../../App";
+import { PageTopBar } from "../../components/PageTopBar";
 
 export const Home = () => {
   let context = useContext(dataContext);

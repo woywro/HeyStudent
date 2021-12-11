@@ -8,11 +8,11 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { dataContext } from "../../App";
+import { dataContext } from "../App";
 import { useContext } from "react";
 import Box from "@mui/material/Box";
-import { db } from "../../firebase/firebase";
-import { defineSuffix } from "../../utils/defineSuffix";
+import { db } from "../firebase/firebase";
+import { defineSuffix } from "../utils/defineSuffix";
 
 import {
   collection,

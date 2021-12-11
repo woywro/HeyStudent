@@ -3,10 +3,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { signInWithGoogle } from "../firebase/firebase";
+import { signInWithGoogle } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { dataContext } from "../App";
+import { dataContext } from "../../App";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export const Login = () => {

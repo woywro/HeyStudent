@@ -1,12 +1,10 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { useContext } from "react";
-import { dataContext } from "../../App";
-import { db } from "../../firebase/firebase";
+import { dataContext } from "../../../App";
+import { db } from "../../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { Paper, Stack } from "@mui/material";
-import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
