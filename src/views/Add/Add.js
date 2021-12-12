@@ -49,8 +49,8 @@ export const Add = () => {
   };
 
   function createTags(tags, nc) {
-    tags.push(nc.city);
     let tagsCopy = JSON.parse(JSON.stringify(tags));
+    tags.push(nc.city);
     const toDelete = ["i", "w"];
     tags.push(...nc.name.filter((e) => !toDelete.includes(e)));
     var result1 = tags.flatMap((v, i) =>
@@ -94,7 +94,7 @@ export const Add = () => {
     nc.minPoints = { value: nc.minPoints, year: "2021/2022" };
     nc.willStudy = [];
     nc.willStudyCount = 0;
-    console.log(newCourse.requiredSubjects);
+    console.log(newCourse.tags);
     setDoc(doc(db, "Courses", random.toString()), newCourse);
   }
 

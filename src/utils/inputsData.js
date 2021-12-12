@@ -131,7 +131,7 @@ export const generalInfoInputs = [
     label: "tagi kierunku",
     helpText: "tagi dla kierunku",
     type: "input",
-    value: "programowanie,ekonomia",
+    value: "programowanie/ekonomia",
   },
   {
     element: "category",

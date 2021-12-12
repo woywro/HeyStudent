@@ -33,7 +33,7 @@ export const CourseInfoAdd = ({ register, errors, handleSubmit, onSubmit }) => {
               {e.type == "input" && (
                 <TextField
                   label={e.label}
-                  // value={e.value}
+                  value={e.value}
                   {...register(e.element, e.validation)}
                 />
               )}
