@@ -12,7 +12,7 @@ export const SearchBar = () => {
   const matches = useMediaQuery("(min-width:600px)");
   const context = useContext(dataContext);
   const [sort, setSort] = useState("random");
-  const { searched } = useSearchContext();
+  const { searched, setSearched } = useSearchContext();
 
   const handleInputChange = (e) => {
     setSort(e.target.value);
@@ -22,23 +22,21 @@ export const SearchBar = () => {
   const sortList = (sort) => {
     if (sort == "alphabetical") {
       const sorted = JSON.parse(
-        JSON.stringify(context.searched.sort((a, b) => b.name[0] < a.name[0]))
+        JSON.stringify(searched.sort((a, b) => b.name[0] < a.name[0]))
       );
-      context.setSearched(sorted);
+      setSearched(sorted);
     } else if (sort == "popularity") {
       const sorted = JSON.parse(
         JSON.stringify(
-          context.searched.sort(
-            (a, b) => b.willStudy.length - a.willStudy.length
-          )
+          searched.sort((a, b) => b.willStudy.length - a.willStudy.length)
         )
       );
-      context.setSearched(sorted);
+      setSearched(sorted);
     } else if (sort == "random") {
       const shuffledArray = JSON.parse(
-        JSON.stringify(context.searched.sort((a, b) => 0.5 - Math.random()))
+        JSON.stringify(searched.sort(() => 0.5 - Math.random()))
       );
-      context.setSearched(shuffledArray);
+      setSearched(shuffledArray);
     }
   };
 
@@ -53,7 +51,7 @@ export const SearchBar = () => {
       }}
     >
       <NameSearch />
-      {searched === [] && (
+      {searched !== false && (
         <ToggleButtonGroup
           value={sort}
           exclusive
