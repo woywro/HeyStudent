@@ -12,6 +12,7 @@ export const generalInfoInputs = [
       },
     },
     type: "input",
+    value: "Informatyka i Ekonometria",
   },
   {
     element: "university",
@@ -30,6 +31,7 @@ export const generalInfoInputs = [
       },
     },
     type: "input",
+    value: "Uniwersytet Gdański",
   },
   {
     element: "departament",
@@ -48,6 +50,7 @@ export const generalInfoInputs = [
       },
     },
     type: "input",
+    value: "Wydział fizyki",
   },
   {
     element: "city",
@@ -55,6 +58,7 @@ export const generalInfoInputs = [
     helpText: "wpisz nazwę miasta",
     type: "select",
     options: ["Gdańsk", "Poznań"],
+    value: "Gdańsk",
   },
   {
     element: "type",
@@ -62,6 +66,7 @@ export const generalInfoInputs = [
     helpText: "wpisz typ studiów (stacjonarne/zaoczne)",
     type: "select",
     options: ["stacjonarne", "zaoczne"],
+    value: "stacjonarne",
   },
   {
     element: "degree",
@@ -69,6 +74,7 @@ export const generalInfoInputs = [
     helpText: "wpisz poziom studiów (licencjat/magister)",
     type: "select",
     options: ["licencjat", "magister", "inżynier"],
+    value: "licencjat",
   },
   {
     element: "website",
@@ -76,6 +82,7 @@ export const generalInfoInputs = [
     helpText: "wpisz adres strony wydziału",
     validation: { required: "adres strony jest wymagany" },
     type: "input",
+    value: "licenadadadadcjat",
   },
   {
     element: "maxPeople",
@@ -83,6 +90,7 @@ export const generalInfoInputs = [
     helpText: "wpisz liczbę miejsc na kierunku",
     validation: { required: "adres strony jest wymagany" },
     type: "input",
+    value: 150000,
   },
   {
     element: "description",
@@ -100,6 +108,7 @@ export const generalInfoInputs = [
       },
     },
     type: "input",
+    value: "to jest opis kierunku wtftftftftfttftftf",
   },
   {
     element: "minPoints",
@@ -107,6 +116,7 @@ export const generalInfoInputs = [
     helpText: "zeszłoroczny próg punktowy",
     type: "input",
     validation: { required: "próg jest wymagany" },
+    value: "prógggg",
   },
   {
     element: "requiredSubjects",
@@ -114,12 +124,14 @@ export const generalInfoInputs = [
     helpText: "Wymagane przedmioty np. (fizyka pr, matematyka pr, polski pp)",
     validation: { required: "przedmioty są wymagane" },
     type: "input",
+    value: ["matma pr/fizyka pr"],
   },
   {
     element: "tags",
     label: "tagi kierunku",
     helpText: "tagi dla kierunku",
     type: "input",
+    value: "programowanie,ekonomia",
   },
   {
     element: "category",
@@ -127,6 +139,7 @@ export const generalInfoInputs = [
     helpText: "wpisz kategorie studiów",
     type: "select",
     options: ["informatyczne", "ekonomiczne", "techniczne"],
+    value: "informatyczne",
   },
 ];
 
@@ -135,25 +148,30 @@ export const subjectInputs = [
     element: "name",
     label: "nazwa",
     helpText: "wpisz nazwę przedmiotu",
+    value: "matematyka",
   },
   {
     element: "hours",
     label: "ilość godzin",
     helpText: "wpisz ilość godzin",
+    value: 30,
   },
   {
     element: "ects",
     label: "punkty ects",
     helpText: "wpisz ilość punktów ects",
+    value: 2,
   },
   {
     element: "year",
     label: "semsestr studiów",
     helpText: "wpisz semestr na którym będą odpywały się zajęcia",
+    value: 2,
   },
   {
     element: "description",
     label: "opis przedmiotu",
     helpText: "opisz przedmiot w 3 zdaniach",
+    value: "to jest opis przedmiotu, który jest spoko",
   },
 ];

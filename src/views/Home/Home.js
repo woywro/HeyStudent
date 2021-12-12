@@ -3,8 +3,6 @@ import { SearchBar } from "./components/SearchBar";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import { HomeList } from "./components/HomeList";
-import { useContext } from "react";
-import { dataContext } from "../../App";
 import { PageTopBar } from "../../components/PageTopBar";
 import { useSearchContext } from "../../context/searchContext";
 

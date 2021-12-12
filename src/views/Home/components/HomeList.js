@@ -55,7 +55,9 @@ export const HomeList = () => {
       component="ul"
     >
       <>
-        <Typography variant="h5">Odkrywaj kierunki</Typography>
+        <Typography variant="h5" sx={{ marginBottom: 1 }}>
+          Odkrywaj kierunki
+        </Typography>
         <ElementCard
           title="Najpopularniejsze"
           content={

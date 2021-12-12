@@ -49,19 +49,28 @@ export const Add = () => {
   };
 
   function createTags(tags, nc) {
-    tags.push(nc.city.toLowerCase());
-    tags.push(nc.name.join(" ").toLowerCase());
+    tags.push(nc.city);
+    let tagsCopy = JSON.parse(JSON.stringify(tags));
+    const toDelete = ["i", "w"];
+    tags.push(...nc.name.filter((e) => !toDelete.includes(e)));
     var result1 = tags.flatMap((v, i) =>
       tags.slice(i + 1).map((w) => v + " " + w)
     );
     var result2 = tags.flatMap((v, i) =>
       tags.slice(i + 1).map((w) => w + " " + v)
     );
-    const result = result1.concat(result2);
-    result.push(nc.city.toLowerCase());
-    result.push(nc.name.join(" ").toLowerCase());
-    result.push(nc.university.toLowerCase());
-    result.push(nc.category.toLowerCase());
+    tags.push(nc.name.join(" "));
+    let result = result1.concat(result2);
+    result.push(...tagsCopy);
+    result.push(nc.city);
+    result.push(nc.name.join(" "));
+    result.push(nc.university);
+    result.push(nc.category);
+    result.push(`${nc.category} ${nc.city}`);
+    result.push(`${nc.city} ${nc.category}`);
+    result.push(`${nc.city} ${nc.name.join(" ")}`);
+    result.push(`${nc.name.join(" ")} ${nc.city}`);
+    result = result.map((e) => e.toLowerCase());
     return result;
   }
 
@@ -70,14 +79,22 @@ export const Add = () => {
     const nc = newCourse;
     nc.subjects = newSubjects;
     nc.name = nc.name.split(" ");
-    nc.requiredSubjects = nc.requiredSubjects.split(",");
-    nc.tags = createTags(nc.tags.split(","), nc);
+    let requiredArray = nc.requiredSubjects.split("/");
+    let requiredSubject = {};
+    nc.requiredSubjects = requiredArray.map((e) => {
+      return {
+        name: e.split(" ")[0],
+        level: e.split(" ")[1],
+      };
+    });
+    nc.tags = createTags(nc.tags.split("/"), nc);
     nc.id = random.toString();
     nc.message = selectedVal;
     nc.category = [nc.category];
     nc.minPoints = { value: nc.minPoints, year: "2021/2022" };
     nc.willStudy = [];
     nc.willStudyCount = 0;
+    console.log(newCourse.requiredSubjects);
     setDoc(doc(db, "Courses", random.toString()), newCourse);
   }
 
