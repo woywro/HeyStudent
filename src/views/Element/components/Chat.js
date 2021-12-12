@@ -6,33 +6,24 @@ import { ChatMessage } from "./ChatMessage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Typography } from "@mui/material";
 import { Paper } from "@mui/material";
-import {
-  getDocs,
-  getDoc,
-  collection,
-  setDoc,
-  addDoc,
-  query,
-  doc,
-  limit,
-  orderBy,
-  deleteDoc,
-  where,
-} from "firebase/firestore";
+import { collection, addDoc, query, limit, orderBy } from "firebase/firestore";
 import "../../../App.css";
 import { Input } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
+import { useUserContext } from "../../../context/userContext";
+import { useChoosenContext } from "../../../context/choosenContext";
 
 export const Chat = () => {
-  const context = useContext(dataContext);
+  const { choosen, setChoosen } = useChoosenContext();
 
-  const messagesRef = collection(db, `Chats/${context.choosen.id}/messages`);
+  const messagesRef = collection(db, `Chats/${choosen.id}/messages`);
   const q = query(messagesRef, orderBy("createdAt"), limit(6));
   const [messages] = useCollectionData(q, {
     idField: "id",
   });
+  const { user } = useUserContext();
 
   const [formValue, setFormValue] = useState("");
 
@@ -43,14 +34,14 @@ export const Chat = () => {
 
     await addDoc(messagesRef, {
       text: formValue,
-      uid: context.user.uid,
+      uid: user.uid,
       createdAt: time,
-      course: context.choosen.id,
+      course: choosen.id,
     });
     setFormValue("");
   };
 
-  return context.user ? (
+  return user ? (
     <>
       <Box
         elevation={6}
@@ -71,7 +62,13 @@ export const Chat = () => {
             onChange={(e) => setFormValue(e.target.value)}
             placeholder="napisz wiadomość"
           />
-          <Button variant="contained" type="submit" disabled={!formValue}>
+          <Button
+            variant="contained"
+            type="submit"
+            disabl
+            color="secondary"
+            ed={!formValue}
+          >
             wyślij
           </Button>
         </Stack>

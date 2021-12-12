@@ -8,10 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { dataContext } from "../App";
 import { useContext, useCallback } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useUserContext } from "../context/userContext";
 
 export default function LeftDrawer({ isOpen, setOpen }) {
   const matches = useMediaQuery("(min-width:600px)");
-  let context = useContext(dataContext);
+  const { user } = useUserContext();
   let navigate = useNavigate();
   const handleCloseMenu = useCallback(() => {
     setOpen(false);
@@ -24,7 +25,6 @@ export default function LeftDrawer({ isOpen, setOpen }) {
       <Drawer
         anchor={"left"}
         open={isOpen}
-        // position="static"
         variant="temporary"
         onClose={handleCloseMenu}
       >
@@ -40,7 +40,7 @@ export default function LeftDrawer({ isOpen, setOpen }) {
                 onClick={() => navigate("/", { replace: false })}
               />
             </ListItem>
-            {context.user && (
+            {user && (
               <>
                 <ListItem sx={{ padding: 1 }} button>
                   <ListItemText

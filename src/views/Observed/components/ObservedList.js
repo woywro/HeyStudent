@@ -9,24 +9,32 @@ import { Container } from "@mui/material";
 import { search } from "../../../utils/search";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Grid } from "@mui/material";
+import {
+  loadingContext,
+  useLoadingContext,
+} from "../../../context/loadingContext";
+import { useUserContext } from "../../../context/userContext";
+import { useUserDataContext } from "../../../context/userDataContext";
 
 export const ObservedList = () => {
+  const { user, setUser } = useUserContext();
+  const { userData, setUserData } = useUserDataContext();
   const matches = useMediaQuery("(min-width:600px)");
-  const context = useContext(dataContext);
   const [likedArray, setLikedArray] = useState([]);
+  const { isLoading, setLoading } = useLoadingContext();
 
   useEffect(() => {
-    if (context.user && context.userData.likedItems.length !== 0) {
+    if (user && userData.likedItems.length !== 0) {
       search(
-        context.setLoading,
+        setLoading,
         "Courses",
         "id",
         "in",
-        context.userData.likedItems,
+        userData.likedItems,
         setLikedArray
       );
     }
-  }, [context.userData]);
+  }, [userData]);
 
   return (
     <Container
@@ -40,7 +48,7 @@ export const ObservedList = () => {
         width: "100vw",
       }}
     >
-      {context.isLoading ? (
+      {isLoading ? (
         <Box sx={{ width: "100%", height: "100%" }}>
           <CircularProgress />
         </Box>

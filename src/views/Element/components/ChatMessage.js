@@ -3,14 +3,15 @@ import { dataContext } from "../../../App";
 import { useContext } from "react";
 import { Paper } from "@mui/material";
 import { Box } from "@mui/system";
+import { useUserContext } from "../../../context/userContext";
+import { useUserDataContext } from "../../../context/userDataContext";
 
 export const ChatMessage = (props) => {
-  const context = useContext(dataContext);
-
+  const { user } = useUserContext();
   const { text, uid } = props.message;
 
-  const messageColor = uid === context.user.uid ? "primary.light" : "#BEBEBE";
-  const messageJustify = uid === context.user.uid ? "flex-end" : "flex-start";
+  const messageColor = uid === user.uid ? "primary.light" : "#BEBEBE";
+  const messageJustify = uid === user.uid ? "flex-end" : "flex-start";
 
   return (
     <Box

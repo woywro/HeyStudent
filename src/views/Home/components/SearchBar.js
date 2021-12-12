@@ -5,11 +5,14 @@ import { NameSearch } from "./NameSearch";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useSearchContext } from "../../../context/searchContext";
 
 export const SearchBar = () => {
   const matches = useMediaQuery("(min-width:600px)");
   const context = useContext(dataContext);
   const [sort, setSort] = useState("random");
+  const { searched } = useSearchContext();
 
   const handleInputChange = (e) => {
     setSort(e.target.value);
@@ -50,7 +53,7 @@ export const SearchBar = () => {
       }}
     >
       <NameSearch />
-      {context.isSearching && (
+      {searched === [] && (
         <ToggleButtonGroup
           value={sort}
           exclusive

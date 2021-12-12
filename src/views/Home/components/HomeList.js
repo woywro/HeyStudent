@@ -16,9 +16,15 @@ import {
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { ElementCard } from "../../../components/ElementCard";
+import { fieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
+import { useFieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useChoosenContext } from "../../../context/choosenContext";
 
 export const HomeList = () => {
-  const context = useContext(dataContext);
+  const fos = useFieldsOfStudyContext();
+  const { isLoading, setLoading } = useLoadingContext();
+  const { choosen, setChoosen } = useChoosenContext();
 
   useEffect(() => {
     async function getData() {
@@ -29,7 +35,8 @@ export const HomeList = () => {
       docSnap.forEach((doc) => {
         array.push(doc.data());
       });
-      context.setFieldsOfStudy(array);
+      fos.setFieldsOfStudy(array);
+      setLoading(false);
     }
     getData();
   }, []);
@@ -59,18 +66,18 @@ export const HomeList = () => {
                 height: 1,
               }}
             >
-              {context.isLoading && (
+              {isLoading && (
                 <Box sx={{ width: "100%", height: "100%" }}>
                   <CircularProgress />
                 </Box>
               )}
-              {context.fieldsOfStudy.map((item) => {
+              {fos.fieldsOfStudy.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} md={6}>
                     <ListItem
                       key={item.name}
                       item={item}
-                      setChoosen={context.setChoosen}
+                      setChoosen={setChoosen}
                     />
                   </Grid>
                 );

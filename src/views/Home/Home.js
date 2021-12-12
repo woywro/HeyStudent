@@ -6,9 +6,10 @@ import { HomeList } from "./components/HomeList";
 import { useContext } from "react";
 import { dataContext } from "../../App";
 import { PageTopBar } from "../../components/PageTopBar";
+import { useSearchContext } from "../../context/searchContext";
 
 export const Home = () => {
-  let context = useContext(dataContext);
+  const { searched } = useSearchContext();
   return (
     <Container
       sx={{
@@ -35,7 +36,7 @@ export const Home = () => {
         }
       />
 
-      {context.isSearching ? <List /> : <HomeList />}
+      {searched !== false ? <List /> : <HomeList />}
     </Container>
   );
 };

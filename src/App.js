@@ -5,76 +5,50 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Element } from "./views/Element/Element";
 import { ThemeProvider } from "@mui/system";
 import { defaultTheme } from "./theme/theme";
+import { UserContextProvider } from "./context/userContext";
 import { TopBar } from "./components/TopBar";
 import { Add } from "./views/Add/Add";
 import { createContext } from "react";
 import { Login } from "./views/Login/Login";
-import { auth, db } from "./firebase/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { doc, getDocs, getDoc, setDoc, collection } from "firebase/firestore";
 import { Observed } from "./views/Observed/Observed";
+import { FieldsOfStudyContextProvider } from "../src/context/fieldsOfStudyContext";
+import { LoadingContextProvider } from "../src/context/loadingContext";
+import { UserDataContextProvider } from "./context/userDataContext";
+import { SearchContextProvider } from "./context/searchContext";
+import { ChoosenContextProvider } from "./context/choosenContext";
 export const dataContext = createContext();
 
 function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [user] = useAuthState(auth);
-  const [fieldsOfStudy, setFieldsOfStudy] = useState([]);
-  const [advanced, setAdvanced] = useState(false);
-  const [userData, setUserData] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [choosen, setChoosen] = useState();
-  const [searched, setSearched] = useState([]);
   const [theme, setTheme] = useState(defaultTheme);
-  const value = {
-    fieldsOfStudy,
-    setFieldsOfStudy,
-    searched,
-    setSearched,
-    advanced,
-    setAdvanced,
-    user,
-    isLoading,
-    setLoading,
-    userData,
-    setUserData,
-    isSearching,
-    setIsSearching,
-    choosen,
-    setChoosen,
-    theme,
-    setTheme,
-  };
-
-  useEffect(() => {
-    if (user) {
-      async function getData() {
-        const docRef = doc(db, "Users", user.uid);
-        const docSnap = await getDoc(docRef);
-        const dat = docSnap.data();
-        setUserData(dat);
-      }
-      getData().then(() => setLoading(false));
-    }
-  }, [user]);
 
   return (
-    <dataContext.Provider value={value}>
-      <BrowserRouter>
-        <div className="App">
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <TopBar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/element" element={<Element />} />
-              <Route path="/add" element={<Add />} />
-              <Route path="/observed" element={<Observed />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </ThemeProvider>
-        </div>
-      </BrowserRouter>
-    </dataContext.Provider>
+    <LoadingContextProvider>
+      <ChoosenContextProvider>
+        <SearchContextProvider>
+          <UserContextProvider>
+            <UserDataContextProvider>
+              <FieldsOfStudyContextProvider>
+                <BrowserRouter>
+                  <div className="App">
+                    <ThemeProvider theme={theme}>
+                      <GlobalStyle />
+                      <TopBar />
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/element" element={<Element />} />
+                        <Route path="/add" element={<Add />} />
+                        <Route path="/observed" element={<Observed />} />
+                        <Route path="/login" element={<Login />} />
+                      </Routes>
+                    </ThemeProvider>
+                  </div>
+                </BrowserRouter>
+              </FieldsOfStudyContextProvider>
+            </UserDataContextProvider>
+          </UserContextProvider>
+        </SearchContextProvider>
+      </ChoosenContextProvider>
+    </LoadingContextProvider>
   );
 }
 

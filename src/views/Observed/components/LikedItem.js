@@ -13,8 +13,14 @@ import { useCallback } from "react";
 import { Recruitment } from "./Recruitment";
 import { SubjectsDialog } from "./SubjectsDialog";
 import SchoolIcon from "@mui/icons-material/School";
+import { useUserContext } from "../../../context/userContext";
+import { useUserDataContext } from "../../../context/userDataContext";
+import { useChoosenContext } from "../../../context/choosenContext";
+
 export const LikedItem = ({ element, likedArray, setLikedArray }) => {
-  const context = useContext(dataContext);
+  const { userData, setUserData } = useUserDataContext();
+  const { choosen, setChoosen } = useChoosenContext();
+  const { user, setUser } = useUserContext();
   let navigate = useNavigate();
   const [openRecruitment, setOpenRecruitment] = useState(false);
   const [openSubjectsDialog, setOpenSubjectsDialog] = useState(false);
@@ -31,7 +37,7 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
 
   const handleDislikeCourse = (e) => {
     e.stopPropagation();
-    let newArray = array.filter((e) => e.uid !== context.user.uid);
+    let newArray = array.filter((e) => e.uid !== user.uid);
     const docRef = doc(db, "Courses", element.id);
     updateDoc(docRef, { willStudy: newArray });
     const docRef1 = doc(db, "Courses", element.id);
@@ -40,25 +46,23 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
   };
 
   const viewMore = useCallback(() => {
-    context.setChoosen(element);
+    setChoosen(element);
     navigate("/element", { replace: false });
   }, []);
 
   const handleStopObserve = useCallback((e) => {
     e.stopPropagation();
-    const newArray = context.userData.likedItems.filter(
-      (x) => x !== element.id
-    );
-    context.setUserData({ likedItems: newArray });
+    const newArray = userData.likedItems.filter((x) => x !== element.id);
+    setUserData({ likedItems: newArray });
     setLikedArray(likedArray.filter((z) => z.id !== element.id));
-    updateDoc(doc(db, "Users", context.user.uid), {
+    updateDoc(doc(db, "Users", user.uid), {
       likedItems: newArray,
     });
     handleDislikeCourse(e);
   }, []);
 
   const hasBorder = () => {
-    if (array.map((e) => e.uid).includes(context.user.uid)) {
+    if (array.map((e) => e.uid).includes(user.uid)) {
       return 3;
     }
   };

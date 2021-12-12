@@ -6,27 +6,28 @@ import SearchIcon from "@mui/icons-material/Search";
 import { dataContext } from "../../../App";
 import { useContext } from "react";
 import { search } from "../../../utils/search";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useSearchContext } from "../../../context/searchContext";
 export const NameSearch = () => {
-  const context = useContext(dataContext);
+  const { searched, setSearched } = useSearchContext();
   const [input, setInput] = useState("");
+  const { isLoading, setLoading } = useLoadingContext();
 
   const handleFind = () => {
     let inputArray = input.split("/");
-    context.setIsSearching(true);
     search(
-      context.setLoading,
+      setLoading,
       "Courses",
       "tags",
       "array-contains-any",
       inputArray,
-      context.setSearched
+      setSearched
     );
   };
   const handleClearList = () => {
     setInput("");
-    context.setSearched([]);
-    context.setIsSearching(false);
-    context.setLoading(false);
+    setSearched(false);
+    setLoading(false);
   };
 
   const generatePlaceholder = () => {

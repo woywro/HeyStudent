@@ -13,6 +13,10 @@ import { useContext } from "react";
 import Box from "@mui/material/Box";
 import { db } from "../firebase/firebase";
 import { defineSuffix } from "../utils/defineSuffix";
+import { useLoadingContext } from "../context/loadingContext";
+import { useUserContext } from "../context/userContext";
+import { useUserDataContext } from "../context/userDataContext";
+import { useChoosenContext } from "../context/choosenContext";
 
 import {
   collection,
@@ -25,23 +29,26 @@ import {
 } from "firebase/firestore";
 
 export const ListItem = ({ item }) => {
-  const context = useContext(dataContext);
+  const { choosen, setChoosen } = useChoosenContext();
   let navigate = useNavigate();
+  const { isLoading, setLoading } = useLoadingContext();
+  const { user } = useUserContext();
+  const { setUserData, userData } = useUserDataContext();
 
   async function handleObserve(e) {
     e.stopPropagation();
-    let a = context.userData.likedItems;
+    let a = userData.likedItems;
     a.push(item.id);
-    context.setUserData({ likedItems: a });
-    await updateDoc(doc(db, "Users", context.user.uid), {
+    setUserData({ likedItems: a });
+    await updateDoc(doc(db, "Users", user.uid), {
       likedItems: a,
     });
   }
   async function handleStopObserve(e) {
     e.stopPropagation();
-    const newArray = context.userData.likedItems.filter((e) => e !== item.id);
-    context.setUserData({ likedItems: newArray });
-    await updateDoc(doc(db, "Users", context.user.uid), {
+    const newArray = userData.likedItems.filter((e) => e !== item.id);
+    setUserData({ likedItems: newArray });
+    await updateDoc(doc(db, "Users", user.uid), {
       likedItems: newArray,
     });
   }
@@ -49,7 +56,7 @@ export const ListItem = ({ item }) => {
   return (
     <Paper
       onClick={() => {
-        context.setChoosen(item);
+        setChoosen(item);
         navigate("/element", { replace: false });
       }}
       elevation={5}
@@ -81,9 +88,9 @@ export const ListItem = ({ item }) => {
             padding: 0,
           }}
         >
-          {!context.isLoading &&
-            context.user &&
-            (context.userData.likedItems.includes(item.id) ? (
+          {user &&
+            userData !== "" &&
+            (userData.likedItems.includes(item.id) ? (
               <IconButton color="primary">
                 <StarIcon
                   sx={{ color: "secondary.main" }}

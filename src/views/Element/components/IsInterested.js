@@ -7,45 +7,53 @@ import { db } from "../../../firebase/firebase";
 import { Box } from "@mui/system";
 import { defineSuffix } from "../../../utils/defineSuffix";
 import { useCallback } from "react";
+import {
+  userDataContext,
+  useUserDataContext,
+} from "../../../context/userDataContext";
+import { useUserContext } from "../../../context/userContext";
+import { useChoosenContext } from "../../../context/choosenContext";
 
 export const IsInterested = () => {
-  const context = useContext(dataContext);
-  const [interested, setInterested] = useState(
-    context.choosen.willStudy.length
-  );
-  const [array, setArray] = useState(context.choosen.willStudy);
+  const { choosen, setChoosen } = useChoosenContext();
+
+  const { user, setUser } = useUserContext();
+  const { userData, setUserData } = useUserDataContext();
+  const [interested, setInterested] = useState(choosen.willStudy.length);
+
+  const [array, setArray] = useState(choosen.willStudy);
 
   const handleObserveCourse = async () => {
-    let a = context.userData.likedItems;
-    a.push(context.choosen.id);
-    context.setUserData({ likedItems: a });
-    await updateDoc(doc(db, "Users", context.user.uid), {
+    let a = userData.likedItems;
+    a.push(choosen.id);
+    setUserData({ likedItems: a });
+    await updateDoc(doc(db, "Users", user.uid), {
       likedItems: a,
     });
   };
 
   const handleLikeCourse = async () => {
-    if (!array.map((e) => e.uid).includes(context.user.uid)) {
+    if (!array.map((e) => e.uid).includes(user.uid)) {
       let newArray = array.slice();
-      const user = {
-        uid: context.user.uid,
+      const newUser = {
+        uid: user.uid,
       };
-      newArray.push(user);
+      newArray.push(newUser);
       setArray(newArray);
-      const docRef = doc(db, "Courses", context.choosen.id);
+      const docRef = doc(db, "Courses", choosen.id);
       updateDoc(docRef, { willStudy: newArray });
       setInterested(newArray.length);
       handleObserveCourse();
-      const docRef1 = doc(db, "Courses", context.choosen.id);
+      const docRef1 = doc(db, "Courses", choosen.id);
       updateDoc(docRef1, { willStudyCount: -newArray.length });
     }
   };
 
   const handleDislikeCourse = () => {
-    let newArray = array.filter((e) => e.uid !== context.user.uid);
-    const docRef = doc(db, "Courses", context.choosen.id);
+    let newArray = array.filter((e) => e.uid !== user.uid);
+    const docRef = doc(db, "Courses", choosen.id);
     updateDoc(docRef, { willStudy: newArray });
-    const docRef1 = doc(db, "Courses", context.choosen.id);
+    const docRef1 = doc(db, "Courses", choosen.id);
     updateDoc(docRef1, { willStudyCount: -newArray.length });
     setArray(newArray);
     setInterested(newArray.length);
@@ -75,9 +83,9 @@ export const IsInterested = () => {
             "osób zainteresowanych"
           )}
         </Typography>
-        {context.user && (
+        {user && (
           <>
-            {array.map((e) => e.uid).includes(context.user.uid) ? (
+            {array.map((e) => e.uid).includes(user.uid) ? (
               <>
                 <Typography variant="subtitle2">
                   Jesteś zainteresowany tym kierunkiem!

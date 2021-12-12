@@ -9,10 +9,11 @@ import { useLocation } from "react-router";
 import { Fade } from "@mui/material";
 import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
+import { useChoosenContext } from "../../context/choosenContext";
 
 export const Element = () => {
-  const context = useContext(dataContext);
   let location = useLocation();
+  const { choosen, setChoosen } = useChoosenContext();
 
   return (
     <Fade in={location.pathname} mountOnEnter unmountOnExit>
@@ -31,11 +32,9 @@ export const Element = () => {
         <PageTopBar
           content={
             <Box sx={{ width: 1 }}>
-              <Typography variant="h3">
-                {context.choosen.name.join(" ")}
-              </Typography>
+              <Typography variant="h3">{choosen.name.join(" ")}</Typography>
               <Typography variant="subtitle2">
-                {context.choosen.type}, {context.choosen.degree}
+                {choosen.type}, {choosen.degree}
               </Typography>
               <Divider
                 orientation="horizontal"
@@ -46,7 +45,7 @@ export const Element = () => {
             </Box>
           }
         />
-        <CourseElementList element={context.choosen} />
+        <CourseElementList element={choosen} />
       </Container>
     </Fade>
   );

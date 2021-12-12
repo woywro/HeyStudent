@@ -9,9 +9,10 @@ import { dataContext } from "../../../App";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Paper } from "@mui/material";
+import { userContext, useUserContext } from "../../../context/userContext";
 
 export const ReportError = ({ choosen }) => {
-  const context = useContext(dataContext);
+  const { user } = useUserContext();
   const [inputValue, setInputValue] = useState("");
 
   const [selectValue, setSelectValue] = useState("błąd");
@@ -28,7 +29,7 @@ export const ReportError = ({ choosen }) => {
       await addDoc(errorsRef, {
         type: selectValue,
         text: inputValue,
-        uid: context.user.uid,
+        uid: user.uid,
         course: choosen.id,
       });
       setInputValue("");
@@ -44,7 +45,7 @@ export const ReportError = ({ choosen }) => {
       alignItems="center"
       onSubmit={sendError}
     >
-      {context.user ? (
+      {user ? (
         <Stack direction="column">
           <Typography variant="body1" sx={{ margin: 1 }}>
             Jeżeli masz jakieś sugestie lub widzisz błąd, daj nam znać!
@@ -57,16 +58,9 @@ export const ReportError = ({ choosen }) => {
             elevation={3}
             sx={{ padding: 1, borderRadius: "20px", margin: 1 }}
           >
-            <Stack
-              direction="row"
-              justifyContent="space-around"
-              direction="row"
-            >
+            <Stack direction="row" justifyContent="space-around">
               <Input
-                sx={{ margin: 1 }}
                 value={inputValue}
-                size="medium"
-                fullWidth
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="np. zła liczba ects z matematyki"
               />

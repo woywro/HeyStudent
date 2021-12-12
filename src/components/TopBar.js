@@ -12,12 +12,13 @@ import { useNavigate, useLocation } from "react-router";
 import { logout } from "../firebase/firebase";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCallback, useState } from "react";
+import { useUserContext } from "../context/userContext";
 
 export const TopBar = () => {
-  const context = useContext(dataContext);
   const [isOpen, setOpen] = useState(false);
   let navigate = useNavigate();
   const location = useLocation();
+  const { user } = useUserContext();
   const handleOpenMenu = useCallback(() => {
     navigate(-1);
   }, []);
@@ -61,7 +62,7 @@ export const TopBar = () => {
             HeyStudent
           </Typography>
 
-          {context.user ? (
+          {user ? (
             <Button color="inherit" onClick={handleLogout}>
               Wyloguj
             </Button>

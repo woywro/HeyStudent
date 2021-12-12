@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Divider } from "@mui/material";
 
 export const SubjectsDialog = ({ setIsOpen, isOpen, element }) => {

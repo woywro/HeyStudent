@@ -7,9 +7,14 @@ import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
 import { defineSuffix } from "../../../utils/defineSuffix";
 import Grid from "@mui/material/Grid";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useSearchContext } from "../../../context/searchContext";
+import { useChoosenContext } from "../../../context/choosenContext";
 
 export const List = () => {
-  const context = useContext(dataContext);
+  const { isLoading, setLoading } = useLoadingContext();
+  const { searched } = useSearchContext();
+  const { choosen, setChoosen } = useChoosenContext();
 
   return (
     <Container
@@ -25,16 +30,16 @@ export const List = () => {
       component="ul"
     >
       <Typography variant="h6">Wyniki wyszukiwania</Typography>
-      {context.searched.length == 0 ? (
+      {searched.length == 0 ? (
         <Typography variant="subtitle1" sx={{ padding: 1 }}>
           Brak wyników dla podanych kryteriów
         </Typography>
       ) : (
         <>
           <Typography variant="subtitle1" sx={{ padding: 1 }}>
-            znaleziono {context.searched.length}{" "}
+            znaleziono {searched.length}{" "}
             {defineSuffix(
-              context.searched.length,
+              searched.length,
               "kierunek spełniający",
               "kierunki spełniające",
               "kierunków spełniających"
@@ -42,13 +47,13 @@ export const List = () => {
             kryteria
           </Typography>
           <Grid container spacing={2}>
-            {context.searched.map((item) => {
+            {searched.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4}>
                   <ListItem
                     key={item.name}
                     item={item}
-                    setChoosen={context.setChoosen}
+                    setChoosen={setChoosen}
                   />
                 </Grid>
               );
@@ -56,7 +61,7 @@ export const List = () => {
           </Grid>
         </>
       )}
-      {context.isLoading && (
+      {isLoading && (
         <Box sx={{ width: "100%", height: "100%" }}>
           <CircularProgress />
         </Box>

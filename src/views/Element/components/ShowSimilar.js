@@ -15,10 +15,15 @@ import { CircularProgress } from "@mui/material";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { useNavigate } from "react-router";
+import { useUserContext } from "../../../context/userContext";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useChoosenContext } from "../../../context/choosenContext";
 
 export const ShowSimilar = () => {
   let navigate = useNavigate("");
-  const context = useContext(dataContext);
+  const { user } = useUserContext();
+  const { choosen, setChoosen } = useChoosenContext();
+  const { isLoading, setLoading } = useLoadingContext();
   const [similar, setSimilar] = useState([]);
   const [year, setYear] = useState(1);
   const handleChange = (event) => {
@@ -26,7 +31,7 @@ export const ShowSimilar = () => {
   };
 
   function similarLimit() {
-    if (context.user) {
+    if (user) {
       return limit(4);
     } else {
       return limit(2);
@@ -34,7 +39,7 @@ export const ShowSimilar = () => {
   }
 
   async function search(colToSearch, field, operator, value) {
-    context.setLoading(true);
+    setLoading(true);
     const array = [];
     const ref = collection(db, colToSearch);
     const q = query(ref, where(field, operator, value), similarLimit());
@@ -42,9 +47,9 @@ export const ShowSimilar = () => {
     querySnapshot.forEach((doc) => {
       array.push(doc.data());
     });
-    const arrayFiltered = array.filter((e) => e.id !== context.choosen.id);
+    const arrayFiltered = array.filter((e) => e.id !== choosen.id);
     setSimilar(arrayFiltered);
-    context.setLoading(false);
+    setLoading(false);
   }
 
   return (
@@ -68,17 +73,12 @@ export const ShowSimilar = () => {
         variant="contained"
         sx={{ margin: 1 }}
         onClick={() =>
-          search(
-            "Courses",
-            "category",
-            "array-contains-any",
-            context.choosen.category
-          )
+          search("Courses", "category", "array-contains-any", choosen.category)
         }
       >
         pokaż podobne kierunki
       </Button>
-      {context.isLoading ? (
+      {isLoading ? (
         <Box sx={{ width: "100%", height: "100%" }}>
           <CircularProgress sx={{ color: "secondary.main" }} />
         </Box>
@@ -95,7 +95,7 @@ export const ShowSimilar = () => {
               <AccordionDetails>
                 <Button
                   onClick={() => {
-                    context.setChoosen(e);
+                    setChoosen(e);
                     navigate("/element", { replace: true });
                   }}
                 >

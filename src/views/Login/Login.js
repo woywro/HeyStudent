@@ -8,17 +8,28 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../App";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useUserDataContext } from "../../context/userDataContext";
+import { doc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+import { getDoc } from "firebase/firestore";
+import { useLoadingContext } from "../../context/loadingContext";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useUserContext } from "../../context/userContext";
 
 export const Login = () => {
   let navigate = useNavigate();
   let context = useContext(dataContext);
   const auth = getAuth();
   const [error, setError] = useState();
+  const { userData, setUserData } = useUserDataContext();
+  const { setLoading } = useLoadingContext();
+  const [user] = useAuthState(auth);
+  const { setUser } = useUserContext();
 
   const signIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        // setUser(userCredential.user);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -34,10 +45,19 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (context.user) {
+    if (user) {
+      // setUser(user);
       navigate("/", { replace: false });
+      // async function getData() {
+      //   const docRef = doc(db, "Users", user.uid);
+      //   const docSnap = await getDoc(docRef);
+      //   const dat = docSnap.data();
+      //   setUserData(dat);
+      // }
+      // getData().then(() => setLoading(false));
+      setLoading(false);
     }
-  }, [context.user]);
+  }, [user]);
 
   return (
     <Container component="main" maxWidth="xs">
