@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import MobileStepper from "@mui/material/MobileStepper";
+import { MobileStepper } from "@mui/material";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { Container } from "@mui/material";
@@ -10,6 +10,7 @@ import { PageTopBar } from "../../components/PageTopBar";
 import { CourseInfoAdd } from "./components/CourseInfoAdd";
 import { CourseSubjectsAdd } from "./components/CourseSubjectsAdd";
 import { CourseSubmit } from "./components/CourseSubmit";
+import { Typography } from "@mui/material";
 
 export const Add = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -112,45 +113,53 @@ export const Add = () => {
     >
       <PageTopBar
         content={
-          <Paper
-            elevation={3}
-            sx={{
-              padding: 1,
-              marginBottom: 2,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <MobileStepper
-              variant="progress"
-              steps={3}
-              position="static"
-              activeStep={activeStep}
-              sx={{ maxWidth: 400, flexGrow: 1 }}
-              nextButton={
-                <Button
-                  size="small"
-                  onClick={() => {
-                    handleSubmit(onSubmit)();
-                  }}
-                  disabled={activeStep === 2}
-                >
-                  Dalej
-                </Button>
-              }
-              backButton={
-                <Button
-                  size="small"
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                  disabled={isDisabled}
-                >
-                  Wstecz
-                </Button>
-              }
-            />
-          </Paper>
+          <>
+            <Typography
+              sx={{ marginBottom: 1, width: 1, color: "white" }}
+              variant="h4"
+            >
+              Dodaj kierunek
+            </Typography>
+            <Paper
+              elevation={3}
+              sx={{
+                width: 0.6,
+                margin: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <MobileStepper
+                variant="dots"
+                steps={3}
+                position="static"
+                activeStep={activeStep}
+                sx={{ maxWidth: 400, flexGrow: 1, borderRadius: "20px" }}
+                nextButton={
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      handleSubmit(onSubmit)();
+                    }}
+                    disabled={activeStep === 2}
+                  >
+                    Dalej
+                  </Button>
+                }
+                backButton={
+                  <Button
+                    size="small"
+                    onClick={handleBack}
+                    disabled={activeStep === 0}
+                    disabled={isDisabled}
+                  >
+                    Wstecz
+                  </Button>
+                }
+              />
+            </Paper>
+          </>
         }
       />
 

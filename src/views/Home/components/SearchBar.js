@@ -10,7 +10,6 @@ import { useSearchContext } from "../../../context/searchContext";
 
 export const SearchBar = () => {
   const matches = useMediaQuery("(min-width:600px)");
-  const context = useContext(dataContext);
   const [sort, setSort] = useState("random");
   const { searched, setSearched } = useSearchContext();
 
@@ -59,7 +58,7 @@ export const SearchBar = () => {
           sx={{ marginTop: 2 }}
           onChange={handleInputChange}
         >
-          <ToggleButton value="random">trafność</ToggleButton>
+          <ToggleButton value="random">losowo</ToggleButton>
           <ToggleButton value="alphabetical">alfabetycznie</ToggleButton>
           <ToggleButton value="popularity">popularność</ToggleButton>
         </ToggleButtonGroup>

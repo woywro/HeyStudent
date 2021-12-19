@@ -1,10 +1,7 @@
 import React, { useRef, useState } from "react";
-import { dataContext } from "../../../App";
-import { useContext } from "react";
 import { Paper } from "@mui/material";
 import { Box } from "@mui/system";
 import { useUserContext } from "../../../context/userContext";
-import { useUserDataContext } from "../../../context/userDataContext";
 
 export const ChatMessage = (props) => {
   const { user } = useUserContext();
@@ -25,7 +22,7 @@ export const ChatMessage = (props) => {
         elevation={0}
         sx={{
           margin: 0.5,
-          padding: 0.5,
+          padding: 0.8,
           maxWidth: 0.8,
           borderRadius: "20px",
           backgroundColor: messageColor,
