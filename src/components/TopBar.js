@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LeftDrawer from "./LeftDrawer";
 import { dataContext } from "../App";
 import { useContext } from "react";
-import { useNavigate, useLocation } from "react-router";
+// import { useNavigate, useLocation } from "react-router";
 import { logout } from "../firebase/firebase";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCallback, useState } from "react";
@@ -16,8 +16,8 @@ import { useUserContext } from "../context/userContext";
 
 export const TopBar = () => {
   const [isOpen, setOpen] = useState(false);
-  let navigate = useNavigate();
-  const location = useLocation();
+  // let navigate = useNavigate();
+  // const location = useLocation();
   const { user } = useUserContext();
   const handleOpenMenu = useCallback(() => {
     navigate(-1);
@@ -38,25 +38,25 @@ export const TopBar = () => {
       <LeftDrawer isOpen={isOpen} setOpen={setOpen} />
       <AppBar elevation={0} position="static" sx={{ color: "white" }}>
         <Toolbar>
-          {location.pathname == "/element" ? (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleOpenMenu}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleCloseMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          {/* {location.pathname == "/element" ? ( */}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            onClick={handleOpenMenu}
+          >
+            <ArrowBackIosNewIcon />
+          </IconButton>
+          {/* ) : ( */}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            onClick={handleCloseMenu}
+          >
+            <MenuIcon />
+          </IconButton>
+          {/* )} */}
 
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             HeyStudent

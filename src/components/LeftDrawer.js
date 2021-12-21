@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { dataContext } from "../App";
 import { useContext, useCallback } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,12 +13,10 @@ import { useUserContext } from "../context/userContext";
 export default function LeftDrawer({ isOpen, setOpen }) {
   const matches = useMediaQuery("(min-width:600px)");
   const { user } = useUserContext();
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const handleCloseMenu = useCallback(() => {
     setOpen(false);
   }, []);
-
-  const drawerWidth = "15%";
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -37,7 +35,7 @@ export default function LeftDrawer({ isOpen, setOpen }) {
             <ListItem sx={{ padding: 1 }} button>
               <ListItemText
                 primary="Wyszukiwanie"
-                onClick={() => navigate("/", { replace: false })}
+                // onClick={() => navigate("/", { replace: false })}
               />
             </ListItem>
             {user && (
@@ -45,14 +43,14 @@ export default function LeftDrawer({ isOpen, setOpen }) {
                 <ListItem sx={{ padding: 1 }} button>
                   <ListItemText
                     primary="Obserwowane kierunki"
-                    onClick={() => navigate("/observed", { replace: false })}
+                    // onClick={() => navigate("/observed", { replace: false })}
                   />
                 </ListItem>
                 <Divider />
                 <ListItem sx={{ padding: 1 }} button>
                   <ListItemText
                     primary="Dodawanie kierunku"
-                    onClick={() => navigate("/add", { replace: false })}
+                    // onClick={() => navigate("/add", { replace: false })}
                   />
                 </ListItem>
               </>

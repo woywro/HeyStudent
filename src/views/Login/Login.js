@@ -4,20 +4,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { signInWithGoogle } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { dataContext } from "../../App";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useUserDataContext } from "../../context/userDataContext";
-import { doc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
-import { getDoc } from "firebase/firestore";
 import { useLoadingContext } from "../../context/loadingContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useUserContext } from "../../context/userContext";
 
 export const Login = () => {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   let context = useContext(dataContext);
   const auth = getAuth();
   const [error, setError] = useState();
@@ -47,7 +44,7 @@ export const Login = () => {
   useEffect(() => {
     if (user) {
       // setUser(user);
-      navigate("/", { replace: false });
+      // navigate("/", { replace: false });
       // async function getData() {
       //   const docRef = doc(db, "Users", user.uid);
       //   const docSnap = await getDoc(docRef);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
@@ -30,7 +30,7 @@ import {
 
 export const ListItem = ({ item }) => {
   const { choosen, setChoosen } = useChoosenContext();
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const { isLoading, setLoading } = useLoadingContext();
   const { user } = useUserContext();
   const { setUserData, userData } = useUserDataContext();
@@ -57,7 +57,7 @@ export const ListItem = ({ item }) => {
     <Paper
       onClick={() => {
         setChoosen(item);
-        navigate("/element", { replace: false });
+        // navigate("/element", { replace: false });
       }}
       elevation={5}
       sx={{

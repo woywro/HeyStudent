@@ -1,7 +1,7 @@
 import { Home } from "./views/Home/Home";
 import { GlobalStyle } from "./theme/globalStyles";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Element } from "./views/Element/Element";
 import { ThemeProvider } from "@mui/system";
 import { defaultTheme } from "./theme/theme";
@@ -18,7 +18,7 @@ import { SearchContextProvider } from "./context/searchContext";
 import { ChoosenContextProvider } from "./context/choosenContext";
 export const dataContext = createContext();
 
-function App() {
+function App({ children }) {
   const [theme, setTheme] = useState(defaultTheme);
 
   return (
@@ -28,21 +28,15 @@ function App() {
           <UserContextProvider>
             <UserDataContextProvider>
               <FieldsOfStudyContextProvider>
-                <BrowserRouter>
-                  <div className="App">
-                    <ThemeProvider theme={theme}>
-                      <GlobalStyle />
-                      <TopBar />
-                      <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/element" element={<Element />} />
-                        <Route path="/add" element={<Add />} />
-                        <Route path="/observed" element={<Observed />} />
-                        <Route path="/login" element={<Login />} />
-                      </Routes>
-                    </ThemeProvider>
-                  </div>
-                </BrowserRouter>
+                {/* <BrowserRouter> */}
+                <div className="App">
+                  <ThemeProvider theme={theme}>
+                    <GlobalStyle />
+                    <TopBar />
+                    {children}
+                  </ThemeProvider>
+                </div>
+                {/* </BrowserRouter> */}
               </FieldsOfStudyContextProvider>
             </UserDataContextProvider>
           </UserContextProvider>

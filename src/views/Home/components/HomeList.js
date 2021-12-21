@@ -1,5 +1,4 @@
 import { ListItem } from "../../../components/ListItem";
-import { dataContext } from "../../../App";
 import { useContext, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
@@ -16,15 +15,16 @@ import {
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { ElementCard } from "../../../components/ElementCard";
-import { fieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
 import { useFieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useChoosenContext } from "../../../context/choosenContext";
+import Link from "next/link";
 
 export const HomeList = () => {
   const fos = useFieldsOfStudyContext();
   const { isLoading, setLoading } = useLoadingContext();
   const { choosen, setChoosen } = useChoosenContext();
+  const ROUTE_POST_ID = "element/[id]";
 
   useEffect(() => {
     async function getData() {
@@ -79,8 +79,17 @@ export const HomeList = () => {
                     <ListItem
                       key={item.name}
                       item={item}
-                      setChoosen={setChoosen}
+                      // setChoosen={setChoosen}
                     />
+                    <Link
+                      // onClick={() => setChoosen(item)}
+                      href={{
+                        pathname: ROUTE_POST_ID,
+                        query: { id: item.id },
+                      }}
+                    >
+                      a
+                    </Link>
                   </Grid>
                 );
               })}

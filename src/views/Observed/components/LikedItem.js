@@ -2,7 +2,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useContext } from "react";
 import { dataContext } from "../../../App";
 import { db } from "../../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Paper, Stack } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useState } from "react";
@@ -21,7 +21,7 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
   const { userData, setUserData } = useUserDataContext();
   const { choosen, setChoosen } = useChoosenContext();
   const { user, setUser } = useUserContext();
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const [openRecruitment, setOpenRecruitment] = useState(false);
   const [openSubjectsDialog, setOpenSubjectsDialog] = useState(false);
   const [array, setArray] = useState(element.willStudy);
@@ -47,7 +47,7 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
 
   const viewMore = useCallback(() => {
     setChoosen(element);
-    navigate("/element", { replace: false });
+    // navigate("/element", { replace: false });
   }, []);
 
   const handleStopObserve = useCallback((e) => {

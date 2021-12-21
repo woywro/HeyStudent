@@ -11,41 +11,40 @@ import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
 import { useChoosenContext } from "../../context/choosenContext";
 
-export const Element = () => {
-  let location = useLocation();
+export const Element = (props) => {
   const { choosen, setChoosen } = useChoosenContext();
 
   return (
-    <Fade in={location.pathname} mountOnEnter unmountOnExit>
-      <Container
-        sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexFlow: "column",
-          padding: 0,
-          width: "100vw",
-        }}
-      >
-        <PageTopBar
-          content={
-            <Box sx={{ width: 1 }}>
-              <Typography variant="h3">{choosen.name.join(" ")}</Typography>
-              <Typography variant="subtitle2">
-                {choosen.type}, {choosen.degree}
-              </Typography>
-              <Divider
-                orientation="horizontal"
-                variant="middle"
-                sx={{ marginTop: 1 }}
-              />
-              <IsInterested />
-            </Box>
-          }
-        />
-        <CourseElementList element={choosen} />
-      </Container>
-    </Fade>
+    // <Fade in={location.pathname} mountOnEnter unmountOnExit>
+    <Container
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexFlow: "column",
+        padding: 0,
+        width: "100vw",
+      }}
+    >
+      <PageTopBar
+        content={
+          <Box sx={{ width: 1 }}>
+            <Typography variant="h3">{props.data.name.join(" ")}</Typography>
+            <Typography variant="subtitle2">
+              {props.data.type}, {props.data.degree}
+            </Typography>
+            <Divider
+              orientation="horizontal"
+              variant="middle"
+              sx={{ marginTop: 1 }}
+            />
+            <IsInterested />
+          </Box>
+        }
+      />
+      <CourseElementList element={props.data} />
+    </Container>
+    // </Fade>
   );
 };
