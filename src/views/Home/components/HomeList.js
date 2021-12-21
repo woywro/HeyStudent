@@ -76,19 +76,22 @@ export const HomeList = () => {
               {fos.fieldsOfStudy.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} md={6}>
-                    <ListItem
-                      key={item.name}
-                      item={item}
-                      // setChoosen={setChoosen}
-                    />
                     <Link
                       // onClick={() => setChoosen(item)}
                       href={{
                         pathname: ROUTE_POST_ID,
                         query: { id: item.id },
                       }}
+                      passHref
                     >
-                      a
+                      <a>
+                        <ListItem
+                          key={item.name}
+                          item={item}
+
+                          // setChoosen={setChoosen}
+                        />
+                      </a>
                     </Link>
                   </Grid>
                 );

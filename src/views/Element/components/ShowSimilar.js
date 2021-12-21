@@ -14,13 +14,13 @@ import { query, where, limit, updateDoc } from "firebase/firestore";
 import { CircularProgress } from "@mui/material";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 import { useUserContext } from "../../../context/userContext";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useChoosenContext } from "../../../context/choosenContext";
 
 export const ShowSimilar = () => {
-  let navigate = useNavigate("");
+  // let navigate = useNavigate("");
   const { user } = useUserContext();
   const { choosen, setChoosen } = useChoosenContext();
   const { isLoading, setLoading } = useLoadingContext();
@@ -96,7 +96,7 @@ export const ShowSimilar = () => {
                 <Button
                   onClick={() => {
                     setChoosen(e);
-                    navigate("/element", { replace: true });
+                    // navigate("/element", { replace: true });
                   }}
                 >
                   przejdź do kierunku

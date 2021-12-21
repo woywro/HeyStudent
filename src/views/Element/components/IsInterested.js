@@ -14,18 +14,18 @@ import {
 import { useUserContext } from "../../../context/userContext";
 import { useChoosenContext } from "../../../context/choosenContext";
 
-export const IsInterested = () => {
+export const IsInterested = ({ data }) => {
   const { choosen, setChoosen } = useChoosenContext();
 
   const { user, setUser } = useUserContext();
   const { userData, setUserData } = useUserDataContext();
-  const [interested, setInterested] = useState(choosen.willStudy.length);
+  const [interested, setInterested] = useState(data.willStudy.length);
 
-  const [array, setArray] = useState(choosen.willStudy);
+  const [array, setArray] = useState(data.willStudy);
 
   const handleObserveCourse = async () => {
     let a = userData.likedItems;
-    a.push(choosen.id);
+    a.push(data.id);
     setUserData({ likedItems: a });
     await updateDoc(doc(db, "Users", user.uid), {
       likedItems: a,
@@ -40,20 +40,20 @@ export const IsInterested = () => {
       };
       newArray.push(newUser);
       setArray(newArray);
-      const docRef = doc(db, "Courses", choosen.id);
+      const docRef = doc(db, "Courses", data.id);
       updateDoc(docRef, { willStudy: newArray });
       setInterested(newArray.length);
       handleObserveCourse();
-      const docRef1 = doc(db, "Courses", choosen.id);
+      const docRef1 = doc(db, "Courses", data.id);
       updateDoc(docRef1, { willStudyCount: -newArray.length });
     }
   };
 
   const handleDislikeCourse = () => {
     let newArray = array.filter((e) => e.uid !== user.uid);
-    const docRef = doc(db, "Courses", choosen.id);
+    const docRef = doc(db, "Courses", data.id);
     updateDoc(docRef, { willStudy: newArray });
-    const docRef1 = doc(db, "Courses", choosen.id);
+    const docRef1 = doc(db, "Courses", data.id);
     updateDoc(docRef1, { willStudyCount: -newArray.length });
     setArray(newArray);
     setInterested(newArray.length);

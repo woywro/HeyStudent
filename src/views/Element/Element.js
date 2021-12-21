@@ -11,7 +11,7 @@ import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
 import { useChoosenContext } from "../../context/choosenContext";
 
-export const Element = (props) => {
+export const Element = ({ data }) => {
   const { choosen, setChoosen } = useChoosenContext();
 
   return (
@@ -30,20 +30,20 @@ export const Element = (props) => {
       <PageTopBar
         content={
           <Box sx={{ width: 1 }}>
-            <Typography variant="h3">{props.data.name.join(" ")}</Typography>
+            <Typography variant="h3">{data.name.join(" ")}</Typography>
             <Typography variant="subtitle2">
-              {props.data.type}, {props.data.degree}
+              {data.type}, {data.degree}
             </Typography>
             <Divider
               orientation="horizontal"
               variant="middle"
               sx={{ marginTop: 1 }}
             />
-            <IsInterested />
+            <IsInterested data={data} />
           </Box>
         }
       />
-      <CourseElementList element={props.data} />
+      <CourseElementList element={data} />
     </Container>
     // </Fade>
   );

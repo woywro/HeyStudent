@@ -5,10 +5,10 @@ import { db } from "../../firebase/firebase";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function elementPage() {
+export default function elementPage({ data }) {
   const router = useRouter();
 
-  return <Element />;
+  return <Element data={data} />;
 }
 export async function getServerSideProps(context) {
   const array = [];
