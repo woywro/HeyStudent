@@ -6,23 +6,19 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
-import { dataContext } from "../../../App";
-import { useContext } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { query, where, limit, updateDoc } from "firebase/firestore";
 import { CircularProgress } from "@mui/material";
 import { Select } from "@mui/material";
 import { MenuItem } from "@mui/material";
-// import { useNavigate } from "react-router";
 import { useUserContext } from "../../../context/userContext";
 import { useLoadingContext } from "../../../context/loadingContext";
-import { useChoosenContext } from "../../../context/choosenContext";
+import { useRouter } from "next/router";
 
-export const ShowSimilar = () => {
-  // let navigate = useNavigate("");
+export const ShowSimilar = ({ element }) => {
+  const router = useRouter();
   const { user } = useUserContext();
-  const { choosen, setChoosen } = useChoosenContext();
   const { isLoading, setLoading } = useLoadingContext();
   const [similar, setSimilar] = useState([]);
   const [year, setYear] = useState(1);
@@ -47,7 +43,7 @@ export const ShowSimilar = () => {
     querySnapshot.forEach((doc) => {
       array.push(doc.data());
     });
-    const arrayFiltered = array.filter((e) => e.id !== choosen.id);
+    const arrayFiltered = array.filter((e) => e.id !== element.id);
     setSimilar(arrayFiltered);
     setLoading(false);
   }
@@ -73,7 +69,7 @@ export const ShowSimilar = () => {
         variant="contained"
         sx={{ margin: 1 }}
         onClick={() =>
-          search("Courses", "category", "array-contains-any", choosen.category)
+          search("Courses", "category", "array-contains-any", element.category)
         }
       >
         pokaż podobne kierunki
@@ -95,8 +91,7 @@ export const ShowSimilar = () => {
               <AccordionDetails>
                 <Button
                   onClick={() => {
-                    setChoosen(e);
-                    // navigate("/element", { replace: true });
+                    router.push(`/element/${e.id}`);
                   }}
                 >
                   przejdź do kierunku

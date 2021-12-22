@@ -1,11 +1,9 @@
 import { Paper } from "@mui/material";
-import { dataContext } from "../../../App";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { NameSearch } from "./NameSearch";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
 
 export const SearchBar = () => {

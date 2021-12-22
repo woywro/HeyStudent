@@ -3,8 +3,6 @@ import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import { dataContext } from "../../../App";
-import { useContext } from "react";
 import { search } from "../../../utils/search";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";

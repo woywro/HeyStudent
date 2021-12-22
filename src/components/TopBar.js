@@ -6,30 +6,29 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import LeftDrawer from "./LeftDrawer";
-import { dataContext } from "../App";
-import { useContext } from "react";
-// import { useNavigate, useLocation } from "react-router";
+import { dataContext } from "../pages/_app";
+
 import { logout } from "../firebase/firebase";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCallback, useState } from "react";
 import { useUserContext } from "../context/userContext";
+import { useRouter } from "next/router";
 
 export const TopBar = () => {
   const [isOpen, setOpen] = useState(false);
-  // let navigate = useNavigate();
-  // const location = useLocation();
+  const router = useRouter();
   const { user } = useUserContext();
-  const handleOpenMenu = useCallback(() => {
-    navigate(-1);
+  const handleBack = useCallback(() => {
+    router.back();
   }, []);
   const handleCloseMenu = useCallback(() => {
     setOpen(!isOpen);
   }, []);
   const handleLogin = useCallback(() => {
-    navigate("/login", { replace: false });
+    router.push("/login");
   }, []);
   const handleLogout = useCallback(() => {
-    navigate("/", { replace: false });
+    router.push("/");
     logout();
   }, []);
 
@@ -38,25 +37,25 @@ export const TopBar = () => {
       <LeftDrawer isOpen={isOpen} setOpen={setOpen} />
       <AppBar elevation={0} position="static" sx={{ color: "white" }}>
         <Toolbar>
-          {/* {location.pathname == "/element" ? ( */}
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            onClick={handleOpenMenu}
-          >
-            <ArrowBackIosNewIcon />
-          </IconButton>
-          {/* ) : ( */}
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            onClick={handleCloseMenu}
-          >
-            <MenuIcon />
-          </IconButton>
-          {/* )} */}
+          {router.pathname == "/element/[id]" ? (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              onClick={handleBack}
+            >
+              <ArrowBackIosNewIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              onClick={handleCloseMenu}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
 
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             HeyStudent

@@ -4,16 +4,16 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-// import { useNavigate } from "react-router-dom";
-import { dataContext } from "../App";
+import { dataContext } from "../pages/_app";
 import { useContext, useCallback } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useUserContext } from "../context/userContext";
+import { useRouter } from "next/router";
 
 export default function LeftDrawer({ isOpen, setOpen }) {
   const matches = useMediaQuery("(min-width:600px)");
+  const router = useRouter();
   const { user } = useUserContext();
-  // let navigate = useNavigate();
   const handleCloseMenu = useCallback(() => {
     setOpen(false);
   }, []);
@@ -35,7 +35,7 @@ export default function LeftDrawer({ isOpen, setOpen }) {
             <ListItem sx={{ padding: 1 }} button>
               <ListItemText
                 primary="Wyszukiwanie"
-                // onClick={() => navigate("/", { replace: false })}
+                onClick={() => router.push("/")}
               />
             </ListItem>
             {user && (
@@ -43,14 +43,14 @@ export default function LeftDrawer({ isOpen, setOpen }) {
                 <ListItem sx={{ padding: 1 }} button>
                   <ListItemText
                     primary="Obserwowane kierunki"
-                    // onClick={() => navigate("/observed", { replace: false })}
+                    onClick={() => router.push("/observed")}
                   />
                 </ListItem>
                 <Divider />
                 <ListItem sx={{ padding: 1 }} button>
                   <ListItemText
                     primary="Dodawanie kierunku"
-                    // onClick={() => navigate("/add", { replace: false })}
+                    onClick={() => router.push("/add")}
                   />
                 </ListItem>
               </>

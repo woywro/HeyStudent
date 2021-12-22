@@ -1,4 +1,3 @@
-import { getThemeProps } from "@mui/system";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 
@@ -8,7 +7,6 @@ export const ElementCard = ({ title, content }) => {
       sx={{
         padding: 2,
         width: 1,
-        // margin: 1,
         height: 1,
         borderRadius: "30px",
       }}

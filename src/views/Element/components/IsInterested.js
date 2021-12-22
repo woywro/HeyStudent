@@ -1,6 +1,5 @@
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { dataContext } from "../../../App";
 import { useContext, useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
@@ -12,13 +11,10 @@ import {
   useUserDataContext,
 } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
-import { useChoosenContext } from "../../../context/choosenContext";
 
 export const IsInterested = ({ data }) => {
-  const { choosen, setChoosen } = useChoosenContext();
-
   const { user, setUser } = useUserContext();
-  const { userData, setUserData } = useUserDataContext();
+  const { userData, setUserData } = useUserDataContext([]);
   const [interested, setInterested] = useState(data.willStudy.length);
 
   const [array, setArray] = useState(data.willStudy);

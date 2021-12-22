@@ -4,24 +4,20 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { signInWithGoogle } from "../../firebase/firebase";
-// import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { dataContext } from "../../App";
+import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useUserDataContext } from "../../context/userDataContext";
 import { useLoadingContext } from "../../context/loadingContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useUserContext } from "../../context/userContext";
+import { useRouter } from "next/router";
 
 export const Login = () => {
-  // let navigate = useNavigate();
-  let context = useContext(dataContext);
   const auth = getAuth();
+  const router = useRouter();
   const [error, setError] = useState();
-  const { userData, setUserData } = useUserDataContext();
   const { setLoading } = useLoadingContext();
   const [user] = useAuthState(auth);
-  const { setUser } = useUserContext();
 
   const signIn = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -43,15 +39,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user) {
-      // setUser(user);
-      // navigate("/", { replace: false });
-      // async function getData() {
-      //   const docRef = doc(db, "Users", user.uid);
-      //   const docSnap = await getDoc(docRef);
-      //   const dat = docSnap.data();
-      //   setUserData(dat);
-      // }
-      // getData().then(() => setLoading(false));
+      router.push("/");
       setLoading(false);
     }
   }, [user]);

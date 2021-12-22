@@ -1,8 +1,5 @@
 import { doc, updateDoc } from "firebase/firestore";
-import { useContext } from "react";
-import { dataContext } from "../../../App";
 import { db } from "../../../firebase/firebase";
-// import { useNavigate } from "react-router-dom";
 import { Paper, Stack } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useState } from "react";
@@ -15,13 +12,15 @@ import { SubjectsDialog } from "./SubjectsDialog";
 import SchoolIcon from "@mui/icons-material/School";
 import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
-import { useChoosenContext } from "../../../context/choosenContext";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Button } from "@mui/material";
 
 export const LikedItem = ({ element, likedArray, setLikedArray }) => {
+  const ROUTE_POST_ID = "element/[id]";
+  const router = useRouter();
   const { userData, setUserData } = useUserDataContext();
-  const { choosen, setChoosen } = useChoosenContext();
   const { user, setUser } = useUserContext();
-  // let navigate = useNavigate();
   const [openRecruitment, setOpenRecruitment] = useState(false);
   const [openSubjectsDialog, setOpenSubjectsDialog] = useState(false);
   const [array, setArray] = useState(element.willStudy);
@@ -44,11 +43,6 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
     updateDoc(docRef1, { willStudyCount: -newArray.length });
     setArray(newArray);
   };
-
-  const viewMore = useCallback(() => {
-    setChoosen(element);
-    // navigate("/element", { replace: false });
-  }, []);
 
   const handleStopObserve = useCallback((e) => {
     e.stopPropagation();
@@ -73,11 +67,9 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
     <>
       <Paper
         elevation={10}
-        onClick={viewMore}
         sx={{
           padding: 2,
           position: "relative",
-          cursor: "pointer",
           width: 1,
           marginBottom: 1.5,
           borderRadius: "20px",
@@ -118,6 +110,17 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
             </IconButton>
           </Stack>
         </Paper>
+        <Link
+          href={{
+            pathname: ROUTE_POST_ID,
+            query: { id: element.id },
+          }}
+          passHref
+        >
+          <a>
+            <Button variant="outlined">zobacz</Button>
+          </a>
+        </Link>
       </Paper>
       <Recruitment
         element={element}

@@ -4,7 +4,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Grid from "@mui/material/Grid";
-import { Divider, Input, Paper } from "@mui/material";
+import { Divider } from "@mui/material";
 import { ElementCard } from "../../../components/ElementCard";
 import { useState } from "react";
 import { MenuItem } from "@mui/material";
@@ -111,7 +111,10 @@ export const CourseElementList = ({ element }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6} md={6}>
-        <ElementCard title="Społeczność" content={[<Chat />]} />
+        <ElementCard
+          title="Społeczność"
+          content={[<Chat element={element} />]}
+        />
       </Grid>
       <Grid item xs={12} sm={6} md={6}>
         <ElementCard
@@ -166,7 +169,7 @@ export const CourseElementList = ({ element }) => {
         />
       </Grid>
       <Grid item xs={12} sm={6} md={6}>
-        <ShowSimilar />
+        <ShowSimilar element={element} />
       </Grid>
     </Grid>
   );

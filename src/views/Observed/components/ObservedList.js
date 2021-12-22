@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { dataContext } from "../../../App";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
 import { LikedItem } from "./LikedItem";
@@ -9,10 +8,7 @@ import { Container } from "@mui/material";
 import { search } from "../../../utils/search";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Grid } from "@mui/material";
-import {
-  loadingContext,
-  useLoadingContext,
-} from "../../../context/loadingContext";
+import { useLoadingContext } from "../../../context/loadingContext";
 import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
 

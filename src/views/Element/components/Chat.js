@@ -1,7 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { db } from "../../../firebase/firebase";
-import { dataContext } from "../../../App";
-import { useContext } from "react";
 import { ChatMessage } from "./ChatMessage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { Typography } from "@mui/material";
@@ -12,12 +10,9 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
 import { useUserContext } from "../../../context/userContext";
-import { useChoosenContext } from "../../../context/choosenContext";
 
-export const Chat = () => {
-  const { choosen, setChoosen } = useChoosenContext();
-
-  const messagesRef = collection(db, `Chats/${choosen.id}/messages`);
+export const Chat = ({ element }) => {
+  const messagesRef = collection(db, `Chats/${element.id}/messages`);
   const q = query(messagesRef, orderBy("createdAt"), limit(6));
   const [messages] = useCollectionData(q, {
     idField: "id",
@@ -35,7 +30,7 @@ export const Chat = () => {
       text: formValue,
       uid: user.uid,
       createdAt: time,
-      course: choosen.id,
+      course: element.id,
     });
     setFormValue("");
   };

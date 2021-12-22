@@ -1,6 +1,4 @@
 import { ListItem } from "../../../components/ListItem";
-import { dataContext } from "../../../App";
-import { useContext } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 import { Container } from "@mui/material";
@@ -9,12 +7,10 @@ import { defineSuffix } from "../../../utils/defineSuffix";
 import Grid from "@mui/material/Grid";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
-import { useChoosenContext } from "../../../context/choosenContext";
 
 export const List = () => {
   const { isLoading, setLoading } = useLoadingContext();
   const { searched } = useSearchContext();
-  const { choosen, setChoosen } = useChoosenContext();
 
   return (
     <Container
@@ -50,11 +46,7 @@ export const List = () => {
             {searched.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4}>
-                  <ListItem
-                    key={item.name}
-                    item={item}
-                    setChoosen={setChoosen}
-                  />
+                  <ListItem key={item.name} item={item} />
                 </Grid>
               );
             })}

@@ -17,14 +17,10 @@ import Grid from "@mui/material/Grid";
 import { ElementCard } from "../../../components/ElementCard";
 import { useFieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
 import { useLoadingContext } from "../../../context/loadingContext";
-import { useChoosenContext } from "../../../context/choosenContext";
-import Link from "next/link";
 
 export const HomeList = () => {
   const fos = useFieldsOfStudyContext();
   const { isLoading, setLoading } = useLoadingContext();
-  const { choosen, setChoosen } = useChoosenContext();
-  const ROUTE_POST_ID = "element/[id]";
 
   useEffect(() => {
     async function getData() {
@@ -76,23 +72,7 @@ export const HomeList = () => {
               {fos.fieldsOfStudy.map((item) => {
                 return (
                   <Grid item xs={12} sm={6} md={6}>
-                    <Link
-                      // onClick={() => setChoosen(item)}
-                      href={{
-                        pathname: ROUTE_POST_ID,
-                        query: { id: item.id },
-                      }}
-                      passHref
-                    >
-                      <a>
-                        <ListItem
-                          key={item.name}
-                          item={item}
-
-                          // setChoosen={setChoosen}
-                        />
-                      </a>
-                    </Link>
+                    <ListItem key={item.name} item={item} />
                   </Grid>
                 );
               })}

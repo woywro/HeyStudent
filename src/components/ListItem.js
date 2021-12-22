@@ -8,16 +8,13 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { dataContext } from "../App";
+import { dataContext } from "../pages/_app";
 import { useContext } from "react";
 import Box from "@mui/material/Box";
 import { db } from "../firebase/firebase";
-import { defineSuffix } from "../utils/defineSuffix";
-import { useLoadingContext } from "../context/loadingContext";
 import { useUserContext } from "../context/userContext";
 import { useUserDataContext } from "../context/userDataContext";
-import { useChoosenContext } from "../context/choosenContext";
-
+import Link from "next/link";
 import {
   collection,
   query,
@@ -29,9 +26,7 @@ import {
 } from "firebase/firestore";
 
 export const ListItem = ({ item }) => {
-  const { choosen, setChoosen } = useChoosenContext();
-  // let navigate = useNavigate();
-  const { isLoading, setLoading } = useLoadingContext();
+  const ROUTE_POST_ID = "element/[id]";
   const { user } = useUserContext();
   const { setUserData, userData } = useUserDataContext();
 
@@ -55,14 +50,9 @@ export const ListItem = ({ item }) => {
 
   return (
     <Paper
-      onClick={() => {
-        setChoosen(item);
-        // navigate("/element", { replace: false });
-      }}
       elevation={5}
       sx={{
         position: "relative",
-        cursor: "pointer",
         padding: 1,
         borderRadius: "20px",
         marginTop: 1,
@@ -113,6 +103,19 @@ export const ListItem = ({ item }) => {
           <Typography variant="body2">
             {item.type}, {item.degree}
           </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Link
+            href={{
+              pathname: ROUTE_POST_ID,
+              query: { id: item.id },
+            }}
+            passHref
+          >
+            <a>
+              <Button variant="outlined">zobacz</Button>
+            </a>
+          </Link>
         </Grid>
       </Grid>
     </Paper>
