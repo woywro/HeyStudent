@@ -11,6 +11,8 @@ chat with other students and many more! The project is not finished yet, there a
 
 | Tech
 | ------------
+| NextJs
+| TypeScript
 | React
 | React Hook Form
 | Styled components
@@ -26,7 +28,3 @@ The biggest problem during coding this app was how to solve the problem of query
 
 Live version will be available soon.
 
-## To be done :pencil2:
-
-- Typescript support
-- React Native version
