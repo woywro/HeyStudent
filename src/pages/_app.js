@@ -9,6 +9,7 @@ import { FieldsOfStudyContextProvider } from "../context/fieldsOfStudyContext";
 import { LoadingContextProvider } from "../context/loadingContext";
 import { UserDataContextProvider } from "../context/userDataContext";
 import { SearchContextProvider } from "../context/searchContext";
+import NextNProgress from "nextjs-progressbar";
 export const dataContext = createContext();
 
 function Application({ Component, pageProps }) {
@@ -23,6 +24,11 @@ function Application({ Component, pageProps }) {
               <div className="App">
                 <ThemeProvider theme={theme}>
                   <GlobalStyle />
+                  <NextNProgress
+                    height={2}
+                    color="#ffc400"
+                    options={{ showSpinner: false }}
+                  />
                   <TopBar />
                   <Component {...pageProps} />
                 </ThemeProvider>
