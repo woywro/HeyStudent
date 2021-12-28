@@ -8,10 +8,9 @@ import Grid from "@mui/material/Grid";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
 
-export const List = () => {
-  const { isLoading, setLoading } = useLoadingContext();
+export const List = ({ elements }) => {
+  const { isLoading } = useLoadingContext();
   const { searched } = useSearchContext();
-
   return (
     <Container
       sx={{
@@ -21,7 +20,7 @@ export const List = () => {
         alignItems: "center",
         flexFlow: "column",
         width: "100vw",
-        padding: "20px",
+        padding: "10px",
       }}
       component="ul"
     >
@@ -46,7 +45,7 @@ export const List = () => {
             {searched.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4}>
-                  <ListItem key={item.name} item={item} />
+                  <ListItem key={item.id} item={item} />
                 </Grid>
               );
             })}

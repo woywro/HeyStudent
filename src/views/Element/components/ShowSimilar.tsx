@@ -15,12 +15,17 @@ import { MenuItem } from "@mui/material";
 import { useUserContext } from "../../../context/userContext";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useRouter } from "next/router";
+import { ItemType } from "../../../types";
 
-export const ShowSimilar = ({ element }) => {
+interface Props {
+  element: ItemType;
+}
+
+export const ShowSimilar = ({ element }: Props) => {
   const router = useRouter();
   const { user } = useUserContext();
   const { isLoading, setLoading } = useLoadingContext();
-  const [similar, setSimilar] = useState([]);
+  const [similar, setSimilar] = useState<ItemType[]>([]);
   const [year, setYear] = useState(1);
   const handleChange = (event) => {
     setYear(event.target.value);
@@ -34,16 +39,21 @@ export const ShowSimilar = ({ element }) => {
     }
   }
 
-  async function search(colToSearch, field, operator, value) {
+  async function search(
+    colToSearch: string,
+    field: string,
+    operator: string,
+    value: string
+  ) {
     setLoading(true);
-    const array = [];
+    const array: any[] = [];
     const ref = collection(db, colToSearch);
     const q = query(ref, where(field, operator, value), similarLimit());
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       array.push(doc.data());
     });
-    const arrayFiltered = array.filter((e) => e.id !== element.id);
+    const arrayFiltered: any[] = array.filter((e) => e.id !== element.id);
     setSimilar(arrayFiltered);
     setLoading(false);
   }

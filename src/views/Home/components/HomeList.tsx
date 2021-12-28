@@ -1,5 +1,5 @@
 import { ListItem } from "../../../components/ListItem";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 import { db } from "../../../firebase/firebase";
@@ -17,21 +17,22 @@ import Grid from "@mui/material/Grid";
 import { ElementCard } from "../../../components/ElementCard";
 import { useFieldsOfStudyContext } from "../../../context/fieldsOfStudyContext";
 import { useLoadingContext } from "../../../context/loadingContext";
+import { ItemType } from "../../../types";
 
 export const HomeList = () => {
-  const fos = useFieldsOfStudyContext();
+  const { fieldsOfStudy, setFieldsOfStudy } = useFieldsOfStudyContext();
   const { isLoading, setLoading } = useLoadingContext();
 
   useEffect(() => {
     async function getData() {
-      const array = [];
+      const array: ItemType[] = [];
       const colRef = collection(db, "Courses");
       const q = query(colRef, orderBy("willStudyCount"), limit(3));
       const docSnap = await getDocs(q);
       docSnap.forEach((doc) => {
         array.push(doc.data());
       });
-      fos.setFieldsOfStudy(array);
+      setFieldsOfStudy(array);
       setLoading(false);
     }
     getData();
@@ -69,10 +70,10 @@ export const HomeList = () => {
                   <CircularProgress />
                 </Box>
               )}
-              {fos.fieldsOfStudy.map((item) => {
+              {fieldsOfStudy.map((item: ItemType) => {
                 return (
                   <Grid item xs={12} sm={6} md={6}>
-                    <ListItem key={item.name} item={item} />
+                    <ListItem key={item.id} item={item} />
                   </Grid>
                 );
               })}

@@ -15,12 +15,19 @@ import { useUserDataContext } from "../../../context/userDataContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
+import { ItemType } from "../../../types";
+import { ChangeEvent } from "react";
 
-export const LikedItem = ({ element, likedArray, setLikedArray }) => {
+interface Props {
+  element: ItemType;
+  likedArray: ItemType[];
+  setLikedArray: (arg: any) => void;
+}
+
+export const LikedItem = ({ element, likedArray, setLikedArray }: Props) => {
   const ROUTE_POST_ID = "element/[id]";
-  const router = useRouter();
   const { userData, setUserData } = useUserDataContext();
-  const { user, setUser } = useUserContext();
+  const { user } = useUserContext();
   const [openRecruitment, setOpenRecruitment] = useState(false);
   const [openSubjectsDialog, setOpenSubjectsDialog] = useState(false);
   const [array, setArray] = useState(element.willStudy);
@@ -34,7 +41,7 @@ export const LikedItem = ({ element, likedArray, setLikedArray }) => {
     setOpenSubjectsDialog(true);
   }, []);
 
-  const handleDislikeCourse = (e) => {
+  const handleDislikeCourse = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     let newArray = array.filter((e) => e.uid !== user.uid);
     const docRef = doc(db, "Courses", element.id);

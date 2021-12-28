@@ -4,8 +4,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useCallback } from "react";
+import { ItemType } from "../../../types";
 
-export const Recruitment = ({ setIsOpen, isOpen, element }) => {
+interface Props {
+  element: ItemType;
+  setIsOpen: (arg: boolean) => void;
+  isOpen: boolean;
+}
+
+export const Recruitment = ({ setIsOpen, isOpen, element }: Props) => {
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);
@@ -21,7 +28,7 @@ export const Recruitment = ({ setIsOpen, isOpen, element }) => {
     return date;
   };
 
-  const daysBetween = (date1, date2) => {
+  const daysBetween = (date1: number, date2: number) => {
     const ONE_DAY = 1000 * 60 * 60 * 24;
     const differenceMs = Math.abs(date1 - date2);
     return Math.round(differenceMs / ONE_DAY);

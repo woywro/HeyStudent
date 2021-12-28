@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import { LikedItem } from "./LikedItem";
+import { LikedItem } from "./ObservedItem";
 import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import { Container } from "@mui/material";
@@ -11,24 +11,30 @@ import { Grid } from "@mui/material";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
+import { db } from "../../../firebase/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 export const ObservedList = () => {
-  const { user, setUser } = useUserContext();
-  const { userData, setUserData } = useUserDataContext();
-  const matches = useMediaQuery("(min-width:600px)");
+  const { user } = useUserContext();
+  const { userData } = useUserDataContext();
   const [likedArray, setLikedArray] = useState([]);
   const { isLoading, setLoading } = useLoadingContext();
 
   useEffect(() => {
     if (user && userData.likedItems.length !== 0) {
-      search(
-        setLoading,
-        "Courses",
-        "id",
-        "in",
-        userData.likedItems,
-        setLikedArray
-      );
+      const getData = async () => {
+        setLoading(true);
+        const array: any[] = [];
+        const ref = collection(db, "Courses");
+        const q = query(ref, where("id", "in", userData.likedItems));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          array.push(doc.data());
+        });
+        setLikedArray(array);
+        setLoading(false);
+      };
+      getData();
     }
   }, [userData]);
 
@@ -56,7 +62,7 @@ export const ObservedList = () => {
         <Grid container spacing={1}>
           {likedArray.map((element) => {
             return (
-              <Grid item item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <LikedItem
                   element={element}
                   likedArray={likedArray}

@@ -4,14 +4,16 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { dataContext } from "../pages/_app";
-import { useContext, useCallback } from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useCallback } from "react";
 import { useUserContext } from "../context/userContext";
 import { useRouter } from "next/router";
 
-export default function LeftDrawer({ isOpen, setOpen }) {
-  const matches = useMediaQuery("(min-width:600px)");
+interface Props {
+  isOpen: boolean;
+  setOpen: (arg: boolean) => void;
+}
+
+export default function LeftDrawer({ isOpen, setOpen }: Props) {
   const router = useRouter();
   const { user } = useUserContext();
   const handleCloseMenu = useCallback(() => {
@@ -26,15 +28,11 @@ export default function LeftDrawer({ isOpen, setOpen }) {
         variant="temporary"
         onClose={handleCloseMenu}
       >
-        <Box
-          sx={{ width: "left" === "top" || "left" === "bottom" ? "auto" : 250 }}
-          role="presentation"
-          onClick={() => setOpen(false)}
-        >
+        <Box role="presentation" onClick={() => setOpen(false)}>
           <List>
             <ListItem sx={{ padding: 1 }} button>
               <ListItemText
-                primary="Wyszukiwanie"
+                primary="Strona główna"
                 onClick={() => router.push("/")}
               />
             </ListItem>

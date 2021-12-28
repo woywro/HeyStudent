@@ -7,7 +7,23 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from "../firebase/firebase";
 import { getDoc } from "firebase/firestore";
 
-export const userDataContext = createContext();
+interface userData {
+  likedItems: string[];
+  name: string;
+  observedSearches: string[];
+  theme: string;
+}
+
+interface userDataType {
+  userData: userData;
+  setUserData: (arg: any) => void;
+}
+
+interface Props {
+  children: JSX.Element | JSX.Element[];
+}
+
+export const userDataContext = createContext<userDataType>("");
 
 export const useUserDataContext = () => {
   const context = useContext(userDataContext);
@@ -19,13 +35,11 @@ export const useUserDataContext = () => {
   return context;
 };
 
-export const UserDataContextProvider = ({ children }) => {
-  const [userData, setUserData] = useState("");
+export const UserDataContextProvider = ({ children }: Props) => {
+  const [userData, setUserData] = useState<userData>("");
   const auth = getAuth();
 
   const [user] = useAuthState(auth);
-
-  const value = { userData, setUserData };
 
   useEffect(() => {
     if (user) {
@@ -40,7 +54,7 @@ export const UserDataContextProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <userDataContext.Provider value={value}>
+    <userDataContext.Provider value={{ userData, setUserData }}>
       {children}
     </userDataContext.Provider>
   );

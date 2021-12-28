@@ -1,13 +1,8 @@
-import { useRouter } from "next/router";
 import { Element } from "../../views/Element/Element";
-import { doc, getDocs, query, collection, where } from "firebase/firestore";
+import { getDocs, query, collection, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
-import { useEffect } from "react";
-import { useState } from "react";
 
 export default function elementPage({ data }) {
-  const router = useRouter();
-
   return <Element data={data} />;
 }
 export async function getServerSideProps(context) {
@@ -19,15 +14,12 @@ export async function getServerSideProps(context) {
     array.push(doc.data());
   });
   const data = array[0];
-  console.log(data);
-
   if (!data) {
     return {
       notFound: true,
     };
   }
-
   return {
-    props: { data }, // will be passed to the page component as props
+    props: { data },
   };
 }

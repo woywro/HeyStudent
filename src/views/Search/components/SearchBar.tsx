@@ -1,12 +1,14 @@
 import { Paper } from "@mui/material";
 import { useState } from "react";
-import { NameSearch } from "./NameSearch";
+import { NameSearch } from "../../Search/components/NameSearch";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSearchContext } from "../../../context/searchContext";
+import { useRouter } from "next/router";
 
 export const SearchBar = () => {
+  let router = useRouter();
   const matches = useMediaQuery("(min-width:600px)");
   const [sort, setSort] = useState("random");
   const { searched, setSearched } = useSearchContext();
@@ -48,7 +50,7 @@ export const SearchBar = () => {
       }}
     >
       <NameSearch />
-      {searched !== false && (
+      {router.pathname !== "/" && (
         <ToggleButtonGroup
           value={sort}
           exclusive

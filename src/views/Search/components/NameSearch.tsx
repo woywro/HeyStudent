@@ -1,32 +1,41 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import { search } from "../../../utils/search";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
+import Link from "next/link";
+import { useRouter } from "next/router";
 export const NameSearch = () => {
+  let router = useRouter();
   const { searched, setSearched } = useSearchContext();
   const [input, setInput] = useState("");
   const { isLoading, setLoading } = useLoadingContext();
+  const HOMEROUTE = "/";
 
-  const handleFind = () => {
-    let inputArray = input.split("/");
-    search(
-      setLoading,
-      "Courses",
-      "tags",
-      "array-contains-any",
-      inputArray,
-      setSearched
-    );
-  };
+  useEffect(() => {
+    if (router.pathname !== "/") {
+      setInput(router.query.search.replace("-", " "));
+    }
+  }, []);
+
   const handleClearList = () => {
     setInput("");
-    setSearched(false);
+    setSearched("");
     setLoading(false);
   };
+
+  const defineRoute = () => {
+    if (router.pathname == "/") {
+      return "search/[search]";
+    } else {
+      return "[search]";
+    }
+  };
+
+  const ROUTE = defineRoute();
 
   const generatePlaceholder = () => {
     const placeholders = [
@@ -55,24 +64,34 @@ export const NameSearch = () => {
         label="wyszukiwanie"
         fullWidth
         variant="standard"
-        size="normal"
         value={input}
       />
-
-      <IconButton
-        size="small"
-        sx={{ borderRadius: "10px" }}
-        onClick={handleFind}
+      <Link
+        href={{
+          pathname: ROUTE,
+          query: { search: input.toString().replace(" ", "-") },
+        }}
+        passHref
       >
-        <SearchIcon />
-      </IconButton>
-      <IconButton
-        size="small"
-        sx={{ borderRadius: "10px" }}
-        onClick={handleClearList}
+        <IconButton size="small" sx={{ borderRadius: "10px" }}>
+          <SearchIcon />
+        </IconButton>
+      </Link>
+      <Link
+        href={{
+          pathname: HOMEROUTE,
+          // query: { search: searched.toString().replace(" ", "-") },
+        }}
+        passHref
       >
-        x
-      </IconButton>
+        <IconButton
+          size="small"
+          sx={{ borderRadius: "10px" }}
+          onClick={handleClearList}
+        >
+          x
+        </IconButton>
+      </Link>
     </Stack>
   );
 };

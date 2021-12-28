@@ -6,8 +6,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import LeftDrawer from "./LeftDrawer";
-import { dataContext } from "../pages/_app";
-
 import { logout } from "../firebase/firebase";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCallback, useState } from "react";

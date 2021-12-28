@@ -13,7 +13,11 @@ import { ShowSimilar } from "./ShowSimilar";
 import { Chat } from "./Chat";
 import { ReportError } from "./ReportError";
 import { Box } from "@mui/system";
-export const CourseElementList = ({ element }) => {
+import { ItemType } from "../../../types";
+interface Props {
+  element: ItemType;
+}
+export const CourseElementList = ({ element }: Props) => {
   const [year, setYear] = useState(1);
   const handleChange = (event) => {
     setYear(event.target.value);
@@ -81,7 +85,6 @@ export const CourseElementList = ({ element }) => {
                 return (
                   <Grid item xs={4}>
                     <Box
-                      elevation={2}
                       sx={{
                         padding: 0.5,
                         marginTop: 0.5,

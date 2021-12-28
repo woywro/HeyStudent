@@ -5,8 +5,13 @@ import { CourseElementList } from "./components/CourseElementList";
 import { IsInterested } from "./components/IsInterested";
 import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
+import { ItemType } from "../../types";
 
-export const Element = ({ data }) => {
+interface Props {
+  data: ItemType;
+}
+
+export const Element = ({ data }: Props) => {
   return (
     <Container
       sx={{

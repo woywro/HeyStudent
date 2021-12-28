@@ -1,7 +1,12 @@
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 
-export const ElementCard = ({ title, content }) => {
+interface Props {
+  title: string;
+  content: any;
+}
+
+export const ElementCard = ({ title, content }: Props) => {
   return (
     <Paper
       sx={{

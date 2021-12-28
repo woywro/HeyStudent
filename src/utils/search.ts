@@ -2,15 +2,15 @@ import { db } from "../firebase/firebase";
 import { collection, query, where, getDocs, doc } from "firebase/firestore";
 
 export async function search(
-  setLoading,
-  colToSearch,
-  field,
-  operator,
-  value,
-  whatToSet
+  setLoading: (arg: boolean) => void,
+  colToSearch: string,
+  field: string,
+  operator: string,
+  value: string,
+  whatToSet: any[]
 ) {
   setLoading(true);
-  const array = [];
+  const array: any[] = [];
   const ref = collection(db, colToSearch);
   const q = query(ref, where(field, operator, value));
   const querySnapshot = await getDocs(q);

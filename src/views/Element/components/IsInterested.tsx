@@ -1,19 +1,20 @@
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { Box } from "@mui/system";
 import { defineSuffix } from "../../../utils/defineSuffix";
-import { useCallback } from "react";
-import {
-  userDataContext,
-  useUserDataContext,
-} from "../../../context/userDataContext";
+import { useUserDataContext } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
+import { ItemType } from "../../../types";
 
-export const IsInterested = ({ data }) => {
-  const { user, setUser } = useUserContext();
+interface Props {
+  data: ItemType;
+}
+
+export const IsInterested = ({ data }: Props) => {
+  const { user } = useUserContext();
   const { userData, setUserData } = useUserDataContext([]);
   const [interested, setInterested] = useState(data.willStudy.length);
 

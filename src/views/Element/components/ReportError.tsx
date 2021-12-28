@@ -4,13 +4,18 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
-import { useContext, useCallback } from "react";
+import { useCallback } from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Paper } from "@mui/material";
-import { userContext, useUserContext } from "../../../context/userContext";
+import { useUserContext } from "../../../context/userContext";
+import { ItemType } from "../../../types";
 
-export const ReportError = ({ choosen }) => {
+interface Props {
+  choosen: ItemType;
+}
+
+export const ReportError = ({ choosen }: Props) => {
   const { user } = useUserContext();
   const [inputValue, setInputValue] = useState("");
 
@@ -18,7 +23,6 @@ export const ReportError = ({ choosen }) => {
 
   const handleChange = useCallback((event) => {
     setSelectValue(event.target.value);
-    console.log(selectValue);
   }, []);
 
   const sendError = useCallback(

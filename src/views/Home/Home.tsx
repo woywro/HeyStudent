@@ -1,5 +1,5 @@
 import { List } from "./components/List";
-import { SearchBar } from "./components/SearchBar";
+import { SearchBar } from "../../views/Search/components/SearchBar";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import { HomeList } from "./components/HomeList";
@@ -34,7 +34,8 @@ export const Home = () => {
         }
       />
 
-      {searched !== false ? <List /> : <HomeList />}
+      {/* {searched !== [] ? <HomeList /> : <List />} */}
+      <HomeList />
     </Container>
   );
 };

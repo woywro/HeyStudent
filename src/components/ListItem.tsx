@@ -1,37 +1,29 @@
-import styled from "styled-components";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-// import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { dataContext } from "../pages/_app";
-import { useContext } from "react";
 import Box from "@mui/material/Box";
 import { db } from "../firebase/firebase";
 import { useUserContext } from "../context/userContext";
 import { useUserDataContext } from "../context/userDataContext";
 import Link from "next/link";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
+import { ItemType } from "../types";
 
-export const ListItem = ({ item }) => {
-  const ROUTE_POST_ID = "element/[id]";
+interface Props {
+  item: ItemType;
+  key: string;
+}
+
+export const ListItem = ({ item, key }: Props) => {
+  const ROUTE_POST_ID = "/element/[id]";
   const { user } = useUserContext();
   const { setUserData, userData } = useUserDataContext();
 
-  async function handleObserve(e) {
-    e.stopPropagation();
+  async function handleObserve() {
     let a = userData.likedItems;
     a.push(item.id);
     setUserData({ likedItems: a });
@@ -39,9 +31,10 @@ export const ListItem = ({ item }) => {
       likedItems: a,
     });
   }
-  async function handleStopObserve(e) {
-    e.stopPropagation();
-    const newArray = userData.likedItems.filter((e) => e !== item.id);
+  async function handleStopObserve() {
+    const newArray: string[] = userData.likedItems.filter(
+      (e: string) => e !== item.id
+    );
     setUserData({ likedItems: newArray });
     await updateDoc(doc(db, "Users", user.uid), {
       likedItems: newArray,
@@ -111,6 +104,7 @@ export const ListItem = ({ item }) => {
               query: { id: item.id },
             }}
             passHref
+            // replace
           >
             <a>
               <Button variant="outlined">zobacz</Button>

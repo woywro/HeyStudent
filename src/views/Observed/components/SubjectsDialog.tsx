@@ -4,8 +4,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useCallback } from "react";
 import { Divider } from "@mui/material";
+import { ItemType } from "../../../types";
 
-export const SubjectsDialog = ({ setIsOpen, isOpen, element }) => {
+interface Props {
+  element: ItemType;
+  setIsOpen: (arg: boolean) => void;
+  isOpen: boolean;
+}
+
+export const SubjectsDialog = ({ setIsOpen, isOpen, element }: Props) => {
   const handleClose = useCallback(() => {
     setIsOpen(false);
   }, []);

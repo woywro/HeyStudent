@@ -10,8 +10,13 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
 import { useUserContext } from "../../../context/userContext";
+import { ItemType } from "../../../types";
 
-export const Chat = ({ element }) => {
+interface Props {
+  element: ItemType;
+}
+
+export const Chat = ({ element }: Props) => {
   const messagesRef = collection(db, `Chats/${element.id}/messages`);
   const q = query(messagesRef, orderBy("createdAt"), limit(6));
   const [messages] = useCollectionData(q, {
@@ -21,7 +26,7 @@ export const Chat = ({ element }) => {
 
   const [formValue, setFormValue] = useState("");
 
-  const sendMessage = async (e) => {
+  const sendMessage = async (e: any) => {
     e.preventDefault();
     const today = new Date();
     const time = today.getTime();
@@ -37,10 +42,7 @@ export const Chat = ({ element }) => {
 
   return user ? (
     <>
-      <Box
-        elevation={6}
-        sx={{ overflowY: "scroll", height: "150px", padding: 1 }}
-      >
+      <Box sx={{ overflowY: "scroll", height: "150px", padding: 1 }}>
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
       </Box>
@@ -59,9 +61,8 @@ export const Chat = ({ element }) => {
           <Button
             variant="contained"
             type="submit"
-            disabl
             color="secondary"
-            ed={!formValue}
+            disabled={!formValue}
           >
             wyślij
           </Button>
