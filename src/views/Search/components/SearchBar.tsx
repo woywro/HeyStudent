@@ -1,11 +1,62 @@
 import { Paper } from "@mui/material";
 import { useState } from "react";
-import { NameSearch } from "../../Search/components/NameSearch";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSearchContext } from "../../../context/searchContext";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import breakpoint from "../../../theme/breakpoints";
+import { useLoadingContext } from "../../../context/loadingContext";
+import { useEffect } from "react";
+import Link from "next/link";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+
+const StyledSearchBar = styled.div`
+  padding: 10px;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 50%;
+  }
+`;
+
+const StyledNameSearch = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-flow: row;
+  width: 90%;
+`;
+
+const StyledInput = styled.input`
+  border: none;
+  background: #e2e7f3;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+
+  width: 100%;
+  :focus {
+    outline: none;
+  }
+`;
+
+const StyledButton = styled.button`
+  background: white;
+  border: 0;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 15px;
+`;
 
 export const SearchBar = () => {
   let router = useRouter();
@@ -39,17 +90,81 @@ export const SearchBar = () => {
     }
   };
 
+  const [input, setInput] = useState("");
+  const { isLoading, setLoading } = useLoadingContext();
+  const HOMEROUTE = "/";
+
+  useEffect(() => {
+    if (router.pathname !== "/") {
+      setInput(router.query.search.replace("-", " "));
+    }
+  }, []);
+
+  const handleClearList = () => {
+    setInput("");
+    setSearched("");
+    setLoading(false);
+  };
+
+  const defineRoute = () => {
+    if (router.pathname == "/") {
+      return "search/[search]";
+    } else {
+      return "[search]";
+    }
+  };
+
+  const ROUTE = defineRoute();
+
+  const generatePlaceholder = () => {
+    const placeholders = [
+      "np. informatyka Gdańsk",
+      "np. Poznań ekonomia",
+      "np. programowanie Poznań",
+      "np. informatyka i ekonometria Gdańsk",
+      "np. uniwersytet gdański",
+    ];
+    const random = Math.floor(Math.random() * placeholders.length);
+    return placeholders[random];
+  };
+
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        padding: 1.5,
-        borderRadius: 3,
-        width: matches ? 0.8 : 1,
-        marginBottom: 3,
-      }}
-    >
-      <NameSearch />
+    <StyledSearchBar>
+      <StyledNameSearch>
+        <StyledInput
+          onChange={(e) => {
+            setInput(e.target.value.toLowerCase());
+          }}
+          placeholder={generatePlaceholder()}
+          value={input}
+        />
+        <Link
+          href={{
+            pathname: ROUTE,
+            query: { search: input.toString().replace(" ", "-") },
+          }}
+          passHref
+        >
+          <StyledButton>Szukaj</StyledButton>
+        </Link>
+
+        <Link
+          href={{
+            pathname: HOMEROUTE,
+            // query: { search: searched.toString().replace(" ", "-") },
+          }}
+          passHref
+        >
+          <IconButton
+            size="small"
+            sx={{ borderRadius: "10px" }}
+            onClick={handleClearList}
+          >
+            x
+          </IconButton>
+        </Link>
+      </StyledNameSearch>
+
       {router.pathname !== "/" && (
         <ToggleButtonGroup
           value={sort}
@@ -63,6 +178,6 @@ export const SearchBar = () => {
           <ToggleButton value="popularity">popularność</ToggleButton>
         </ToggleButtonGroup>
       )}
-    </Paper>
+    </StyledSearchBar>
   );
 };

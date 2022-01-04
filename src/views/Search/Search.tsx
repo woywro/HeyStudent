@@ -5,22 +5,31 @@ import { PageTopBar } from "../../components/PageTopBar";
 import { useSearchContext } from "../../context/searchContext";
 import { NameSearch } from "./components/NameSearch";
 import { SearchBar } from "./components/SearchBar";
+import styled from "styled-components";
+import breakpoint from "../../theme/breakpoints";
+
+const StyledSearch = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 70%;
+  }
+`;
+
 export const Search = ({ data }) => {
   const { searched, setSearched } = useSearchContext();
   setSearched(data);
   return (
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexFlow: "column",
-        padding: "10px",
-        width: "100vw",
-      }}
-    >
-      <SearchBar />
+    <StyledSearch>
+      <PageTopBar>
+        <SearchBar />
+      </PageTopBar>
       <List elements={data} />
-    </Container>
+    </StyledSearch>
   );
 };

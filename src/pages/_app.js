@@ -10,7 +10,18 @@ import { LoadingContextProvider } from "../context/loadingContext";
 import { UserDataContextProvider } from "../context/userDataContext";
 import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
+import styled from "styled-components";
+import Burger from "../components/Burger";
+import Menu from "@mui/icons-material/Menu";
 export const dataContext = createContext();
+
+const StyledApp = styled.div`
+  display: flex;
+  flex-flow: column;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+`;
 
 function Application({ Component, pageProps }) {
   const [theme, setTheme] = useState(defaultTheme);
@@ -22,16 +33,18 @@ function Application({ Component, pageProps }) {
           <UserDataContextProvider>
             <FieldsOfStudyContextProvider>
               <div className="App">
-                <ThemeProvider theme={theme}>
-                  <GlobalStyle />
-                  <NextNProgress
-                    height={2}
-                    color="#ffc400"
-                    options={{ showSpinner: false }}
-                  />
-                  <TopBar />
-                  <Component {...pageProps} />
-                </ThemeProvider>
+                <StyledApp>
+                  <ThemeProvider theme={theme}>
+                    <GlobalStyle />
+                    <NextNProgress
+                      height={2}
+                      color="#ffc400"
+                      options={{ showSpinner: false }}
+                    />
+                    <TopBar>{/* <Burger /> */}</TopBar>
+                    <Component {...pageProps} />
+                  </ThemeProvider>
+                </StyledApp>
               </div>
             </FieldsOfStudyContextProvider>
           </UserDataContextProvider>

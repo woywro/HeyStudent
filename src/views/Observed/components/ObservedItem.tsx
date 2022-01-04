@@ -17,12 +17,43 @@ import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { ItemType } from "../../../types";
 import { ChangeEvent } from "react";
+import styled from "styled-components";
 
 interface Props {
   element: ItemType;
   likedArray: ItemType[];
   setLikedArray: (arg: any) => void;
 }
+
+const StyledObservedItem = styled.div`
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: inline-grid;
+  grid-template-columns: 3fr 3fr 3fr 1fr 1fr;
+  justify-items: start;
+  align-items: center;
+  position: relative;
+  margin: 15px;
+  padding: 10px;
+  cursor: pointer;
+  border: ${(props) => props.hasBorder};
+`;
+
+const StyledCourseTitle = styled.h1`
+  font-size: 18px;
+  font-weight: normal;
+`;
+const StyledCourseUniversity = styled.p`
+  font-size: 15px;
+`;
+const StyledCourseCity = styled.p`
+  font-size: 15px;
+`;
+const StyledCourseMatch = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+`;
 
 export const LikedItem = ({ element, likedArray, setLikedArray }: Props) => {
   const ROUTE_POST_ID = "element/[id]";
@@ -64,81 +95,29 @@ export const LikedItem = ({ element, likedArray, setLikedArray }: Props) => {
 
   const hasBorder = () => {
     if (array.map((e) => e.uid).includes(user.uid)) {
-      return 3;
+      return "2px solid #039be5;";
     }
   };
 
-  const courseName = element.name.join(" ");
-
   return (
-    <>
-      <Paper
-        elevation={10}
-        sx={{
-          padding: 2,
-          position: "relative",
-          width: 1,
-          marginBottom: 1.5,
-          borderRadius: "20px",
-          border: hasBorder(),
-          borderColor: "secondary.main",
-        }}
-      >
-        <Typography sx={{ padding: 0.5 }} variant="h5">
-          {courseName}
-        </Typography>
-        <Typography variant="subtitle1">{element.university}</Typography>
-        <Paper elevation={3} sx={{ borderRadius: "20px" }}>
-          <Stack
-            sx={{
-              margin: 1,
-            }}
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-          >
-            <IconButton color="primary">
-              <EventIcon
-                sx={{ color: "secondary.main" }}
-                onClick={handleOpenRecruitment}
-              />
-            </IconButton>
-            <IconButton color="primary">
-              <SchoolIcon
-                sx={{ color: "secondary.main" }}
-                onClick={handleOpenSubjectsDialog}
-              />
-            </IconButton>
-            <IconButton color="primary">
-              <StarIcon
-                sx={{ color: "secondary.main" }}
-                onClick={handleStopObserve}
-              />
-            </IconButton>
-          </Stack>
-        </Paper>
-        <Link
-          href={{
-            pathname: ROUTE_POST_ID,
-            query: { id: element.id },
-          }}
-          passHref
-        >
-          <a>
-            <Button variant="outlined">zobacz</Button>
-          </a>
-        </Link>
-      </Paper>
-      <Recruitment
-        element={element}
-        isOpen={openRecruitment}
-        setIsOpen={setOpenRecruitment}
-      />
-      <SubjectsDialog
-        element={element}
-        isOpen={openSubjectsDialog}
-        setIsOpen={setOpenSubjectsDialog}
-      />
-    </>
+    <Link
+      href={{
+        pathname: ROUTE_POST_ID,
+        query: { id: element.id },
+      }}
+      passHref
+    >
+      <StyledObservedItem hasBorder={hasBorder}>
+        <StyledCourseTitle>{element.name.join(" ")}</StyledCourseTitle>
+        <StyledCourseUniversity>{element.university}</StyledCourseUniversity>
+        <StyledCourseCity>{element.city}</StyledCourseCity>
+        <IconButton color="primary">
+          <StarIcon
+            sx={{ color: "secondary.main" }}
+            onClick={handleStopObserve}
+          />
+        </IconButton>
+      </StyledObservedItem>
+    </Link>
   );
 };

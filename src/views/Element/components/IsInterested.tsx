@@ -8,10 +8,19 @@ import { defineSuffix } from "../../../utils/defineSuffix";
 import { useUserDataContext } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
+import styled from "styled-components";
 
 interface Props {
   data: ItemType;
 }
+
+const StyledIsInterested = styled.div`
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+`;
 
 export const IsInterested = ({ data }: Props) => {
   const { user } = useUserContext();
@@ -57,63 +66,49 @@ export const IsInterested = ({ data }: Props) => {
   };
 
   return (
-    <>
-      <Box
-        sx={{
-          marginTop: 1,
-          width: 1,
-          position: "relative",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          flexFlow: "column",
-          padding: 0,
-          backgroundColor: "primary.main",
-        }}
-      >
-        <Typography variant="subtitle1">
-          {interested}{" "}
-          {defineSuffix(
-            interested,
-            "osoba zainteresowana",
-            "osoby zainteresowane",
-            "osób zainteresowanych"
-          )}
-        </Typography>
-        {user && (
-          <>
-            {array.map((e) => e.uid).includes(user.uid) ? (
-              <>
-                <Typography variant="subtitle2">
-                  Jesteś zainteresowany tym kierunkiem!
-                </Typography>
-                <Button
-                  color="secondary"
-                  sx={{
-                    margin: 0.5,
-                  }}
-                  variant="contained"
-                  onClick={handleDislikeCourse}
-                >
-                  Nie jestem zainteresowany
-                </Button>
-              </>
-            ) : (
+    <StyledIsInterested>
+      <Typography variant="subtitle1">
+        {interested}{" "}
+        {defineSuffix(
+          interested,
+          "osoba zainteresowana",
+          "osoby zainteresowane",
+          "osób zainteresowanych"
+        )}
+      </Typography>
+      {user && (
+        <>
+          {array.map((e) => e.uid).includes(user.uid) ? (
+            <>
+              <Typography variant="subtitle2">
+                Jesteś zainteresowany tym kierunkiem!
+              </Typography>
               <Button
+                color="secondary"
                 sx={{
                   margin: 0.5,
-                  color: "secondary.main",
-                  borderColor: "secondary.main",
                 }}
-                variant="outlined"
-                onClick={handleLikeCourse}
+                variant="contained"
+                onClick={handleDislikeCourse}
               >
-                Jestem zainteresowany
+                Nie jestem zainteresowany
               </Button>
-            )}
-          </>
-        )}
-      </Box>
-    </>
+            </>
+          ) : (
+            <Button
+              sx={{
+                margin: 0.5,
+                color: "secondary.main",
+                borderColor: "secondary.main",
+              }}
+              variant="outlined"
+              onClick={handleLikeCourse}
+            >
+              Jestem zainteresowany
+            </Button>
+          )}
+        </>
+      )}
+    </StyledIsInterested>
   );
 };

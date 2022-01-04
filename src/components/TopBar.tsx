@@ -11,8 +11,69 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCallback, useState } from "react";
 import { useUserContext } from "../context/userContext";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+import breakpoint from "../theme/breakpoints";
+import Burger from "./Burger";
 
-export const TopBar = () => {
+const StyledTopBar = styled.nav`
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  @media only screen and ${breakpoint.device.xs} {
+    justify-content: space-between;
+    background: #039be5;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    padding-left: 20%;
+    padding-right: 20%;
+    justify-content: space-around;
+    background: white;
+  }
+`;
+
+const StyledNavItem = styled.a`
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  cursor: pointer;
+`;
+const NavItems = styled.li`
+  width: 50%;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+  }
+`;
+const StyledTitle = styled.h1`
+  font-weight: bold;
+  font-size: 16px;
+  @media only screen and ${breakpoint.device.xs} {
+    color: white;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    color: black;
+  }
+`;
+const StyledLogButton = styled.button`
+  background: blue;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+  }
+`;
+
+export const TopBar = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const router = useRouter();
   const { user } = useUserContext();
@@ -29,47 +90,29 @@ export const TopBar = () => {
     router.push("/");
     logout();
   }, []);
+  console.log(breakpoint);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <LeftDrawer isOpen={isOpen} setOpen={setOpen} />
-      <AppBar elevation={0} position="static" sx={{ color: "white" }}>
-        <Toolbar>
-          {router.pathname == "/element/[id]" ? (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleBack}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleCloseMenu}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            HeyStudent
-          </Typography>
-
-          {user ? (
-            <Button color="inherit" onClick={handleLogout}>
-              Wyloguj
-            </Button>
-          ) : (
-            <Button color="inherit" onClick={handleLogin}>
-              Zaloguj
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <StyledTopBar>
+      {children}
+      <StyledTitle>HeyStudent</StyledTitle>
+      <Burger />
+      <NavItems>
+        <StyledNavItem onClick={() => router.push("/")}>
+          Strona główna
+        </StyledNavItem>
+        <StyledNavItem onClick={() => router.push("/observed")}>
+          Obserwowane kierunki
+        </StyledNavItem>
+        <StyledNavItem onClick={() => router.push("/add")}>
+          Dodawanie Kierunku
+        </StyledNavItem>
+      </NavItems>
+      {user ? (
+        <StyledLogButton onClick={handleLogout}>Wyloguj</StyledLogButton>
+      ) : (
+        <StyledLogButton onClick={handleLogin}>Zaloguj</StyledLogButton>
+      )}
+    </StyledTopBar>
   );
 };

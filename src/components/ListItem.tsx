@@ -12,6 +12,34 @@ import { useUserDataContext } from "../context/userDataContext";
 import Link from "next/link";
 import { updateDoc, doc } from "firebase/firestore";
 import { ItemType } from "../types";
+import styled from "styled-components";
+
+const StyledListItem = styled.li`
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: inline-grid;
+  grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+  justify-items: start;
+  align-items: center;
+  position: relative;
+  margin: 15px;
+  padding: 10px;
+  cursor: pointer;
+`;
+const StyledCourseTitle = styled.h1`
+  font-size: 18px;
+  font-weight: normal;
+`;
+const StyledCourseUniversity = styled.p`
+  font-size: 15px;
+`;
+const StyledCourseCity = styled.p`
+  font-size: 15px;
+`;
+const StyledCourseMatch = styled.p`
+  font-size: 18px;
+`;
 
 interface Props {
   item: ItemType;
@@ -42,76 +70,38 @@ export const ListItem = ({ item, key }: Props) => {
   }
 
   return (
-    <Paper
-      elevation={5}
-      sx={{
-        position: "relative",
-        padding: 1,
-        borderRadius: "20px",
-        marginTop: 1,
-        width: 1,
+    <Link
+      href={{
+        pathname: ROUTE_POST_ID,
+        query: { id: item.id },
       }}
+      passHref
     >
-      <Grid container spacing={0.5}>
-        <Grid item xs={12}>
-          <Typography
-            variant="h5"
-            sx={{
-              padding: 1,
-            }}
-          >
-            {item.name.join(" ")}
-          </Typography>
-        </Grid>
-        <Box
-          sx={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            padding: 0,
-          }}
-        >
-          {user &&
-            userData !== "" &&
-            (userData.likedItems.includes(item.id) ? (
-              <IconButton color="primary">
-                <StarIcon
-                  sx={{ color: "secondary.main" }}
-                  onClick={handleStopObserve}
-                />
-              </IconButton>
-            ) : (
-              <IconButton color="primary">
-                <StarBorderIcon
-                  sx={{ color: "secondary.main" }}
-                  onClick={handleObserve}
-                />
-              </IconButton>
-            ))}
-        </Box>
-        <Grid item xs={12}>
-          <Typography variant="body2">{item.university}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body2">
-            {item.type}, {item.degree}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Link
-            href={{
-              pathname: ROUTE_POST_ID,
-              query: { id: item.id },
-            }}
-            passHref
-            // replace
-          >
-            <a>
-              <Button variant="outlined">zobacz</Button>
-            </a>
-          </Link>
-        </Grid>
-      </Grid>
-    </Paper>
+      <StyledListItem>
+        <StyledCourseMatch>
+          {item.university == "Politechnika Gdańska" ? "PG" : "UG"}
+        </StyledCourseMatch>
+        <StyledCourseTitle>{item.name.join(" ")}</StyledCourseTitle>
+        <StyledCourseUniversity>{item.university}</StyledCourseUniversity>
+        <StyledCourseCity>{item.city}</StyledCourseCity>
+        {user &&
+          userData !== "" &&
+          (userData.likedItems.includes(item.id) ? (
+            <IconButton color="primary">
+              <StarIcon
+                sx={{ color: "secondary.main" }}
+                onClick={handleStopObserve}
+              />
+            </IconButton>
+          ) : (
+            <IconButton color="primary">
+              <StarBorderIcon
+                sx={{ color: "secondary.main" }}
+                onClick={handleObserve}
+              />
+            </IconButton>
+          ))}
+      </StyledListItem>
+    </Link>
   );
 };

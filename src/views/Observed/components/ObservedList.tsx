@@ -13,6 +13,7 @@ import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
 import { db } from "../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { ListItem } from "../../../components/ListItem";
 
 export const ObservedList = () => {
   const { user } = useUserContext();
@@ -62,13 +63,11 @@ export const ObservedList = () => {
         <Grid container spacing={1}>
           {likedArray.map((element) => {
             return (
-              <Grid item xs={12} sm={6} md={6}>
-                <LikedItem
-                  element={element}
-                  likedArray={likedArray}
-                  setLikedArray={setLikedArray}
-                />
-              </Grid>
+              <LikedItem
+                element={element}
+                likedArray={likedArray}
+                setLikedArray={setLikedArray}
+              />
             );
           })}
         </Grid>

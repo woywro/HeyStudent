@@ -6,10 +6,22 @@ import { IsInterested } from "./components/IsInterested";
 import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
 import { ItemType } from "../../types";
+import styled from "styled-components";
 
 interface Props {
   data: ItemType;
 }
+
+const StyledCourseTitle = styled.h1`
+  color: white;
+  font-size: 40px;
+`;
+
+const StyledCourseText = styled.p`
+  color: white;
+  font-size: 20px;
+  margin: 5px;
+`;
 
 export const Element = ({ data }: Props) => {
   return (
@@ -24,22 +36,21 @@ export const Element = ({ data }: Props) => {
         width: "100vw",
       }}
     >
-      <PageTopBar
-        content={
-          <Box sx={{ width: 1 }}>
-            <Typography variant="h3">{data.name.join(" ")}</Typography>
-            <Typography variant="subtitle2">
-              {data.type}, {data.degree}
-            </Typography>
-            <Divider
-              orientation="horizontal"
-              variant="middle"
-              sx={{ marginTop: 1 }}
-            />
-            <IsInterested data={data} />
-          </Box>
-        }
-      />
+      <PageTopBar>
+        <StyledCourseTitle>{data.name.join(" ")}</StyledCourseTitle>
+        <StyledCourseText>
+          {data.university}, {data.city}
+        </StyledCourseText>
+        {/* <StyledCourseText>
+          {data.type}, {data.degree}
+        </StyledCourseText> */}
+        <Divider
+          orientation="horizontal"
+          variant="middle"
+          sx={{ marginTop: 1 }}
+        />
+        {/* <IsInterested data={data} /> */}
+      </PageTopBar>
       <CourseElementList element={data} />
     </Container>
   );

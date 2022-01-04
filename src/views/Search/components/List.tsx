@@ -41,15 +41,9 @@ export const List = ({ elements }) => {
             )}{" "}
             kryteria
           </Typography>
-          <Grid container spacing={2}>
-            {searched.map((item) => {
-              return (
-                <Grid item xs={12} sm={6} md={4}>
-                  <ListItem key={item.id} item={item} />
-                </Grid>
-              );
-            })}
-          </Grid>
+          {searched.map((item) => {
+            return <ListItem key={item.id} item={item} />;
+          })}
         </>
       )}
       {isLoading && (
