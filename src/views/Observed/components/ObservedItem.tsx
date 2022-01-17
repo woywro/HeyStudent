@@ -1,7 +1,5 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
-import { Paper, Stack } from "@mui/material";
-import { Typography } from "@mui/material";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";

@@ -1,4 +1,3 @@
-import { Paper } from "@mui/material";
 import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -11,7 +10,6 @@ import { useLoadingContext } from "../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
 import { IconButton } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 
 const StyledSearchBar = styled.div`
   padding: 10px;
@@ -26,7 +24,7 @@ const StyledSearchBar = styled.div`
     width: 100%;
   }
   @media only screen and ${breakpoint.device.lg} {
-    width: 50%;
+    width: 60%;
   }
 `;
 

@@ -1,13 +1,6 @@
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import Grid from "@mui/material/Grid";
-import { Divider } from "@mui/material";
-import { ElementCard } from "../../../components/ElementCard";
 import { useEffect, useState } from "react";
-import { MenuItem } from "@mui/material";
-import { Select } from "@mui/material";
 import { ShowSimilar } from "./ShowSimilar";
 import { Chat } from "./Chat";
 import { ReportError } from "./ReportError";
@@ -55,16 +48,16 @@ export const CourseElementList = ({ element }: Props) => {
   const [tags, setTags] = useState([]);
   console.log(tags);
 
-  useEffect(() => {
-    const allTags = () => {
-      const t = [];
-      element.subjects.map((e) => {
-        e.tags.map((i) => t.push(i));
-      });
-      setTags(t);
-    };
-    allTags();
-  }, []);
+  // useEffect(() => {
+  //   const allTags = () => {
+  //     const t = [];
+  //     element.subjects.map((e) => {
+  //       e.tags.map((i) => t.push(i));
+  //     });
+  //     setTags(t);
+  //   };
+  //   allTags();
+  // }, []);
 
   const courseSubjectsFiltered = element.subjects
     .filter((e) => e.year == year)
@@ -152,12 +145,12 @@ export const CourseElementList = ({ element }: Props) => {
         <StyledCourseElementTitle>zgłoś błąd</StyledCourseElementTitle>
         <ReportError choosen={element} />
       </StyledCourseElement>
-      <StyledCourseElement>
+      {/* <StyledCourseElement>
         <StyledCourseElementTitle>tagi</StyledCourseElementTitle>
         {tags.map((e) => {
           return <p>{e}</p>;
         })}
-      </StyledCourseElement>
+      </StyledCourseElement> */}
     </StyledCourseElementList>
 
     // {/* <ElementCard

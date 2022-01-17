@@ -12,6 +12,7 @@ const StyledPageTopBar = styled.div`
   display: flex;
   justify-content: center;
   flex-flow: column;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   align-items: center;
   @media only screen and ${breakpoint.device.xs} {
     border-top-right-radius: 0;

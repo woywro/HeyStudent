@@ -1,6 +1,4 @@
-import { Typography } from "@mui/material";
 import { ObservedList } from "./components/ObservedList";
-import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
 import styled from "styled-components";
 import breakpoint from "../../theme/breakpoints";

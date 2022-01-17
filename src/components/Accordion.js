@@ -71,11 +71,11 @@ const Accordion = ({ title, content }) => {
       {isActive && (
         <StyledAccordionInside>
           {content.description}
-          <StyledTags>
+          {/* <StyledTags>
             {content.tags.map((e) => {
               return <StyledTag>{e} </StyledTag>;
             })}
-          </StyledTags>
+          </StyledTags> */}
         </StyledAccordionInside>
       )}
     </StyledAccordionItem>

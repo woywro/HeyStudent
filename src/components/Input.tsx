@@ -1,0 +1,20 @@
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  border: none;
+  background: #e2e7f3;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  :focus {
+    outline: none;
+    transform: scale(1.02);
+  }
+`;
+
+export const Input = ({ value, onChange, placeholder }) => {
+  return (
+    <StyledInput value={value} onChange={onChange} placeholder={placeholder} />
+  );
+};

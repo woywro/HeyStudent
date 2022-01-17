@@ -5,8 +5,6 @@ import { LikedItem } from "./ObservedItem";
 import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
 import { Container } from "@mui/material";
-import { search } from "../../../utils/search";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { Grid } from "@mui/material";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useUserContext } from "../../../context/userContext";
