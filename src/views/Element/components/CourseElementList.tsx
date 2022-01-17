@@ -21,17 +21,25 @@ const StyledCourseElement = styled.li`
   width: 100%;
   padding: 20px;
   margin: 10px;
-
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const StyledCourseElementTitle = styled.h1`
   padding: 10px;
   font-weight: normal;
+  margin-bottom: 5px;
 `;
 
 const Text = styled.p`
   font-size: 18px;
+`;
+
+const SubjectsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+  justify-items: center;
+  align-items: center;
 `;
 
 interface Props {
@@ -74,10 +82,11 @@ export const CourseElementList = ({ element }: Props) => {
         <StyledCourseElementTitle>
           przedmioty rekrutacji
         </StyledCourseElementTitle>
-
-        {element.requiredSubjects.map((e) => {
-          return <Text>{e.name}</Text>;
-        })}
+        <SubjectsGrid>
+          {element.requiredSubjects.map((e) => {
+            return <Text>{e.name}</Text>;
+          })}
+        </SubjectsGrid>
       </StyledCourseElement>
       <StyledCourseElement>
         <StyledCourseElementTitle>

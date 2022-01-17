@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import breakpoint from "../theme/breakpoints";
 export const StyledButton = styled.button`
   background: #039be5;
   border-radius: 999px;

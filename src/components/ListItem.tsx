@@ -13,19 +13,26 @@ import Link from "next/link";
 import { updateDoc, doc } from "firebase/firestore";
 import { ItemType } from "../types";
 import styled from "styled-components";
+import breakpoint from "../theme/breakpoints";
 
 const StyledListItem = styled.li`
   border-radius: 10px;
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: inline-grid;
-  grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
   justify-items: start;
   align-items: center;
   position: relative;
   margin: 15px;
   padding: 10px;
   cursor: pointer;
+  @media only screen and ${breakpoint.device.xs} {
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 const StyledCourseTitle = styled.h1`
   font-size: 18px;
@@ -33,6 +40,12 @@ const StyledCourseTitle = styled.h1`
 `;
 const StyledCourseUniversity = styled.p`
   font-size: 15px;
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+  }
 `;
 const StyledCourseCity = styled.p`
   font-size: 15px;

@@ -33,13 +33,23 @@ const StyledSearchBar = styled.div`
 const StyledNameSearch = styled.div`
   display: flex;
   justify-content: center;
-  flex-flow: row;
   width: 90%;
+  @media only screen and ${breakpoint.device.xs} {
+    flex-flow: column;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    flex-flow: row;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SearchBar = () => {
   let router = useRouter();
-  const matches = useMediaQuery("(min-width:600px)");
   const [sort, setSort] = useState("random");
   const { searched, setSearched } = useSearchContext();
 
@@ -117,25 +127,25 @@ export const SearchBar = () => {
           placeholder={generatePlaceholder()}
           value={input}
         />
-        <Link
-          href={{
-            pathname: ROUTE,
-            query: { search: input.toString().replace(" ", "-") },
-          }}
-          passHref
-        >
-          <Button>Szukaj</Button>
-        </Link>
-
-        <Link
-          href={{
-            pathname: HOMEROUTE,
-            // query: { search: searched.toString().replace(" ", "-") },
-          }}
-          passHref
-        >
-          <Button onClick={handleClearList}>x</Button>
-        </Link>
+        <ButtonGroup>
+          <Link
+            href={{
+              pathname: ROUTE,
+              query: { search: input.toString().replace(" ", "-") },
+            }}
+            passHref
+          >
+            <Button>Szukaj</Button>
+          </Link>
+          <Link
+            href={{
+              pathname: HOMEROUTE,
+            }}
+            passHref
+          >
+            <Button onClick={handleClearList}>x</Button>
+          </Link>
+        </ButtonGroup>
       </StyledNameSearch>
 
       {router.pathname !== "/" && (

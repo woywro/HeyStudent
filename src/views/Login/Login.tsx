@@ -1,17 +1,40 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { signInWithGoogle } from "../../firebase/firebase";
 import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useUserDataContext } from "../../context/userDataContext";
 import { useLoadingContext } from "../../context/loadingContext";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useUserContext } from "../../context/userContext";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import breakpoint from "../../theme/breakpoints";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
+
+const Container = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 70%;
+  }
+`;
+
+const LoginForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: #039be5 0 10px 20px -10px;
+`;
 
 export const Login = () => {
   const auth = getAuth();
@@ -19,19 +42,20 @@ export const Login = () => {
   const [error, setError] = useState();
   const { setLoading } = useLoadingContext();
   const [user] = useAuthState(auth);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const signIn = (email, password) => {
+    console.log(email);
     signInWithEmailAndPassword(auth, email, password).catch((error) => {
-      const errorCode = error.code;
       const errorMessage = error.message;
       setError(errorMessage);
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    signIn(data.get("email"), data.get("password"));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signIn(email, password);
   };
 
   useEffect(() => {
@@ -42,49 +66,24 @@ export const Login = () => {
   }, [user]);
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h4">Zaloguj</Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Adres Email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Hasło"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <Typography variant="subtitle2">{error}</Typography>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Zaloguj
-          </Button>
-        </Box>
+    <Container>
+      <Typography variant="h4">Zaloguj</Typography>
+      <LoginForm>
+        <Input
+          placeholder="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          placeholder="hasło"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Typography variant="subtitle2">{error}</Typography>
+        <Button onClick={handleSubmit}>Zaloguj</Button>
         <Button onClick={signInWithGoogle}>Zaloguj z Google</Button>
-      </Box>
+      </LoginForm>
     </Container>
   );
 };
