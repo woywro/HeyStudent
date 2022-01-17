@@ -11,6 +11,7 @@ import { useLoadingContext } from "../../context/loadingContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useUserContext } from "../../context/userContext";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
 export const Login = () => {
   const auth = getAuth();
@@ -20,15 +21,11 @@ export const Login = () => {
   const [user] = useAuthState(auth);
 
   const signIn = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // setUser(userCredential.user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
+    signInWithEmailAndPassword(auth, email, password).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage);
+    });
   };
 
   const handleSubmit = (event) => {

@@ -7,9 +7,10 @@ const StyledInput = styled.input`
   border-radius: 10px;
   font-size: 15px;
   transition: all 0.3s ease;
-  :focus {
-    outline: none;
+  width: 100%;
+  &:focus {
     transform: scale(1.02);
+    outline: none;
   }
 `;
 

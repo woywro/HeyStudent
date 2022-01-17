@@ -1,55 +1,39 @@
-import Typography from "@mui/material/Typography";
-import { Divider } from "@mui/material";
-import { Box } from "@mui/system";
 import { CourseElementList } from "./components/CourseElementList";
-import { IsInterested } from "./components/IsInterested";
-import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
 import { ItemType } from "../../types";
 import styled from "styled-components";
+import breakpoint from "../../theme/breakpoints";
 
 interface Props {
   data: ItemType;
 }
 
-const StyledCourseTitle = styled.h1`
-  color: white;
-  font-size: 40px;
-`;
-
-const StyledCourseText = styled.p`
+const CourseText = styled.p`
   color: white;
   font-size: 20px;
   margin: 5px;
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  @media only screen and ${breakpoint.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    width: 70%;
+  }
+`;
+
 export const Element = ({ data }: Props) => {
   return (
-    <Container
-      sx={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexFlow: "column",
-        padding: 0,
-        width: "100vw",
-      }}
-    >
-      <PageTopBar>
-        <StyledCourseTitle>{data.name.join(" ")}</StyledCourseTitle>
-        <StyledCourseText>
+    <Container>
+      <PageTopBar title={data.name.join(" ")}>
+        <CourseText>
           {data.university}, {data.city}
-        </StyledCourseText>
-        {/* <StyledCourseText>
-          {data.type}, {data.degree}
-        </StyledCourseText> */}
-        <Divider
-          orientation="horizontal"
-          variant="middle"
-          sx={{ marginTop: 1 }}
-        />
-        {/* <IsInterested data={data} /> */}
+        </CourseText>
       </PageTopBar>
       <CourseElementList element={data} />
     </Container>

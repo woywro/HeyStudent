@@ -19,6 +19,6 @@ export const StyledButton = styled.button`
   margin: 10px;
 `;
 
-export const Button = ({ onClick, text }) => {
-  return <StyledButton onClick={onClick}>{text}</StyledButton>;
+export const Button = ({ onClick, children }) => {
+  return <StyledButton onClick={onClick}>{children}</StyledButton>;
 };

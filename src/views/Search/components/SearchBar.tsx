@@ -9,7 +9,9 @@ import breakpoint from "../../../theme/breakpoints";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
+import { Button } from "../../../components/Button";
 import { IconButton } from "@mui/material";
+import { Input } from "../../../components/Input";
 
 const StyledSearchBar = styled.div`
   padding: 10px;
@@ -33,27 +35,6 @@ const StyledNameSearch = styled.div`
   justify-content: center;
   flex-flow: row;
   width: 90%;
-`;
-
-const StyledInput = styled.input`
-  border: none;
-  background: #e2e7f3;
-  padding: 15px 20px;
-  border-radius: 10px;
-  font-size: 15px;
-
-  width: 100%;
-  :focus {
-    outline: none;
-  }
-`;
-
-const StyledButton = styled.button`
-  background: white;
-  border: 0;
-  margin: 10px;
-  cursor: pointer;
-  font-size: 15px;
 `;
 
 export const SearchBar = () => {
@@ -129,7 +110,7 @@ export const SearchBar = () => {
   return (
     <StyledSearchBar>
       <StyledNameSearch>
-        <StyledInput
+        <Input
           onChange={(e) => {
             setInput(e.target.value.toLowerCase());
           }}
@@ -143,7 +124,7 @@ export const SearchBar = () => {
           }}
           passHref
         >
-          <StyledButton>Szukaj</StyledButton>
+          <Button>Szukaj</Button>
         </Link>
 
         <Link
@@ -153,13 +134,7 @@ export const SearchBar = () => {
           }}
           passHref
         >
-          <IconButton
-            size="small"
-            sx={{ borderRadius: "10px" }}
-            onClick={handleClearList}
-          >
-            x
-          </IconButton>
+          <Button onClick={handleClearList}>x</Button>
         </Link>
       </StyledNameSearch>
 

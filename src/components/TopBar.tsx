@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
 import Burger from "./Burger";
+import { Button } from "./Button";
 
 const StyledTopBar = styled.nav`
   position: sticky;
@@ -54,15 +55,6 @@ const StyledTitle = styled.h1`
     color: black;
   }
 `;
-const StyledLogButton = styled.button`
-  background: blue;
-  @media only screen and ${breakpoint.device.xs} {
-    display: none;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    display: flex;
-  }
-`;
 
 export const TopBar = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
@@ -100,9 +92,9 @@ export const TopBar = ({ children }) => {
         </StyledNavItem>
       </NavItems>
       {user ? (
-        <StyledLogButton onClick={handleLogout}>Wyloguj</StyledLogButton>
+        <Button onClick={handleLogout}>Wyloguj</Button>
       ) : (
-        <StyledLogButton onClick={handleLogin}>Zaloguj</StyledLogButton>
+        <Button onClick={handleLogin}>Zaloguj</Button>
       )}
     </StyledTopBar>
   );

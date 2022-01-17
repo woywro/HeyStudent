@@ -1,14 +1,12 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
-import { Box } from "@mui/system";
 import { defineSuffix } from "../../../utils/defineSuffix";
 import { useUserDataContext } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
 import styled from "styled-components";
+import { Button } from "../../../components/Button";
 
 interface Props {
   data: ItemType;
@@ -20,6 +18,10 @@ const StyledIsInterested = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
+`;
+
+const Text = styled.p`
+  font-size: 20px;
 `;
 
 export const IsInterested = ({ data }: Props) => {
@@ -67,7 +69,7 @@ export const IsInterested = ({ data }: Props) => {
 
   return (
     <StyledIsInterested>
-      <Typography variant="subtitle1">
+      <Text>
         {interested}{" "}
         {defineSuffix(
           interested,
@@ -75,37 +77,18 @@ export const IsInterested = ({ data }: Props) => {
           "osoby zainteresowane",
           "osób zainteresowanych"
         )}
-      </Typography>
+      </Text>
       {user && (
         <>
           {array.map((e) => e.uid).includes(user.uid) ? (
             <>
-              <Typography variant="subtitle2">
-                Jesteś zainteresowany tym kierunkiem!
-              </Typography>
-              <Button
-                color="secondary"
-                sx={{
-                  margin: 0.5,
-                }}
-                variant="contained"
-                onClick={handleDislikeCourse}
-              >
+              <Text>Jesteś zainteresowany tym kierunkiem!</Text>
+              <Button onClick={handleDislikeCourse}>
                 Nie jestem zainteresowany
               </Button>
             </>
           ) : (
-            <Button
-              sx={{
-                margin: 0.5,
-                color: "secondary.main",
-                borderColor: "secondary.main",
-              }}
-              variant="outlined"
-              onClick={handleLikeCourse}
-            >
-              Jestem zainteresowany
-            </Button>
+            <Button onClick={handleLikeCourse}>Jestem zainteresowany</Button>
           )}
         </>
       )}
