@@ -6,7 +6,7 @@ import { useUserDataContext } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
 import styled from "styled-components";
-import { Button } from "../../../components/Button";
+import { StyledButton } from "../../../components/StyledButton";
 
 interface Props {
   data: ItemType;
@@ -22,6 +22,10 @@ const StyledIsInterested = styled.div`
 
 const Text = styled.p`
   font-size: 20px;
+`;
+
+const Button = styled.button`
+  ${StyledButton}
 `;
 
 export const IsInterested = ({ data }: Props) => {

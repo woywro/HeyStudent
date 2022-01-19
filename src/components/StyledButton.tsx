@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import breakpoint from "../theme/breakpoints";
-export const StyledButton = styled.button`
+import styled, { css } from "styled-components";
+
+export const StyledButton = css`
   background: #039be5;
   border-radius: 999px;
   box-shadow: #039be5 0 10px 20px -10px;
@@ -19,7 +19,3 @@ export const StyledButton = styled.button`
   border: 0;
   margin: 10px;
 `;
-
-export const Button = ({ onClick, children }) => {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
-};

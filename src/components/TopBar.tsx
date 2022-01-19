@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
 import Burger from "./Burger";
-import { Button } from "./Button";
+import { StyledButton } from "./StyledButton";
 
 const StyledTopBar = styled.nav`
   position: sticky;
@@ -56,6 +56,16 @@ const StyledTitle = styled.h1`
   }
 `;
 
+const SignButton = styled.button`
+  ${StyledButton}
+  @media only screen and ${breakpoint.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoint.device.lg} {
+    display: flex;
+  }
+`;
+
 export const TopBar = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const router = useRouter();
@@ -92,9 +102,9 @@ export const TopBar = ({ children }) => {
         </StyledNavItem>
       </NavItems>
       {user ? (
-        <Button onClick={handleLogout}>Wyloguj</Button>
+        <SignButton onClick={handleLogout}>Wyloguj</SignButton>
       ) : (
-        <Button onClick={handleLogin}>Zaloguj</Button>
+        <SignButton onClick={handleLogin}>Zaloguj</SignButton>
       )}
     </StyledTopBar>
   );

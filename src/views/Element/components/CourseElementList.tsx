@@ -13,7 +13,7 @@ const StyledCourseElementList = styled.ul`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  width: 80%;
+  width: 90%;
 `;
 
 const StyledCourseElement = styled.li`

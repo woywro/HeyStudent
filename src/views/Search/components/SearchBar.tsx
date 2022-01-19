@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSearchContext } from "../../../context/searchContext";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -9,8 +8,7 @@ import breakpoint from "../../../theme/breakpoints";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
-import { Button } from "../../../components/Button";
-import { IconButton } from "@mui/material";
+import { StyledButton } from "../../../components/StyledButton";
 import { Input } from "../../../components/Input";
 
 const StyledSearchBar = styled.div`
@@ -46,6 +44,10 @@ const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Button = styled.button`
+  ${StyledButton}
 `;
 
 export const SearchBar = () => {
@@ -126,6 +128,7 @@ export const SearchBar = () => {
           }}
           placeholder={generatePlaceholder()}
           value={input}
+          type="text"
         />
         <ButtonGroup>
           <Link

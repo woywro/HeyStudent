@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
 import { Text } from "../../../components/Text";
-import { Button } from "../../../components/Button";
+import { StyledButton } from "../../../components/StyledButton";
 import { Input } from "../../../components/Input";
 import styled from "styled-components";
 
@@ -18,6 +18,10 @@ const Container = styled.form`
   justify-content: center;
   align-items: center;
   flex-flow: column;
+`;
+
+const Button = styled.button`
+  ${StyledButton}
 `;
 
 export const ReportError = ({ choosen }: Props) => {

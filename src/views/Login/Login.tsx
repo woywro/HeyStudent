@@ -1,5 +1,3 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { signInWithGoogle } from "../../firebase/firebase";
 import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -8,8 +6,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import breakpoint from "../../theme/breakpoints";
-import { Button } from "../../components/Button";
+import { StyledButton } from "../../components/StyledButton";
 import { Input } from "../../components/Input";
+import { Text } from "../../components/Text";
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +33,10 @@ const LoginForm = styled.form`
   padding: 30px;
   border-radius: 10px;
   box-shadow: #039be5 0 10px 20px -10px;
+`;
+
+const Button = styled.button`
+  ${StyledButton}
 `;
 
 export const Login = () => {
@@ -67,7 +70,7 @@ export const Login = () => {
 
   return (
     <Container>
-      <Typography variant="h4">Zaloguj</Typography>
+      <Text size="24px">Zaloguj</Text>
       <LoginForm>
         <Input
           placeholder="email"
@@ -80,7 +83,7 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Typography variant="subtitle2">{error}</Typography>
+        <Text size="18px">{error}</Text>
         <Button onClick={handleSubmit}>Zaloguj</Button>
         <Button onClick={signInWithGoogle}>Zaloguj z Google</Button>
       </LoginForm>

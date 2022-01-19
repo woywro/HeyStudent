@@ -4,7 +4,6 @@ import { Box } from "@mui/system";
 import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
 import { defineSuffix } from "../../../utils/defineSuffix";
-import Grid from "@mui/material/Grid";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
 
