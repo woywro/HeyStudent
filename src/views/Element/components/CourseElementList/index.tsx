@@ -7,37 +7,12 @@ import styled from "styled-components";
 import { IsInterested } from "../IsInterested";
 import Accordion from "../../../../components/Accordion";
 import { Text } from "../../../../components/Text";
-
-const StyledCourseElementList = styled.ul`
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  width: 90%;
-`;
-
-const StyledCourseElement = styled.li`
-  border-radius: 10px;
-  width: 100%;
-  padding: 20px;
-  margin: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-`;
-
-const StyledCourseElementTitle = styled.h1`
-  padding: 10px;
-  font-weight: normal;
-  margin-bottom: 5px;
-`;
-
-const SubjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5px;
-  justify-items: center;
-  align-items: center;
-`;
+import {
+  StyledCourseElementList,
+  StyledCourseElement,
+  StyledCourseElementTitle,
+  SubjectsGrid,
+} from "./style";
 
 interface Props {
   element: ItemType;

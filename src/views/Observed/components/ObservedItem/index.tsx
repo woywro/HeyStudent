@@ -9,46 +9,18 @@ import { useUserDataContext } from "../../../../context/userDataContext";
 import Link from "next/link";
 import { ItemType } from "../../../../types";
 import { ChangeEvent } from "react";
-import styled from "styled-components";
-import breakpoints from "../../../../theme/breakpoints";
+import {
+  StyledObservedItem,
+  StyledCourseTitle,
+  StyledCourseUniversity,
+  StyledCourseCity,
+} from "./style";
 
 interface Props {
   element: ItemType;
   likedArray: ItemType[];
   setLikedArray: (arg: any) => void;
 }
-
-const StyledObservedItem = styled.div`
-  border-radius: 10px;
-  width: 100%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  display: inline-grid;
-  grid-template-columns: 3fr 3fr 1fr;
-  justify-items: start;
-  align-items: center;
-  position: relative;
-  margin-bottom: 10px;
-  padding: 10px;
-  cursor: pointer;
-  border: ${(props) => props.hasBorder};
-`;
-
-const StyledCourseTitle = styled.h1`
-  font-size: 18px;
-  font-weight: normal;
-`;
-const StyledCourseUniversity = styled.p`
-  font-size: 15px;
-`;
-const StyledCourseCity = styled.p`
-  font-size: 15px;
-  @media only screen and ${breakpoints.device.xs} {
-    display: none;
-  }
-  @media only screen and ${breakpoints.device.lg} {
-    display: flex;
-  }
-`;
 
 export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
   const ROUTE_POST_ID = "element/[id]";

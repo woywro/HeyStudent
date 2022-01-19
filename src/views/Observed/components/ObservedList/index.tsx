@@ -9,17 +9,7 @@ import { useUserContext } from "../../../../context/userContext";
 import { useUserDataContext } from "../../../../context/userDataContext";
 import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import styled from "styled-components";
-
-const Container = styled.div`
-display: flex;
-justify-content: flex-start'
-align-items: center;
-flex-flow: column;
-padding: 10px;
-width: 100%;
-
-`;
+import { Container } from "./style";
 
 export const ObservedList = () => {
   const { user } = useUserContext();

@@ -5,21 +5,13 @@ import { defineSuffix } from "../../../../utils/defineSuffix";
 import { useUserDataContext } from "../../../../context/userDataContext";
 import { useUserContext } from "../../../../context/userContext";
 import { ItemType } from "../../../../types";
-import styled from "styled-components";
 import { Button } from "../../../../components/Button";
 import { Text } from "../../../../components/Text";
+import { StyledIsInterested } from "./style";
 
 interface Props {
   data: ItemType;
 }
-
-const StyledIsInterested = styled.div`
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-`;
 
 export const IsInterested = ({ data }: Props) => {
   const { user } = useUserContext();

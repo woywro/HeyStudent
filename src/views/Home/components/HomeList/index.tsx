@@ -20,34 +20,7 @@ import gdansk from "../../../../../public/static/4.png";
 import poznan from "../../../../../public/static/5.png";
 import krakow from "../../../../../public/static/6.png";
 import { CardLink } from "../CardLink";
-
-const StyledHomeList = styled.ul`
-  list-style: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  display: flex;
-  flex-flow: column;
-`;
-
-const Category = styled.li`
-  padding: 10px;
-  @media only screen and ${breakpoint.device.xs} {
-    display: flex;
-    flex-flow: column;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-    width: 80%;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 26px;
-  margin-top: 10px;
-`;
+import { StyledHomeList, Category, Title } from "./style";
 
 export const HomeList = () => {
   const { fieldsOfStudy, setFieldsOfStudy } = useFieldsOfStudyContext();

@@ -1,20 +1,6 @@
 import { ObservedList } from "./components/ObservedList";
 import { PageTopBar } from "../../components/PageTopBar";
-import styled from "styled-components";
-import breakpoint from "../../theme/breakpoints";
-
-const StyledObserved = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  @media only screen and ${breakpoint.device.xs} {
-    width: 100%;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    width: 70%;
-  }
-`;
+import { StyledObserved } from "./style";
 
 export const Observed = () => {
   return (

@@ -4,36 +4,10 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useLoadingContext } from "../../context/loadingContext";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
-import styled from "styled-components";
-import breakpoint from "../../theme/breakpoints";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Text } from "../../components/Text";
-
-const Container = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  @media only screen and ${breakpoint.device.xs} {
-    width: 100%;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    width: 70%;
-  }
-`;
-
-const LoginForm = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: #039be5 0 10px 20px -10px;
-`;
+import { LoginForm, Container } from "./style";
 
 export const Login = () => {
   const auth = getAuth();

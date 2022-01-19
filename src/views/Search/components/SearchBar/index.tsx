@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useSearchContext } from "../../../../context/searchContext";
 import { useRouter } from "next/router";
-import styled from "styled-components";
-import breakpoint from "../../../../theme/breakpoints";
 import { useLoadingContext } from "../../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -13,52 +11,7 @@ import {
   ToggleButton,
 } from "../../../../components/ToogleButtonGroup";
 
-const StyledSearchBar = styled.div`
-  padding: 10px;
-  border-radius: 10px;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  @media only screen and ${breakpoint.device.xs} {
-    width: 100%;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    width: 60%;
-  }
-`;
-
-const StyledNameSearch = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  @media only screen and ${breakpoint.device.xs} {
-    flex-flow: column;
-  }
-  @media only screen and ${breakpoint.device.lg} {
-    flex-flow: row;
-  }
-`;
-
-const ClearButton = styled.button`
-  font-size: 15px;
-  background: none;
-  border: none;
-  margin: 10px;
-  cursor: pointer;
-  font-weight: bold;
-`;
-
-const Row = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: #e2e7f3;
-  border-radius: 10px;
-`;
+import { StyledSearchBar, StyledNameSearch, ClearButton, Row } from "./style";
 
 export const SearchBar = () => {
   let router = useRouter();

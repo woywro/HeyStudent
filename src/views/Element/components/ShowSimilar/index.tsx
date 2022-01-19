@@ -9,18 +9,11 @@ import { ItemType } from "../../../../types";
 import styled from "styled-components";
 import { ListItem } from "../../../../components/ListItem";
 import { Loading } from "../../../../components/Loading";
+import { Container } from "./style";
 
 interface Props {
   element: ItemType;
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-  width: 100%;
-`;
 
 export const ShowSimilar = ({ element }: Props) => {
   const { user } = useUserContext();

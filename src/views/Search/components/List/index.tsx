@@ -7,15 +7,7 @@ import { useLoadingContext } from "../../../../context/loadingContext";
 import { useSearchContext } from "../../../../context/searchContext";
 import styled from "styled-components";
 import { Text } from "../../../../components/Text";
-
-const Container = styled.div`
-  padding: 10px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: column;
-  width: 100%;
-`;
+import { Container } from "./style";
 
 export const List = ({ elements }) => {
   const { isLoading } = useLoadingContext();

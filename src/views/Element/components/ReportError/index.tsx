@@ -6,31 +6,13 @@ import { useUserContext } from "../../../../context/userContext";
 import { ItemType } from "../../../../types";
 import { Text } from "../../../../components/Text";
 import { Input } from "../../../../components/Input";
-import styled from "styled-components";
 import { Button } from "../../../../components/Button";
 import { LockedFunction } from "../../../../components/LockedFunction";
-import breakpoints from "../../../../theme/breakpoints";
+import { Container, TextInput } from "./style";
 
 interface Props {
   choosen: ItemType;
 }
-
-const Container = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column;
-`;
-
-const TextInput = styled(Input)`
-  margin: 10px;
-  @media only screen and ${breakpoints.device.xs} {
-    width: 100%;
-  }
-  @media only screen and ${breakpoints.device.lg} {
-    width: 70%;
-  }
-`;
 
 export const ReportError = ({ choosen }: Props) => {
   const { user } = useUserContext();
