@@ -1,5 +1,3 @@
-import { Box } from "@mui/system";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
 
@@ -30,6 +28,7 @@ const StyledPageTopBarTitle = styled.h1`
   font-size: 40px;
   color: white;
   margin: 10px;
+  text-align: center;
 `;
 
 export const PageTopBar = ({ children, title }) => {

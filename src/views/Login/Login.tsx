@@ -6,7 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import breakpoint from "../../theme/breakpoints";
-import { StyledButton } from "../../components/StyledButton";
+import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { Text } from "../../components/Text";
 
@@ -33,10 +33,6 @@ const LoginForm = styled.form`
   padding: 30px;
   border-radius: 10px;
   box-shadow: #039be5 0 10px 20px -10px;
-`;
-
-const Button = styled.button`
-  ${StyledButton}
 `;
 
 export const Login = () => {
@@ -70,7 +66,7 @@ export const Login = () => {
 
   return (
     <Container>
-      <Text size="24px">Zaloguj</Text>
+      <Text size="big">Zaloguj</Text>
       <LoginForm>
         <Input
           placeholder="email"
@@ -83,7 +79,7 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Text size="18px">{error}</Text>
+        <Text>{error}</Text>
         <Button onClick={handleSubmit}>Zaloguj</Button>
         <Button onClick={signInWithGoogle}>Zaloguj z Google</Button>
       </LoginForm>

@@ -1,4 +1,4 @@
-import { StyledButton } from "../../../components/StyledButton";
+import { Button } from "../../../components/Button";
 import { useState, useCallback } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
@@ -20,10 +20,6 @@ const Container = styled.div`
   align-items: center;
   flex-flow: column;
   width: 100%;
-`;
-
-const Button = styled.button`
-  ${StyledButton}
 `;
 
 export const ShowSimilar = ({ element }: Props) => {

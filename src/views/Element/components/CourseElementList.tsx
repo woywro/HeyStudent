@@ -6,6 +6,7 @@ import { ItemType } from "../../../types";
 import styled from "styled-components";
 import { IsInterested } from "./IsInterested";
 import Accordion from "../../../components/Accordion";
+import { Text } from "../../../components/Text";
 
 const StyledCourseElementList = styled.ul`
   list-style: none;
@@ -28,10 +29,6 @@ const StyledCourseElementTitle = styled.h1`
   padding: 10px;
   font-weight: normal;
   margin-bottom: 5px;
-`;
-
-const Text = styled.p`
-  font-size: 18px;
 `;
 
 const SubjectsGrid = styled.div`

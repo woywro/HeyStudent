@@ -8,7 +8,7 @@ import breakpoint from "../../../theme/breakpoints";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
-import { StyledButton } from "../../../components/StyledButton";
+import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 
 const StyledSearchBar = styled.div`
@@ -31,7 +31,7 @@ const StyledSearchBar = styled.div`
 const StyledNameSearch = styled.div`
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   @media only screen and ${breakpoint.device.xs} {
     flex-flow: column;
   }
@@ -46,8 +46,22 @@ const ButtonGroup = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
-  ${StyledButton}
+const ClearButton = styled.button`
+  font-size: 15px;
+  background: none;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: bold;
+`;
+
+const Row = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: #e2e7f3;
+  border-radius: 10px;
 `;
 
 export const SearchBar = () => {
@@ -122,33 +136,26 @@ export const SearchBar = () => {
   return (
     <StyledSearchBar>
       <StyledNameSearch>
-        <Input
-          onChange={(e) => {
-            setInput(e.target.value.toLowerCase());
+        <Row>
+          <Input
+            onChange={(e) => {
+              setInput(e.target.value.toLowerCase());
+            }}
+            placeholder={generatePlaceholder()}
+            value={input}
+            type="text"
+          />
+          <ClearButton onClick={handleClearList}>x</ClearButton>
+        </Row>
+        <Link
+          href={{
+            pathname: ROUTE,
+            query: { search: input.toString().replace(" ", "-") },
           }}
-          placeholder={generatePlaceholder()}
-          value={input}
-          type="text"
-        />
-        <ButtonGroup>
-          <Link
-            href={{
-              pathname: ROUTE,
-              query: { search: input.toString().replace(" ", "-") },
-            }}
-            passHref
-          >
-            <Button>Szukaj</Button>
-          </Link>
-          <Link
-            href={{
-              pathname: HOMEROUTE,
-            }}
-            passHref
-          >
-            <Button onClick={handleClearList}>x</Button>
-          </Link>
-        </ButtonGroup>
+          passHref
+        >
+          <Button>Szukaj</Button>
+        </Link>
       </StyledNameSearch>
 
       {router.pathname !== "/" && (

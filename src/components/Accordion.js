@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Text } from "../components/Text";
 
 const StyledAccordionItem = styled.li`
   display: flex;
@@ -29,7 +30,7 @@ const StyledDivider = styled.div`
 `;
 
 const StyledAccordionTitle = styled.h1`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
 `;
 
@@ -70,12 +71,7 @@ const Accordion = ({ title, content }) => {
       <StyledDivider />
       {isActive && (
         <StyledAccordionInside>
-          {content.description}
-          {/* <StyledTags>
-            {content.tags.map((e) => {
-              return <StyledTag>{e} </StyledTag>;
-            })}
-          </StyledTags> */}
+          <Text>{content.description}</Text>
         </StyledAccordionInside>
       )}
     </StyledAccordionItem>

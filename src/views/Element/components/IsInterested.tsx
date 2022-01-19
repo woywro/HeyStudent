@@ -6,7 +6,8 @@ import { useUserDataContext } from "../../../context/userDataContext";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
 import styled from "styled-components";
-import { StyledButton } from "../../../components/StyledButton";
+import { Button } from "../../../components/Button";
+import { Text } from "../../../components/Text";
 
 interface Props {
   data: ItemType;
@@ -18,14 +19,6 @@ const StyledIsInterested = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-`;
-
-const Text = styled.p`
-  font-size: 20px;
-`;
-
-const Button = styled.button`
-  ${StyledButton}
 `;
 
 export const IsInterested = ({ data }: Props) => {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledInput = styled.input`
+export const Input = styled.input`
   border: none;
   background: #e2e7f3;
   padding: 15px 20px;
@@ -13,14 +13,3 @@ const StyledInput = styled.input`
     outline: none;
   }
 `;
-
-export const Input = ({ value, onChange, placeholder, type }) => {
-  return (
-    <StyledInput
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      type={type}
-    />
-  );
-};

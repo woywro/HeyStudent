@@ -5,9 +5,9 @@ import { useCallback } from "react";
 import { useUserContext } from "../../../context/userContext";
 import { ItemType } from "../../../types";
 import { Text } from "../../../components/Text";
-import { StyledButton } from "../../../components/StyledButton";
 import { Input } from "../../../components/Input";
 import styled from "styled-components";
+import { Button } from "../../../components/Button";
 
 interface Props {
   choosen: ItemType;
@@ -18,10 +18,6 @@ const Container = styled.form`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-`;
-
-const Button = styled.button`
-  ${StyledButton}
 `;
 
 export const ReportError = ({ choosen }: Props) => {
@@ -46,7 +42,7 @@ export const ReportError = ({ choosen }: Props) => {
     <Container onSubmit={sendError}>
       {user ? (
         <>
-          <Text size="15px">
+          <Text size="small">
             Jeżeli masz jakieś sugestie lub widzisz błąd, daj nam znać!
           </Text>
           <Input
@@ -57,7 +53,7 @@ export const ReportError = ({ choosen }: Props) => {
           <Button disabled={!inputValue}>wyślij</Button>
         </>
       ) : (
-        <Text size="20px">Zaloguj się aby mieć dostęp do tej funkcji</Text>
+        <Text size="big">Zaloguj się aby mieć dostęp do tej funkcji</Text>
       )}
     </Container>
   );

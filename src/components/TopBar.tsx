@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import breakpoint from "../theme/breakpoints";
 import Burger from "./Burger";
-import { StyledButton } from "./StyledButton";
+import { Button } from "./Button";
 const StyledTopBar = styled.nav`
   position: sticky;
   top: 0;
@@ -61,8 +61,7 @@ const StyledTitle = styled.h1`
   }
 `;
 
-const SignButton = styled.button`
-  ${StyledButton}
+const SignButton = styled(Button)`
   @media only screen and ${breakpoint.device.xs} {
     display: none;
   }

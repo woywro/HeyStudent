@@ -3,7 +3,7 @@ import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
 import { useRouter } from "next/router";
 import { useUserContext } from "../context/userContext";
-import { StyledButton } from "./StyledButton";
+import { Button } from "./Button";
 import { logout } from "../firebase/firebase";
 import { useCallback } from "react";
 
@@ -45,10 +45,6 @@ const NavItem = styled.li`
   padding: 10px;
   margin: 10px;
   cursor: pointer;
-`;
-
-const Button = styled.button`
-  ${StyledButton}
 `;
 
 const Nav = ({ open, setOpen }) => {
