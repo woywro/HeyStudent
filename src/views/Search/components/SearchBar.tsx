@@ -1,6 +1,4 @@
 import { useState } from "react";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useSearchContext } from "../../../context/searchContext";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -10,6 +8,10 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
+import {
+  ToggleButtonGroup,
+  ToggleButton,
+} from "../../../components/ToogleButtonGroup";
 
 const StyledSearchBar = styled.div`
   padding: 10px;
@@ -40,12 +42,6 @@ const StyledNameSearch = styled.div`
   }
 `;
 
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const ClearButton = styled.button`
   font-size: 15px;
   background: none;
@@ -70,6 +66,7 @@ export const SearchBar = () => {
   const { searched, setSearched } = useSearchContext();
 
   const handleInputChange = (e) => {
+    e.preventDefault();
     setSort(e.target.value);
     sortList(e.target.value);
   };
@@ -97,7 +94,6 @@ export const SearchBar = () => {
 
   const [input, setInput] = useState("");
   const { isLoading, setLoading } = useLoadingContext();
-  const HOMEROUTE = "/";
 
   useEffect(() => {
     if (router.pathname !== "/") {
@@ -159,16 +155,28 @@ export const SearchBar = () => {
       </StyledNameSearch>
 
       {router.pathname !== "/" && (
-        <ToggleButtonGroup
-          value={sort}
-          exclusive
-          size="small"
-          sx={{ marginTop: 2 }}
-          onChange={handleInputChange}
-        >
-          <ToggleButton value="random">losowo</ToggleButton>
-          <ToggleButton value="alphabetical">alfabetycznie</ToggleButton>
-          <ToggleButton value="popularity">popularność</ToggleButton>
+        <ToggleButtonGroup>
+          <ToggleButton
+            checked={sort == "random"}
+            value="random"
+            onClick={handleInputChange}
+          >
+            Random
+          </ToggleButton>
+          <ToggleButton
+            checked={sort == "alphabetical"}
+            value="alphabetical"
+            onClick={handleInputChange}
+          >
+            Alphabetical
+          </ToggleButton>
+          <ToggleButton
+            checked={sort == "popularity"}
+            value="popularity"
+            onClick={handleInputChange}
+          >
+            Popularity
+          </ToggleButton>
         </ToggleButtonGroup>
       )}
     </StyledSearchBar>
