@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
-import { defineSuffix } from "../../../utils/defineSuffix";
-import { useUserDataContext } from "../../../context/userDataContext";
-import { useUserContext } from "../../../context/userContext";
-import { ItemType } from "../../../types";
+import { db } from "../../../../firebase/firebase";
+import { defineSuffix } from "../../../../utils/defineSuffix";
+import { useUserDataContext } from "../../../../context/userDataContext";
+import { useUserContext } from "../../../../context/userContext";
+import { ItemType } from "../../../../types";
 import styled from "styled-components";
-import { Button } from "../../../components/Button";
-import { Text } from "../../../components/Text";
+import { Button } from "../../../../components/Button";
+import { Text } from "../../../../components/Text";
 
 interface Props {
   data: ItemType;

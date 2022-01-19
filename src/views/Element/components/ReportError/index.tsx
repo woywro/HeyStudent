@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "../../../../firebase/firebase";
 import { useCallback } from "react";
-import { useUserContext } from "../../../context/userContext";
-import { ItemType } from "../../../types";
-import { Text } from "../../../components/Text";
-import { Input } from "../../../components/Input";
+import { useUserContext } from "../../../../context/userContext";
+import { ItemType } from "../../../../types";
+import { Text } from "../../../../components/Text";
+import { Input } from "../../../../components/Input";
 import styled from "styled-components";
-import { Button } from "../../../components/Button";
-import { LockedFunction } from "../../../components/LockedFunction";
-import breakpoints from "../../../theme/breakpoints";
+import { Button } from "../../../../components/Button";
+import { LockedFunction } from "../../../../components/LockedFunction";
+import breakpoints from "../../../../theme/breakpoints";
 
 interface Props {
   choosen: ItemType;

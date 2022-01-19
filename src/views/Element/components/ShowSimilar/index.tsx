@@ -1,14 +1,14 @@
-import { Button } from "../../../components/Button";
+import { Button } from "../../../../components/Button";
 import { useState, useCallback } from "react";
 import { getDocs, collection } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "../../../../firebase/firebase";
 import { query, where, limit, updateDoc } from "firebase/firestore";
-import { useUserContext } from "../../../context/userContext";
-import { useLoadingContext } from "../../../context/loadingContext";
-import { ItemType } from "../../../types";
+import { useUserContext } from "../../../../context/userContext";
+import { useLoadingContext } from "../../../../context/loadingContext";
+import { ItemType } from "../../../../types";
 import styled from "styled-components";
-import { ListItem } from "../../../components/ListItem";
-import { Loading } from "../../../components/Loading";
+import { ListItem } from "../../../../components/ListItem";
+import { Loading } from "../../../../components/Loading";
 
 interface Props {
   element: ItemType;

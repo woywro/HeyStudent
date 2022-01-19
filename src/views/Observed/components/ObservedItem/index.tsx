@@ -1,15 +1,16 @@
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../firebase/firebase";
+import { db } from "../../../../firebase/firebase";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { useCallback } from "react";
-import { useUserContext } from "../../../context/userContext";
-import { useUserDataContext } from "../../../context/userDataContext";
+import { useUserContext } from "../../../../context/userContext";
+import { useUserDataContext } from "../../../../context/userDataContext";
 import Link from "next/link";
-import { ItemType } from "../../../types";
+import { ItemType } from "../../../../types";
 import { ChangeEvent } from "react";
 import styled from "styled-components";
+import breakpoints from "../../../../theme/breakpoints";
 
 interface Props {
   element: ItemType;
@@ -22,12 +23,11 @@ const StyledObservedItem = styled.div`
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: inline-grid;
-  grid-template-columns: 3fr 3fr 3fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr;
   justify-items: start;
   align-items: center;
   position: relative;
-  margin: 15px;
+  margin-bottom: 10px;
   padding: 10px;
   cursor: pointer;
   border: ${(props) => props.hasBorder};
@@ -42,6 +42,12 @@ const StyledCourseUniversity = styled.p`
 `;
 const StyledCourseCity = styled.p`
   font-size: 15px;
+  @media only screen and ${breakpoints.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    display: flex;
+  }
 `;
 
 export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {

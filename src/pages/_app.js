@@ -11,14 +11,12 @@ import { UserDataContextProvider } from "../context/userDataContext";
 import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
 import styled from "styled-components";
-import Burger from "../components/Burger";
-import Menu from "@mui/icons-material/Menu";
 export const dataContext = createContext();
 
 const StyledApp = styled.div`
   display: flex;
   flex-flow: column;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
   align-items: center;
 `;

@@ -1,4 +1,4 @@
-import { Element } from "../../views/Element/Element";
+import { Element } from "../../views/Element";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 

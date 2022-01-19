@@ -74,12 +74,6 @@ export const TopBar = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
   const router = useRouter();
   const { user } = useUserContext();
-  const handleBack = useCallback(() => {
-    router.back();
-  }, []);
-  const handleCloseMenu = useCallback(() => {
-    setOpen(!isOpen);
-  }, []);
   const handleLogin = useCallback(() => {
     router.push("/login");
   }, []);

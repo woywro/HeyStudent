@@ -1,4 +1,4 @@
-import { SearchBar } from "../../views/Search/components/SearchBar";
+import { SearchBar } from "../Search/components/SearchBar";
 import { HomeList } from "./components/HomeList";
 import { PageTopBar } from "../../components/PageTopBar";
 import styled from "styled-components";
@@ -9,7 +9,6 @@ const StyledHome = styled.div`
   flex-flow: column;
   justify-content: center;
   align-items: center;
-
   @media only screen and ${breakpoint.device.xs} {
     width: 100%;
   }

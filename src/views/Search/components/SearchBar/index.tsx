@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { useSearchContext } from "../../../context/searchContext";
+import { useSearchContext } from "../../../../context/searchContext";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import breakpoint from "../../../theme/breakpoints";
-import { useLoadingContext } from "../../../context/loadingContext";
+import breakpoint from "../../../../theme/breakpoints";
+import { useLoadingContext } from "../../../../context/loadingContext";
 import { useEffect } from "react";
 import Link from "next/link";
-import { Button } from "../../../components/Button";
-import { Input } from "../../../components/Input";
+import { Button } from "../../../../components/Button";
+import { Input } from "../../../../components/Input";
 import {
   ToggleButtonGroup,
   ToggleButton,
-} from "../../../components/ToogleButtonGroup";
+} from "../../../../components/ToogleButtonGroup";
 
 const StyledSearchBar = styled.div`
   padding: 10px;

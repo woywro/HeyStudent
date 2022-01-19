@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import { ObservedItem } from "./ObservedItem";
+import { ObservedItem } from "../ObservedItem";
 import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
-import { useLoadingContext } from "../../../context/loadingContext";
-import { useUserContext } from "../../../context/userContext";
-import { useUserDataContext } from "../../../context/userDataContext";
-import { db } from "../../../firebase/firebase";
+import { useLoadingContext } from "../../../../context/loadingContext";
+import { useUserContext } from "../../../../context/userContext";
+import { useUserDataContext } from "../../../../context/userDataContext";
+import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import styled from "styled-components";
 
@@ -16,7 +16,8 @@ display: flex;
 justify-content: flex-start'
 align-items: center;
 flex-flow: column;
-width:100%;
+padding: 10px;
+width: 100%;
 
 `;
 

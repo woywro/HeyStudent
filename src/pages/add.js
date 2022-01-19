@@ -1,4 +1,4 @@
-import { Add } from "../views/Add/Add";
+import { Add } from "../views/Add";
 const AddRoute = () => {
   return <Add />;
 };

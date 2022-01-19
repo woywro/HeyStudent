@@ -1,4 +1,4 @@
-import { Observed } from "../views/Observed/Observed";
+import { Observed } from "../views/Observed";
 const ObservedRoute = () => {
   return <Observed />;
 };

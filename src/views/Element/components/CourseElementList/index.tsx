@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { ShowSimilar } from "./ShowSimilar";
-import { Chat } from "./Chat";
-import { ReportError } from "./ReportError";
-import { ItemType } from "../../../types";
+import { ShowSimilar } from "../ShowSimilar";
+import { Chat } from "../Chat";
+import { ReportError } from "../ReportError";
+import { ItemType } from "../../../../types";
 import styled from "styled-components";
-import { IsInterested } from "./IsInterested";
-import Accordion from "../../../components/Accordion";
-import { Text } from "../../../components/Text";
+import { IsInterested } from "../IsInterested";
+import Accordion from "../../../../components/Accordion";
+import { Text } from "../../../../components/Text";
 
 const StyledCourseElementList = styled.ul`
   list-style: none;

@@ -1,12 +1,12 @@
-import { ListItem } from "../../../components/ListItem";
+import { ListItem } from "../../../../components/ListItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import { defineSuffix } from "../../../utils/defineSuffix";
-import { useLoadingContext } from "../../../context/loadingContext";
-import { useSearchContext } from "../../../context/searchContext";
+import { defineSuffix } from "../../../../utils/defineSuffix";
+import { useLoadingContext } from "../../../../context/loadingContext";
+import { useSearchContext } from "../../../../context/searchContext";
 import styled from "styled-components";
-import { Text } from "../../../components/Text";
+import { Text } from "../../../../components/Text";
 
 const Container = styled.div`
   padding: 10px;

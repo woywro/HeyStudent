@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { db } from "../../../firebase/firebase";
-import { ChatMessage } from "./ChatMessage";
+import { db } from "../../../../firebase/firebase";
+import { ChatMessage } from "../ChatMessage";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { collection, addDoc, query, limit, orderBy } from "firebase/firestore";
-import { useUserContext } from "../../../context/userContext";
-import { ItemType } from "../../../types";
-import { Input } from "../../../components/Input";
-import { Button } from "../../../components/Button";
-import { LockedFunction } from "../../../components/LockedFunction";
+import { useUserContext } from "../../../../context/userContext";
+import { ItemType } from "../../../../types";
+import { Input } from "../../../../components/Input";
+import { Button } from "../../../../components/Button";
+import { LockedFunction } from "../../../../components/LockedFunction";
 import styled from "styled-components";
-import breakpoints from "../../../theme/breakpoints";
+import breakpoints from "../../../../theme/breakpoints";
 
 const Container = styled.div`
   display: flex;

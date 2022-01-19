@@ -1,4 +1,4 @@
-import { Search } from "../../views/Search/Search";
+import { Search } from "../../views/Search";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { useSearchContext } from "../../context/searchContext";
