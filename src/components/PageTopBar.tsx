@@ -6,7 +6,7 @@ import breakpoint from "../theme/breakpoints";
 const StyledPageTopBar = styled.div`
   width: 100%;
   background: blue;
-  padding: 30px;
+  padding: 10px;
   background: #039be5;
   position: relative;
   display: flex;

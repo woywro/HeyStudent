@@ -1,11 +1,6 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Paper } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import Box from "@mui/material/Box";
 import { db } from "../firebase/firebase";
 import { useUserContext } from "../context/userContext";
 import { useUserDataContext } from "../context/userDataContext";
@@ -20,7 +15,7 @@ const StyledListItem = styled.li`
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: inline-grid;
-  justify-items: start;
+  justify-items: center;
   align-items: center;
   position: relative;
   margin: 15px;

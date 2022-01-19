@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Typography } from "@mui/material";
-import { LikedItem } from "./ObservedItem";
+import { ObservedItem } from "./ObservedItem";
 import { Box } from "@mui/system";
 import { CircularProgress } from "@mui/material";
-import { Container } from "@mui/material";
-import { Grid } from "@mui/material";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
 import { db } from "../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { ListItem } from "../../../components/ListItem";
+import styled from "styled-components";
+
+const Container = styled.div`
+display: flex;
+justify-content: flex-start'
+align-items: center;
+flex-flow: column;
+width:100%;
+
+`;
 
 export const ObservedList = () => {
   const { user } = useUserContext();
@@ -38,17 +45,7 @@ export const ObservedList = () => {
   }, [userData]);
 
   return (
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        flexFlow: "column",
-        margin: 0,
-        padding: "10px",
-        width: "100vw",
-      }}
-    >
+    <Container>
       {isLoading ? (
         <Box sx={{ width: "100%", height: "100%" }}>
           <CircularProgress />
@@ -58,17 +55,15 @@ export const ObservedList = () => {
           Nie obserwujesz żadnych kierunków
         </Typography>
       ) : (
-        <Grid container spacing={1}>
-          {likedArray.map((element) => {
-            return (
-              <LikedItem
-                element={element}
-                likedArray={likedArray}
-                setLikedArray={setLikedArray}
-              />
-            );
-          })}
-        </Grid>
+        likedArray.map((element) => {
+          return (
+            <ObservedItem
+              element={element}
+              likedArray={likedArray}
+              setLikedArray={setLikedArray}
+            />
+          );
+        })
       )}
     </Container>
   );

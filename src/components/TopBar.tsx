@@ -1,12 +1,11 @@
 import { logout } from "../firebase/firebase";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useUserContext } from "../context/userContext";
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import breakpoint from "../theme/breakpoints";
 import Burger from "./Burger";
 import { StyledButton } from "./StyledButton";
-
 const StyledTopBar = styled.nav`
   position: sticky;
   top: 0;
@@ -32,6 +31,11 @@ const StyledNavItem = styled.a`
   font-size: 15px;
   color: black;
   cursor: pointer;
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      font-weight: bold;
+    `}
 `;
 const NavItems = styled.li`
   width: 50%;
@@ -48,6 +52,7 @@ const NavItems = styled.li`
 const StyledTitle = styled.h1`
   font-weight: bold;
   font-size: 16px;
+  cursor: pointer;
   @media only screen and ${breakpoint.device.xs} {
     color: white;
   }
@@ -83,21 +88,29 @@ export const TopBar = ({ children }) => {
     router.push("/");
     logout();
   }, []);
-  console.log(breakpoint);
 
   return (
     <StyledTopBar>
       {children}
-      <StyledTitle>HeyStudent</StyledTitle>
+      <StyledTitle onClick={() => router.push("/")}>HeyStudent</StyledTitle>
       <Burger />
       <NavItems>
-        <StyledNavItem onClick={() => router.push("/")}>
+        <StyledNavItem
+          isActive={router.pathname == "/" ? true : false}
+          onClick={() => router.push("/")}
+        >
           Strona główna
         </StyledNavItem>
-        <StyledNavItem onClick={() => router.push("/observed")}>
+        <StyledNavItem
+          onClick={() => router.push("/observed")}
+          isActive={router.pathname == "/observed" ? true : false}
+        >
           Obserwowane kierunki
         </StyledNavItem>
-        <StyledNavItem onClick={() => router.push("/add")}>
+        <StyledNavItem
+          onClick={() => router.push("/add")}
+          isActive={router.pathname == "/add" ? true : false}
+        >
           Dodawanie Kierunku
         </StyledNavItem>
       </NavItems>

@@ -3,16 +3,10 @@ import { db } from "../../../firebase/firebase";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import EventIcon from "@mui/icons-material/Event";
 import { useCallback } from "react";
-import { Recruitment } from "./Recruitment";
-import { SubjectsDialog } from "./SubjectsDialog";
-import SchoolIcon from "@mui/icons-material/School";
 import { useUserContext } from "../../../context/userContext";
 import { useUserDataContext } from "../../../context/userDataContext";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { Button } from "@mui/material";
 import { ItemType } from "../../../types";
 import { ChangeEvent } from "react";
 import styled from "styled-components";
@@ -28,7 +22,8 @@ const StyledObservedItem = styled.div`
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: inline-grid;
-  grid-template-columns: 3fr 3fr 3fr 1fr 1fr;
+  grid-template-columns: 3fr 3fr 3fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-items: start;
   align-items: center;
   position: relative;
@@ -48,27 +43,12 @@ const StyledCourseUniversity = styled.p`
 const StyledCourseCity = styled.p`
   font-size: 15px;
 `;
-const StyledCourseMatch = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-`;
 
-export const LikedItem = ({ element, likedArray, setLikedArray }: Props) => {
+export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
   const ROUTE_POST_ID = "element/[id]";
   const { userData, setUserData } = useUserDataContext();
   const { user } = useUserContext();
-  const [openRecruitment, setOpenRecruitment] = useState(false);
-  const [openSubjectsDialog, setOpenSubjectsDialog] = useState(false);
   const [array, setArray] = useState(element.willStudy);
-
-  const handleOpenRecruitment = useCallback((e) => {
-    e.stopPropagation();
-    setOpenRecruitment(true);
-  }, []);
-  const handleOpenSubjectsDialog = useCallback((e) => {
-    e.stopPropagation();
-    setOpenSubjectsDialog(true);
-  }, []);
 
   const handleDislikeCourse = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();

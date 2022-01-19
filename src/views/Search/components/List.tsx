@@ -1,28 +1,26 @@
 import { ListItem } from "../../../components/ListItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
-import { Container } from "@mui/material";
 import { Typography } from "@mui/material";
 import { defineSuffix } from "../../../utils/defineSuffix";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
+import styled from "styled-components";
+
+const Container = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column;
+  width: 100%;
+`;
 
 export const List = ({ elements }) => {
   const { isLoading } = useLoadingContext();
   const { searched } = useSearchContext();
   return (
-    <Container
-      sx={{
-        margin: 0,
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        flexFlow: "column",
-        width: "100vw",
-        padding: "10px",
-      }}
-      component="ul"
-    >
+    <Container>
       <Typography variant="h6">Wyniki wyszukiwania</Typography>
       {searched.length == 0 ? (
         <Typography variant="subtitle1" sx={{ padding: 1 }}>
