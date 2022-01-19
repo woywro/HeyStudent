@@ -23,7 +23,7 @@ export const Search = ({ data }) => {
   setSearched(data);
   return (
     <StyledSearch>
-      <PageTopBar>
+      <PageTopBar title="wyszukiwanie">
         <SearchBar />
       </PageTopBar>
       <List elements={data} />

@@ -8,6 +8,8 @@ import { Text } from "../../../components/Text";
 import { Input } from "../../../components/Input";
 import styled from "styled-components";
 import { Button } from "../../../components/Button";
+import { LockedFunction } from "../../../components/LockedFunction";
+import breakpoints from "../../../theme/breakpoints";
 
 interface Props {
   choosen: ItemType;
@@ -18,6 +20,16 @@ const Container = styled.form`
   justify-content: center;
   align-items: center;
   flex-flow: column;
+`;
+
+const TextInput = styled(Input)`
+  margin: 10px;
+  @media only screen and ${breakpoints.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    width: 70%;
+  }
 `;
 
 export const ReportError = ({ choosen }: Props) => {
@@ -45,7 +57,7 @@ export const ReportError = ({ choosen }: Props) => {
           <Text size="small">
             Jeżeli masz jakieś sugestie lub widzisz błąd, daj nam znać!
           </Text>
-          <Input
+          <TextInput
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="np. zła liczba ects z matematyki"
@@ -53,7 +65,7 @@ export const ReportError = ({ choosen }: Props) => {
           <Button disabled={!inputValue}>wyślij</Button>
         </>
       ) : (
-        <Text size="big">Zaloguj się aby mieć dostęp do tej funkcji</Text>
+        <LockedFunction />
       )}
     </Container>
   );

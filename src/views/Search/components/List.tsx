@@ -6,6 +6,7 @@ import { defineSuffix } from "../../../utils/defineSuffix";
 import { useLoadingContext } from "../../../context/loadingContext";
 import { useSearchContext } from "../../../context/searchContext";
 import styled from "styled-components";
+import { Text } from "../../../components/Text";
 
 const Container = styled.div`
   padding: 10px;
@@ -21,14 +22,12 @@ export const List = ({ elements }) => {
   const { searched } = useSearchContext();
   return (
     <Container>
-      <Typography variant="h6">Wyniki wyszukiwania</Typography>
+      <Text bold>Wyniki wyszukiwania</Text>
       {searched.length == 0 ? (
-        <Typography variant="subtitle1" sx={{ padding: 1 }}>
-          Brak wyników dla podanych kryteriów
-        </Typography>
+        <Text size="small">Brak wyników dla podanych kryteriów</Text>
       ) : (
         <>
-          <Typography variant="subtitle1" sx={{ padding: 1 }}>
+          <Text size="small">
             znaleziono {searched.length}{" "}
             {defineSuffix(
               searched.length,
@@ -37,7 +36,7 @@ export const List = ({ elements }) => {
               "kierunków spełniających"
             )}{" "}
             kryteria
-          </Typography>
+          </Text>
           {searched.map((item) => {
             return <ListItem key={item.id} item={item} />;
           })}
