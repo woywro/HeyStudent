@@ -9,11 +9,12 @@ import { updateDoc, doc } from "firebase/firestore";
 import { ItemType } from "../types";
 import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
+import { shadow } from "../mixnins/shadow";
 
 const StyledListItem = styled.li`
   border-radius: 10px;
   width: 100%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  ${shadow}
   display: inline-grid;
   justify-items: center;
   align-items: center;

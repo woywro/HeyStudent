@@ -1,33 +1,10 @@
-import { createTheme } from "@mui/material/styles";
-import { yellow } from "@mui/material/colors";
-import { blue } from "@mui/material/colors";
-export const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#039be5",
-    },
-    secondary: {
-      main: "#ffc400",
-    },
+export const theme = {
+  colors: {
+    // primary: "linear-gradient(to right, #1fa2ff, #12d8fa, #a6ffcb)",
+    // primary: "linear-gradient(to right, #0575e6, #021b79)",
+    primary: "#039be5",
+    persianGreen: "#06B49A",
+    lightBlue: "#AFDBD2",
+    onyx: "#36313D",
   },
-});
-export const blueTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#3250e5",
-    },
-    secondary: {
-      main: "#f9a825",
-    },
-  },
-});
-export const yellowTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#6200ee",
-    },
-    secondary: {
-      main: "#03dac5",
-    },
-  },
-});
+};

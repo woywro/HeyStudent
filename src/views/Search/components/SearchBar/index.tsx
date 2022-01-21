@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useSearchContext } from "../../../../context/searchContext";
 import { useRouter } from "next/router";
 import { useLoadingContext } from "../../../../context/loadingContext";
@@ -24,26 +24,29 @@ export const SearchBar = () => {
     sortList(e.target.value);
   };
 
-  const sortList = (sort) => {
-    if (sort == "alphabetical") {
-      const sorted = JSON.parse(
-        JSON.stringify(searched.sort((a, b) => b.name[0] < a.name[0]))
-      );
-      setSearched(sorted);
-    } else if (sort == "popularity") {
-      const sorted = JSON.parse(
-        JSON.stringify(
-          searched.sort((a, b) => b.willStudy.length - a.willStudy.length)
-        )
-      );
-      setSearched(sorted);
-    } else if (sort == "random") {
-      const shuffledArray = JSON.parse(
-        JSON.stringify(searched.sort(() => 0.5 - Math.random()))
-      );
-      setSearched(shuffledArray);
-    }
-  };
+  const sortList = useCallback(
+    (sort) => {
+      if (sort == "alphabetical") {
+        const sorted = JSON.parse(
+          JSON.stringify(searched.sort((a, b) => b.name[0] < a.name[0]))
+        );
+        setSearched(sorted);
+      } else if (sort == "popularity") {
+        const sorted = JSON.parse(
+          JSON.stringify(
+            searched.sort((a, b) => b.willStudy.length - a.willStudy.length)
+          )
+        );
+        setSearched(sorted);
+      } else if (sort == "random") {
+        const shuffledArray = JSON.parse(
+          JSON.stringify(searched.sort(() => 0.5 - Math.random()))
+        );
+        setSearched(shuffledArray);
+      }
+    },
+    [sort, searched]
+  );
 
   const [input, setInput] = useState("");
   const { isLoading, setLoading } = useLoadingContext();

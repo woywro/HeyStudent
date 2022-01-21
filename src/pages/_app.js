@@ -1,7 +1,6 @@
 import { GlobalStyle } from "../theme/globalStyles";
 import { useState } from "react";
-import { ThemeProvider } from "@mui/system";
-import { defaultTheme } from "../theme/theme";
+import { ThemeProvider } from "styled-components";
 import { UserContextProvider } from "../context/userContext";
 import { TopBar } from "../components/TopBar";
 import { createContext } from "react";
@@ -11,6 +10,7 @@ import { UserDataContextProvider } from "../context/userDataContext";
 import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
 import styled from "styled-components";
+import { theme } from "../theme/theme";
 export const dataContext = createContext();
 
 const StyledApp = styled.div`
@@ -22,8 +22,6 @@ const StyledApp = styled.div`
 `;
 
 function Application({ Component, pageProps }) {
-  const [theme, setTheme] = useState(defaultTheme);
-
   return (
     <LoadingContextProvider>
       <SearchContextProvider>

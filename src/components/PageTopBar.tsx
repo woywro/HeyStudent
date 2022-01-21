@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import breakpoint from "../theme/breakpoints";
+import { shadow } from "../mixnins/shadow";
 
 const StyledPageTopBar = styled.div`
   width: 100%;
   background: blue;
   padding: 10px;
-  background: #039be5;
+  background: ${({ theme }) => theme.colors.primary};
   position: relative;
   display: flex;
   justify-content: center;
   flex-flow: column;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  ${shadow}
   align-items: center;
   @media only screen and ${breakpoint.device.xs} {
     border-top-right-radius: 0;
