@@ -6,57 +6,101 @@ import Select from "@mui/material/Select";
 import Paper from "@mui/material/Paper";
 import { ErrorMessage } from "@hookform/error-message";
 import { generalInfoInputs } from "../../../utils/inputsData";
+import React from "react";
+import ReactDOM from "react-dom";
+import { useFormik } from "formik";
+import styled from "styled-components";
+import { Input } from "../../../components/Input";
+import { Button } from "../../../components/Button";
+import { shadow } from "../../../mixnins/shadow";
+import { Text } from "../../../components/Text";
 
-export const CourseInfoAdd = ({ register, errors, handleSubmit, onSubmit }) => {
+const StyledForm = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+`;
+
+const Column = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+`;
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  margin: 10px;
+  border-radius: 10px;
+  ${shadow}
+`;
+
+export const CourseInfoAdd = ({
+  register,
+  errors,
+  handleSubmit,
+  onSubmit,
+  setActiveStep,
+  activeStep,
+}) => {
+  const inputs = [
+    "name",
+    "university",
+    "departament",
+    "city",
+    "type",
+    "degree",
+    "website",
+    "description",
+    "requiredSubjects",
+    "tags",
+    "category",
+  ];
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      university: "",
+      departament: "",
+      city: "",
+      type: "",
+      degree: "",
+      website: "",
+      description: "",
+      requiredSubjects: "",
+      tags: "",
+      category: "",
+    },
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+      setActiveStep(activeStep + 1);
+    },
+  });
   return (
-    <Box
-      sx={{
-        padding: 1,
-        margin: 1,
-        width: 1,
-      }}
-    >
-      <Typography variant="h6">informacje o kierunku</Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {generalInfoInputs.map((e) => {
+    <Container>
+      <Text bold size="big">
+        Ogólne informacje
+      </Text>
+      <StyledForm onSubmit={formik.handleSubmit}>
+        {inputs.map((e) => {
           return (
-            <Paper
-              elevation={6}
-              sx={{
-                padding: 1,
-                margin: 1,
-              }}
-            >
-              <Typography sx={{ marginBottom: 1 }} variant="subtitle1">
-                {e.helpText}
-              </Typography>
-              {e.type == "input" && (
-                <TextField
-                  label={e.label}
-                  value={e.value}
-                  {...register(e.element, e.validation)}
-                />
-              )}
-              {e.type == "select" && (
-                <Select
-                  fullWidth
-                  defaultValue={e.options[0]}
-                  {...register(e.element)}
-                >
-                  {e.options.map((x) => {
-                    return <MenuItem value={x}>{x}</MenuItem>;
-                  })}
-                </Select>
-              )}
-              <ErrorMessage
-                errors={errors}
-                name={e.element}
-                render={({ message }) => <p>{message}</p>}
+            <Column>
+              <label htmlFor={e}>{e}</label>
+              <Input
+                id={e}
+                name={e}
+                type={e}
+                onChange={formik.handleChange}
+                value={formik.values.e}
               />
-            </Paper>
+            </Column>
           );
         })}
-      </form>
-    </Box>
+        <Button type="submit">Submit</Button>
+      </StyledForm>
+    </Container>
   );
 };

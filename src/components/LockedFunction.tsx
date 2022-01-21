@@ -15,7 +15,7 @@ const Text = styled.p`
 export const LockedFunction = () => {
   return (
     <LockedContainer>
-      <Text>dadadad</Text>
+      <Text>Ta funkcja jest zablokowana, zaloguj się.</Text>
     </LockedContainer>
   );
 };

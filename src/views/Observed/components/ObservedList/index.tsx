@@ -10,6 +10,7 @@ import { useUserDataContext } from "../../../../context/userDataContext";
 import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Container } from "./style";
+import { LockedFunction } from "../../../../components/LockedFunction";
 
 export const ObservedList = () => {
   const { user } = useUserContext();
@@ -41,6 +42,8 @@ export const ObservedList = () => {
         <Box sx={{ width: "100%", height: "100%" }}>
           <CircularProgress />
         </Box>
+      ) : !user ? (
+        <LockedFunction />
       ) : likedArray.length == 0 ? (
         <Typography variant="subtitle1">
           Nie obserwujesz żadnych kierunków

@@ -1,12 +1,64 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import { Stack } from "@mui/material";
-import { Button } from "@mui/material";
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { subjectInputs } from "../../../utils/inputsData";
+import { useFormik } from "formik";
+import styled from "styled-components";
+import { shadow } from "../../../mixnins/shadow";
+import { Input } from "../../../components/Input";
+import { Button } from "../../../components/Button";
+import { Text } from "../../../components/Text";
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  margin: 10px;
+  border-radius: 10px;
+  ${shadow}
+`;
+
+const SubjectContainer = styled.div`
+  width: 100%;
+  padding: 10px;
+  ${shadow}
+  border-radius: 10px;
+`;
+
+const SubjectList = styled.ul`
+  list-style: none;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  flex-flow: column;
+  padding: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin: 5px;
+`;
+
+const Subject = styled.li`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px;
+  ${shadow}
+`;
+
+const StyledForm = styled.form`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
 
 export const CourseSubjectsAdd = ({
   registerSubjects,
@@ -15,97 +67,73 @@ export const CourseSubjectsAdd = ({
   handleSubmitSubjects,
   onSubmitSubjects,
 }) => {
+  const inputs = ["name", "hours", "ects", "semester", "description"];
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      hours: "",
+      ects: "",
+      semester: "",
+      description: "",
+    },
+    onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+      onSubmitSubjects(values);
+    },
+  });
   return (
-    <Box
-      sx={{
-        padding: 1,
-        margin: 1,
-        width: 1,
-      }}
-    >
+    <Container>
       <Typography variant="h6">Dodaj przedmioty</Typography>
-      <form onSubmit={handleSubmitSubjects(onSubmitSubjects)}>
-        {subjectInputs.map((e) => {
+      <StyledForm onSubmit={formik.handleSubmit}>
+        {inputs.map((e) => {
           return (
-            <TextField
-              sx={{ margin: 1 }}
-              label={e.label}
-              {...registerSubjects(e.element, { required: false })}
-            />
+            <Column>
+              <label htmlFor={e}>{e}</label>
+              <Input
+                id={e}
+                name={e}
+                type={e}
+                onChange={formik.handleChange}
+                value={formik.values.e}
+              />
+            </Column>
           );
         })}
+
         <Button
+          onClick={(e) => {
+            e.preventDefault();
+            formik.handleSubmit();
+          }}
           type="submit"
-          variant="contained"
-          sx={{ margin: 1, backgroundColor: "secondary.main" }}
         >
           Dodaj przedmiot
         </Button>
-      </form>
-      <Box
-        sx={{
-          backgroundColor: "primary.main",
-          position: "absolute",
-          borderTopLeftRadius: "30px",
-          borderTopRightRadius: "30px",
-          padding: 2,
-          left: 0,
-          width: "100vw",
-          marginTop: 1,
-        }}
-      >
-        <Typography variant="h5" sx={{ color: "white", marginBottom: 1 }}>
-          dodane przedmioty
-        </Typography>
-        <Box sx={{ overflowY: "scroll", height: "35vh" }}>
+      </StyledForm>
+      <SubjectContainer>
+        <Text>dodane przedmioty</Text>
+        <SubjectList>
           {newSubjects.map((e) => {
             return (
-              <Paper
-                elevation={5}
-                sx={{
-                  padding: 1,
-                  position: "relative",
-                  border: 1,
-                  borderColor: "primary.main",
-                }}
-              >
-                <Typography variant="h6">{e.name}</Typography>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Typography variant="subtitle1">
-                    Godziny: {e.hours}
-                  </Typography>
-                  <Typography variant="subtitle1">ECTS: {e.ects}</Typography>
-                </Stack>
-                <Typography variant="subtitle1">
-                  opis: {e.description}
-                </Typography>
-                <IconButton
-                  aria-label="delete"
-                  sx={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    color: "secondary.main",
-                  }}
-                  variant="contained"
+              <Subject>
+                <Text bold>{e.name}</Text>
+                <Text>Godziny: {e.hours}</Text>
+                <Text>ECTS: {e.ects}</Text>
+                <Text>opis: {e.description}</Text>
+                <Button
                   onClick={() => {
                     setNewSubjects(
                       newSubjects.filter((x) => x.name !== e.name)
                     );
                   }}
                 >
-                  <DeleteIcon />
-                </IconButton>
-              </Paper>
+                  x
+                </Button>
+              </Subject>
             );
           })}
-        </Box>
-      </Box>
-    </Box>
+        </SubjectList>
+      </SubjectContainer>
+    </Container>
   );
 };
