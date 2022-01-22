@@ -31,10 +31,14 @@ const Container = styled.div`
 export const AddTags = ({ tags, setTags }) => {
   const [inputValue, setInputValue] = useState("");
 
-  const handleAddTag = useCallback(() => {
-    setTags([...tags, inputValue]);
-    console.log(inputValue);
-  }, [inputValue]);
+  const handleAddTag = useCallback(
+    (e) => {
+      e.preventDefault();
+      setTags([...tags, inputValue]);
+      console.log(inputValue);
+    },
+    [inputValue]
+  );
 
   const handleDeleteTag = (e) => {
     console.log(e);

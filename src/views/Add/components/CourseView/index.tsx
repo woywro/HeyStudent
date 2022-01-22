@@ -169,6 +169,26 @@ export const CourseView = () => {
             />
             <Error>{formik.errors.name ? formik.errors.name : null}</Error>
           </InputWrapper>
+          <InputWrapper>
+            <Input
+              id="type"
+              name="type"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.type}
+            />
+            <Error>{formik.errors.type ? formik.errors.type : null}</Error>
+          </InputWrapper>
+          <InputWrapper>
+            <Input
+              id="name"
+              name="degree"
+              type="degree"
+              onChange={formik.handleChange}
+              value={formik.values.degree}
+            />
+            <Error>{formik.errors.degree ? formik.errors.degree : null}</Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>
@@ -186,6 +206,17 @@ export const CourseView = () => {
             <Error>
               {formik.errors.university ? formik.errors.university : null}
             </Error>
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="city">Miasto</label>
+            <Input
+              id="city"
+              name="city"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.city}
+            />
+            <Error>{formik.errors.city ? formik.errors.city : null}</Error>
           </InputWrapper>
           <InputWrapper>
             <label htmlFor="departament">Wydział</label>
