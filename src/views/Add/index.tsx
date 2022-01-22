@@ -1,33 +1,24 @@
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { MobileStepper } from "@mui/material";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
-import { Container } from "@mui/material";
 import { PageTopBar } from "../../components/PageTopBar";
-import { CourseInfoAdd } from "./components/CourseInfoAdd";
-import { CourseSubjectsAdd } from "./components/CourseSubjectsAdd";
-import { CourseSubmit } from "./components/CourseSubmit";
-import { Typography } from "@mui/material";
 import { CourseView } from "./components/CourseView/index";
+import { SentScreen } from "./components/SentScreen";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 70%;
+`;
 
 export const Add = () => {
+  const [sent, setSent] = useState(false);
+
   return (
-    <Container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexFlow: "column",
-        padding: 0,
-        width: "100vw",
-        height: "100%",
-      }}
-    >
+    <Container>
       <PageTopBar title="Dodaj kierunek" />
-      <CourseView />
+      {sent ? <SentScreen /> : <CourseView setSent={setSent} />}
     </Container>
   );
 };

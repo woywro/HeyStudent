@@ -19,6 +19,10 @@ const StyledApp = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
 `;
 
 function Application({ Component, pageProps }) {

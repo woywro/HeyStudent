@@ -7,7 +7,7 @@ import {
 } from "./style";
 import { useFormik, ErrorMessage } from "formik";
 import { Input } from "../../../../components/Input";
-import { CourseSubjectsAdd } from "../CourseSubjectsAdd";
+import { SubjectsAdd } from "../SubjectsAdd";
 import { Button } from "../../../../components/Button";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
@@ -34,7 +34,7 @@ const Error = styled(Text)`
   padding: 5px;
 `;
 
-export const CourseView = () => {
+export const CourseView = ({ setSent }) => {
   const [newCourse, setNewCourse] = useState();
   const [newSubjects, setNewSubjects] = useState([]);
   const [selectedVal, setSelectedVal] = useState("");
@@ -82,8 +82,10 @@ export const CourseView = () => {
     nc.category = [nc.category];
     nc.minPoints = { value: nc.minPoints, year: "2021/2022" };
     nc.willStudy = [];
-    console.log(course.tags);
-    // setDoc(doc(db, "Courses", random.toString()), nc);
+    // console.log(nc.tags);
+    setDoc(doc(db, "Courses", random.toString()), nc).then(() => {
+      setSent(true);
+    });
   }
 
   const validationSchema = Yup.object({
@@ -150,7 +152,7 @@ export const CourseView = () => {
     onSubmit: (values) => {
       setNewCourse(values);
       handleSubmitAll(values);
-      console.log(JSON.stringify(values, null, 2));
+      // console.log(JSON.stringify(values, null, 2));
     },
     validationSchema,
   });
@@ -158,8 +160,11 @@ export const CourseView = () => {
     <StyledCourseElementList>
       <StyledForm onSubmit={formik.handleSubmit}>
         <StyledCourseElement>
-          <StyledCourseElementTitle>Nazwa kierunku</StyledCourseElementTitle>
+          <StyledCourseElementTitle>
+            Informacje o kierunku
+          </StyledCourseElementTitle>
           <InputWrapper>
+            <label htmlFor="name">Nazwa kierunku</label>
             <Input
               id="name"
               name="name"
@@ -170,6 +175,7 @@ export const CourseView = () => {
             <Error>{formik.errors.name ? formik.errors.name : null}</Error>
           </InputWrapper>
           <InputWrapper>
+            <label htmlFor="type">Typ studiów</label>
             <Input
               id="type"
               name="type"
@@ -180,6 +186,7 @@ export const CourseView = () => {
             <Error>{formik.errors.type ? formik.errors.type : null}</Error>
           </InputWrapper>
           <InputWrapper>
+            <label htmlFor="degree">Stopień studiów</label>
             <Input
               id="name"
               name="degree"
@@ -337,13 +344,13 @@ export const CourseView = () => {
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>przedmioty</StyledCourseElementTitle>
-          <CourseSubjectsAdd
+          <SubjectsAdd
             newSubjects={newSubjects}
             onSubmitSubjects={onSubmitSubjects}
             setNewSubjects={setNewSubjects}
           />
         </StyledCourseElement>
-        <Button type="submit">Zapisz</Button>
+        <Button type="submit">Dodaj do serwisu</Button>
       </StyledForm>
     </StyledCourseElementList>
   );

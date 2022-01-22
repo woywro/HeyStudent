@@ -4,10 +4,10 @@ import Paper from "@mui/material/Paper";
 import { Stack } from "@mui/material";
 import { useFormik } from "formik";
 import styled from "styled-components";
-import { shadow } from "../../../mixnins/shadow";
-import { Input } from "../../../components/Input";
-import { Button } from "../../../components/Button";
-import { Text } from "../../../components/Text";
+import { shadow } from "../../../../mixnins/shadow";
+import { Input } from "../../../../components/Input";
+import { Button } from "../../../../components/Button";
+import { Text } from "../../../../components/Text";
 
 const Container = styled.div`
   width: 100%;
@@ -16,14 +16,6 @@ const Container = styled.div`
   align-items: center;
   flex-flow: column;
   margin: 10px;
-  border-radius: 10px;
-  ${shadow}
-`;
-
-const SubjectContainer = styled.div`
-  width: 100%;
-  padding: 10px;
-  ${shadow}
   border-radius: 10px;
 `;
 
@@ -47,7 +39,7 @@ const Subject = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   flex-flow: column;
   ${shadow};
@@ -56,12 +48,9 @@ const Grid = styled.div`
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  padding: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   width: 100%;
 `;
-
-const DeleteButton = styled(Button)``;
 
 const StyledForm = styled.form`
   display: grid;
@@ -70,11 +59,9 @@ const StyledForm = styled.form`
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
-export const CourseSubjectsAdd = ({
-  registerSubjects,
+export const SubjectsAdd = ({
   newSubjects,
   setNewSubjects,
-  handleSubmitSubjects,
   onSubmitSubjects,
 }) => {
   const inputs = ["name", "hours", "ects", "year", "description"];
@@ -120,33 +107,31 @@ export const CourseSubjectsAdd = ({
           Dodaj przedmiot
         </Button>
       </StyledForm>
-      <SubjectContainer>
-        <Text>dodane przedmioty</Text>
-        <SubjectList>
-          {newSubjects.map((e) => {
-            return (
-              <Subject>
-                <Grid>
-                  <Text bold>{e.name}</Text>
-                  <Text>Godziny: {e.hours}</Text>
-                  <Text>ECTS: {e.ects}</Text>
-                  <Text>Semestr: {e.year}</Text>
-                  <DeleteButton
-                    onClick={() => {
-                      setNewSubjects(
-                        newSubjects.filter((x) => x.name !== e.name)
-                      );
-                    }}
-                  >
-                    x
-                  </DeleteButton>
-                </Grid>
-                <Text>Opis: {e.description}</Text>
-              </Subject>
-            );
-          })}
-        </SubjectList>
-      </SubjectContainer>
+      <Text>dodane przedmioty</Text>
+      <SubjectList>
+        {newSubjects.map((e) => {
+          return (
+            <Subject>
+              <Grid>
+                <Text bold>{e.name}</Text>
+                <Text>Godziny: {e.hours}</Text>
+                <Text>ECTS: {e.ects}</Text>
+                <Text>Semestr: {e.year}</Text>
+                <Button
+                  onClick={() => {
+                    setNewSubjects(
+                      newSubjects.filter((x) => x.name !== e.name)
+                    );
+                  }}
+                >
+                  x
+                </Button>
+              </Grid>
+              <Text>Opis: {e.description}</Text>
+            </Subject>
+          );
+        })}
+      </SubjectList>
     </Container>
   );
 };

@@ -2,8 +2,8 @@ import { Input } from "../../../../components/Input";
 import { Button } from "../../../../components/Button";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
-import { TagSharp } from "@mui/icons-material";
 import { shadow } from "../../../../mixnins/shadow";
+import { Text } from "../../../../components/Text";
 const Row = styled.div`
   display: flex;
   flex-flow: row;
@@ -53,8 +53,9 @@ export const AddTags = ({ tags, setTags }) => {
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
-        <Button onClick={handleAddTag}>+</Button>
+        {tags.length <= 4 ? <Button onClick={handleAddTag}>+</Button> : ""}
       </Row>
+      {tags.length > 4 && <Text>Możesz dodać maksymalnie 5 tagów</Text>}
       <TagList>
         {tags.map((e) => {
           return <Tag onClick={handleDeleteTag}>{e}</Tag>;
