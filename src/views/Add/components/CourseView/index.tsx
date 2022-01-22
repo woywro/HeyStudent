@@ -109,6 +109,10 @@ export const CourseView = ({ setSent }) => {
       .min(6, "nazwa jest za krótka")
       .max(50, "nazwa jest za długa!")
       .required("pole wymagane"),
+    contact: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
     degree: Yup.string()
       .min(6, "nazwa jest za krótka")
       .max(50, "nazwa jest za długa!")
@@ -315,21 +319,10 @@ export const CourseView = ({ setSent }) => {
           </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
-          <StyledCourseElementTitle>Tagi kierunku</StyledCourseElementTitle>
+          <StyledCourseElementTitle>
+            Kategoria kierunku
+          </StyledCourseElementTitle>
           <InputWrapper>
-            {/* <label htmlFor="tags">tagi kierunku</label>
-            <Input
-              id="tags"
-              name="tags"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.tags}
-            />
-            <Error>{formik.errors.tags ? formik.errors.tags : null}</Error> */}
-            <AddTags tags={tags} setTags={setTags} />
-          </InputWrapper>
-          <InputWrapper>
-            <label htmlFor="category">kategoria kierunku</label>
             <Input
               id="category"
               name="category"
@@ -341,6 +334,10 @@ export const CourseView = ({ setSent }) => {
               {formik.errors.category ? formik.errors.category : null}
             </Error>
           </InputWrapper>
+        </StyledCourseElement>
+        <StyledCourseElement>
+          <StyledCourseElementTitle>Tagi kierunku</StyledCourseElementTitle>
+          <AddTags tags={tags} setTags={setTags} />
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>przedmioty</StyledCourseElementTitle>

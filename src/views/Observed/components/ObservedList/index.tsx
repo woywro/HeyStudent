@@ -11,6 +11,7 @@ import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Container } from "./style";
 import { LockedFunction } from "../../../../components/LockedFunction";
+import { Loading } from "../../../../components/Loading";
 
 export const ObservedList = () => {
   const { user } = useUserContext();
@@ -39,9 +40,7 @@ export const ObservedList = () => {
   return (
     <Container>
       {isLoading ? (
-        <Box sx={{ width: "100%", height: "100%" }}>
-          <CircularProgress />
-        </Box>
+        <Loading />
       ) : !user ? (
         <LockedFunction />
       ) : likedArray.length == 0 ? (

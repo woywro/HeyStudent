@@ -2,8 +2,8 @@ import { Input } from "../../../../components/Input";
 import { Button } from "../../../../components/Button";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
-import { shadow } from "../../../../mixnins/shadow";
 import { Text } from "../../../../components/Text";
+import { shadow } from "../../../../mixnins/shadow";
 const Row = styled.div`
   display: flex;
   flex-flow: row;
@@ -15,10 +15,15 @@ const TagList = styled.ul`
   justify-content: center;
   align-items: center;
   padding: 10px;
+  height: 50px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+  ${shadow};
 `;
 
 const Tag = styled.li`
-  padding: 5px;
+  padding: 10px;
   border-radius: 10px;
   cursor: pointer;
   ${shadow}
