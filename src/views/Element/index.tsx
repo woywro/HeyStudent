@@ -14,6 +14,9 @@ export const Element = ({ data }: Props) => {
         <CourseText>
           {data.university}, {data.city}
         </CourseText>
+        <CourseText>
+          {data.type}, {data.degree}
+        </CourseText>
       </PageTopBar>
       <CourseElementList element={data} />
     </Container>

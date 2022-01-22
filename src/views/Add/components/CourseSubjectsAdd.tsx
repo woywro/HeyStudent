@@ -29,12 +29,11 @@ const SubjectContainer = styled.div`
 
 const SubjectList = styled.ul`
   list-style: none;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
   flex-flow: column;
   padding: 10px;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 `;
 
@@ -45,19 +44,30 @@ const Column = styled.div`
 `;
 
 const Subject = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  flex-flow: column;
+  ${shadow};
+`;
+const Grid = styled.div`
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding: 20px;
-  ${shadow}
+  width: 100%;
 `;
+
+const DeleteButton = styled(Button)``;
 
 const StyledForm = styled.form`
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 export const CourseSubjectsAdd = ({
@@ -67,13 +77,13 @@ export const CourseSubjectsAdd = ({
   handleSubmitSubjects,
   onSubmitSubjects,
 }) => {
-  const inputs = ["name", "hours", "ects", "semester", "description"];
+  const inputs = ["name", "hours", "ects", "year", "description"];
   const formik = useFormik({
     initialValues: {
       name: "",
       hours: "",
       ects: "",
-      semester: "",
+      year: "",
       description: "",
     },
     onSubmit: (values) => {
@@ -116,19 +126,22 @@ export const CourseSubjectsAdd = ({
           {newSubjects.map((e) => {
             return (
               <Subject>
-                <Text bold>{e.name}</Text>
-                <Text>Godziny: {e.hours}</Text>
-                <Text>ECTS: {e.ects}</Text>
-                <Text>opis: {e.description}</Text>
-                <Button
-                  onClick={() => {
-                    setNewSubjects(
-                      newSubjects.filter((x) => x.name !== e.name)
-                    );
-                  }}
-                >
-                  x
-                </Button>
+                <Grid>
+                  <Text bold>{e.name}</Text>
+                  <Text>Godziny: {e.hours}</Text>
+                  <Text>ECTS: {e.ects}</Text>
+                  <Text>Semestr: {e.year}</Text>
+                  <DeleteButton
+                    onClick={() => {
+                      setNewSubjects(
+                        newSubjects.filter((x) => x.name !== e.name)
+                      );
+                    }}
+                  >
+                    x
+                  </DeleteButton>
+                </Grid>
+                <Text>Opis: {e.description}</Text>
               </Subject>
             );
           })}

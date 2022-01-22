@@ -5,10 +5,16 @@ import {
   StyledCourseElement,
   StyledCourseElementTitle,
 } from "./style";
-import { useFormik } from "formik";
+import { useFormik, ErrorMessage } from "formik";
 import { Input } from "../../../../components/Input";
 import { CourseSubjectsAdd } from "../CourseSubjectsAdd";
 import { Button } from "../../../../components/Button";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "../../../../firebase/firebase";
+import * as Yup from "yup";
+import { ErrorSharp } from "@material-ui/icons";
+import { Text } from "../../../../components/Text";
+import { AddTags } from "../AddTags";
 
 const StyledForm = styled.form`
   display: flex;
@@ -17,10 +23,22 @@ const StyledForm = styled.form`
   flex-flow: column;
 `;
 
+const InputWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+`;
+
+const Error = styled(Text)`
+  color: red;
+  font-size: 12px;
+  padding: 5px;
+`;
+
 export const CourseView = () => {
   const [newCourse, setNewCourse] = useState();
   const [newSubjects, setNewSubjects] = useState([]);
   const [selectedVal, setSelectedVal] = useState("");
+  const [tags, setTags] = useState([]);
 
   const onSubmitSubjects = (data) => {
     setNewSubjects([...newSubjects, data]);
@@ -52,29 +70,67 @@ export const CourseView = () => {
     return result;
   }
 
-  function handleSubmitAll() {
+  function handleSubmitAll(course) {
     const random = Math.floor(Math.random() * 100000);
-    const nc = newCourse;
+    const nc = JSON.parse(JSON.stringify(course));
     nc.subjects = newSubjects;
     nc.name = nc.name.split(" ");
-    let requiredArray = nc.requiredSubjects.split("/");
-    let requiredSubject = {};
-    nc.requiredSubjects = requiredArray.map((e) => {
-      return {
-        name: e.split(" ")[0],
-        level: e.split(" ")[1],
-      };
-    });
-    nc.tags = createTags(nc.tags.split("/"), nc);
+    nc.requiredSubjects = nc.requiredSubjects.split("/");
+    nc.tags = createTags(tags, nc);
     nc.id = random.toString();
     nc.message = selectedVal;
     nc.category = [nc.category];
     nc.minPoints = { value: nc.minPoints, year: "2021/2022" };
     nc.willStudy = [];
-    nc.willStudyCount = 0;
-    console.log(newCourse.tags);
-    setDoc(doc(db, "Courses", random.toString()), newCourse);
+    console.log(course.tags);
+    // setDoc(doc(db, "Courses", random.toString()), nc);
   }
+
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(4, "nazwa jest za krótka!")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    university: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    departament: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    city: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    type: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    degree: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    website: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    description: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    requiredSubjects: Yup.string()
+      .min(6, "nazwa jest za krótka")
+      .max(50, "nazwa jest za długa!")
+      .required("pole wymagane"),
+    minPoints: Yup.number()
+      .positive("ilość punktów nie może być równa 0!")
+      .typeError("ilość punktów nie może zawierać liter")
+      .required("pole wymagane"),
+
+    // .typeError("ilość punktów nie może zawierać liter")
+    // .required("pole wymagane"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -82,105 +138,178 @@ export const CourseView = () => {
       university: "",
       departament: "",
       city: "",
+      contact: "",
       type: "",
       degree: "",
       website: "",
       description: "",
       requiredSubjects: "",
-      tags: "",
+      minPoints: "",
       category: "",
     },
     onSubmit: (values) => {
+      setNewCourse(values);
+      handleSubmitAll(values);
       console.log(JSON.stringify(values, null, 2));
     },
+    validationSchema,
   });
   return (
     <StyledCourseElementList>
       <StyledForm onSubmit={formik.handleSubmit}>
         <StyledCourseElement>
           <StyledCourseElementTitle>Nazwa kierunku</StyledCourseElementTitle>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
+          <InputWrapper>
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            <Error>{formik.errors.name ? formik.errors.name : null}</Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>
             Informacje o uczelni
           </StyledCourseElementTitle>
-          <label htmlFor="university">Uniwersytet</label>
-          <Input
-            id="university"
-            name="university"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.university}
-          />
-          <label htmlFor="departament">Wydział</label>
-          <Input
-            id="departament"
-            name="departament"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.departament}
-          />
-          <label htmlFor="contact">Kontakt</label>
-          <Input
-            id="contact"
-            name="contact"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.contact}
-          />
-          <label htmlFor="website">Strona internetowa</label>
-          <Input
-            id="website"
-            name="website"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.website}
-          />
+          <InputWrapper>
+            <label htmlFor="university">Uniwersytet</label>
+            <Input
+              id="university"
+              name="university"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.university}
+            />
+            <Error>
+              {formik.errors.university ? formik.errors.university : null}
+            </Error>
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="departament">Wydział</label>
+            <Input
+              id="departament"
+              name="departament"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.departament}
+            />
+            <Error>
+              {formik.errors.departament ? formik.errors.departament : null}
+            </Error>
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="contact">Kontakt</label>
+            <Input
+              id="contact"
+              name="contact"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.contact}
+            />
+            <Error>
+              {formik.errors.contact ? formik.errors.contact : null}
+            </Error>
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="website">Strona internetowa</label>
+            <Input
+              id="website"
+              name="website"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.website}
+            />
+            <Error>
+              {formik.errors.website ? formik.errors.website : null}
+            </Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>opis kierunku</StyledCourseElementTitle>
-          <Input
-            id="description"
-            name="description"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.description}
-          />
+          <InputWrapper>
+            <Input
+              id="description"
+              name="description"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.description}
+            />
+            <Error>
+              {formik.errors.description ? formik.errors.description : null}
+            </Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>
             przedmioty rekrutacji
           </StyledCourseElementTitle>
-          <Input
-            id="requiredSubjects"
-            name="requiredSubjects"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.requiredSubjects}
-          />
+          <InputWrapper>
+            <Input
+              id="requiredSubjects"
+              name="requiredSubjects"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.requiredSubjects}
+            />
+            <Error>
+              {formik.errors.requiredSubjects
+                ? formik.errors.requiredSubjects
+                : null}
+            </Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>próg punktowy</StyledCourseElementTitle>
-          <Input
-            id="minPoints"
-            name="minPoints"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.minPoints}
-          />
+          <InputWrapper>
+            <Input
+              id="minPoints"
+              name="minPoints"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.minPoints}
+            />
+            <Error>
+              {formik.errors.minPoints ? formik.errors.minPoints : null}
+            </Error>
+          </InputWrapper>
+        </StyledCourseElement>
+        <StyledCourseElement>
+          <StyledCourseElementTitle>Tagi kierunku</StyledCourseElementTitle>
+          <InputWrapper>
+            {/* <label htmlFor="tags">tagi kierunku</label>
+            <Input
+              id="tags"
+              name="tags"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.tags}
+            />
+            <Error>{formik.errors.tags ? formik.errors.tags : null}</Error> */}
+            <AddTags tags={tags} setTags={setTags} />
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="category">kategoria kierunku</label>
+            <Input
+              id="category"
+              name="category"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.category}
+            />
+            <Error>
+              {formik.errors.category ? formik.errors.category : null}
+            </Error>
+          </InputWrapper>
         </StyledCourseElement>
         <StyledCourseElement>
           <StyledCourseElementTitle>przedmioty</StyledCourseElementTitle>
           <CourseSubjectsAdd
             newSubjects={newSubjects}
             onSubmitSubjects={onSubmitSubjects}
+            setNewSubjects={setNewSubjects}
           />
         </StyledCourseElement>
         <Button type="submit">Zapisz</Button>

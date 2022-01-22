@@ -18,7 +18,7 @@ interface Props {
   element: ItemType;
 }
 export const CourseElementList = ({ element }: Props) => {
-  const [year, setYear] = useState(1);
+  const [semester, setYear] = useState(1);
   const handleChange = (event) => {
     setYear(event.target.value);
   };
@@ -27,7 +27,7 @@ export const CourseElementList = ({ element }: Props) => {
   }
 
   const courseSubjectsFiltered = element.subjects
-    .filter((e) => e.year == year)
+    // .filter((e) => e.semester == semester)
     .sort((a, b) => b.hours - a.hours);
   return (
     <StyledCourseElementList>
@@ -56,7 +56,7 @@ export const CourseElementList = ({ element }: Props) => {
         </StyledCourseElementTitle>
         <SubjectsGrid>
           {element.requiredSubjects.map((e) => {
-            return <Text>{e.name}</Text>;
+            return <Text>{e}</Text>;
           })}
         </SubjectsGrid>
       </StyledCourseElement>
