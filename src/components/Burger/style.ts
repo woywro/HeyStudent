@@ -1,19 +1,17 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import Nav from "./Nav";
-import breakpoint from "../theme/breakpoints";
+import breakpoints from "../../theme/breakpoints";
 
-const StyledBurger = styled.div`
+export const StyledBurger = styled.div`
   width: 2rem;
   height: 2rem;
   z-index: 20;
   display: none;
-  @media only screen and ${breakpoint.device.xs} {
+  @media only screen and ${breakpoints.device.xs} {
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
   }
-  @media only screen and ${breakpoint.device.lg} {
+  @media only screen and ${breakpoints.device.lg} {
   }
   div {
     width: 2rem;
@@ -34,20 +32,3 @@ const StyledBurger = styled.div`
     }
   }
 `;
-
-const Burger = () => {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
-        <div />
-        <div />
-        <div />
-      </StyledBurger>
-      <Nav open={open} setOpen={setOpen} />
-    </>
-  );
-};
-
-export default Burger;

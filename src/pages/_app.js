@@ -2,7 +2,7 @@ import { GlobalStyle } from "../theme/globalStyles";
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { UserContextProvider } from "../context/userContext";
-import { TopBar } from "../components/TopBar";
+import { Nav } from "../components/Nav";
 import { createContext } from "react";
 import { FieldsOfStudyContextProvider } from "../context/fieldsOfStudyContext";
 import { LoadingContextProvider } from "../context/loadingContext";
@@ -41,7 +41,7 @@ function Application({ Component, pageProps }) {
                       color="#ffc400"
                       options={{ showSpinner: false }}
                     />
-                    <TopBar>{/* <Burger /> */}</TopBar>
+                    <Nav />
                     <Component {...pageProps} />
                   </ThemeProvider>
                 </StyledApp>
