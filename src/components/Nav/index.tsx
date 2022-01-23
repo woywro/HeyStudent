@@ -5,8 +5,11 @@ import { useRouter } from "next/router";
 import { Burger } from "../Burger";
 import { StyledTopBar, Title, NavItems, NavItem, SignButton } from "./style";
 
-export const Nav = ({ children }) => {
-  const [isOpen, setOpen] = useState(false);
+interface Props {
+  children: JSX.Element;
+}
+
+export const Nav = ({ children }: Props) => {
   const router = useRouter();
   const { user } = useUserContext();
   const handleLogin = useCallback(() => {

@@ -9,8 +9,14 @@ import {
   Divider,
   AccordionInside,
 } from "./style";
+import { SubjectInterface } from "../../interfaces/SubjectInterface";
 
-const Accordion = ({ title, content }) => {
+interface Props {
+  title: string;
+  content: SubjectInterface;
+}
+
+export const Accordion = ({ title, content }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -30,5 +36,3 @@ const Accordion = ({ title, content }) => {
     </AccordionItem>
   );
 };
-
-export default Accordion;

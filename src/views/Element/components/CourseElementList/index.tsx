@@ -5,7 +5,7 @@ import { ReportError } from "../ReportError";
 import { ItemType } from "../../../../types";
 import styled from "styled-components";
 import { IsInterested } from "../IsInterested";
-import Accordion from "../../../../components/Accordion";
+import { Accordion } from "../../../../components/Accordion";
 import { Text } from "../../../../components/Text";
 import {
   StyledCourseElementList,
@@ -18,17 +18,13 @@ interface Props {
   element: ItemType;
 }
 export const CourseElementList = ({ element }: Props) => {
-  const [semester, setYear] = useState(1);
-  const handleChange = (event) => {
-    setYear(event.target.value);
-  };
   function openWebsite(url) {
     window.open(url, "_blank");
   }
 
-  const courseSubjectsFiltered = element.subjects
-    // .filter((e) => e.semester == semester)
-    .sort((a, b) => b.hours - a.hours);
+  const courseSubjectsFiltered = element.subjects.sort(
+    (a, b) => b.hours - a.hours
+  );
   return (
     <StyledCourseElementList>
       <StyledCourseElement>

@@ -1,7 +1,7 @@
 import breakpoints from "../../theme/breakpoints";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ open: boolean }>`
   @media only screen and ${breakpoints.device.xs} {
     overflow: hidden;
     padding: 20px;

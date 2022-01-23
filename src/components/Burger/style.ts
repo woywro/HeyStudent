@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import breakpoints from "../../theme/breakpoints";
 
-export const StyledBurger = styled.div`
+export const StyledBurger = styled.div<{ open: boolean }>`
   width: 2rem;
   height: 2rem;
   z-index: 20;
-  display: none;
   @media only screen and ${breakpoints.device.xs} {
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
   }
   @media only screen and ${breakpoints.device.lg} {
+    display: none;
   }
   div {
     width: 2rem;

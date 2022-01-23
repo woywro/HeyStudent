@@ -23,7 +23,7 @@ export const StyledTopBar = styled.nav`
   }
 `;
 
-export const NavItem = styled.a`
+export const NavItem = styled.a<{ isActive: boolean }>`
   text-decoration: none;
   font-size: 15px;
   color: black;

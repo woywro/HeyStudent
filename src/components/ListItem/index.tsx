@@ -59,7 +59,6 @@ export const ListItem = ({ item, key }: Props) => {
         <CourseUniversity>{item.university}</CourseUniversity>
         <CourseCity>{item.city}</CourseCity>
         {user &&
-          userData !== "" &&
           (userData.likedItems.includes(item.id) ? (
             <IconButton color="primary">
               <StarIcon

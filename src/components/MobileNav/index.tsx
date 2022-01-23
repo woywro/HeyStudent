@@ -8,7 +8,12 @@ import { logout } from "../../firebase/firebase";
 import { useCallback } from "react";
 import { Container, NavItems, NavItem } from "./style";
 
-export const MobileNav = ({ open, setOpen }) => {
+interface Props {
+  open: boolean;
+  setOpen: (arg0: boolean) => void;
+}
+
+export const MobileNav = ({ open, setOpen }: Props) => {
   const { user } = useUserContext();
 
   const router = useRouter();
