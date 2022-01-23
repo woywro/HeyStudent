@@ -8,7 +8,7 @@ export const ToggleButtonGroup = styled.form`
   margin-top: 10px;
 `;
 
-export const ToggleButton = styled(Button)`
+export const ToggleButton = styled(Button)<{ checked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
