@@ -1,7 +1,7 @@
 import { StyledPageTopBar, PageTopBarTitle } from "./style";
 
 interface Props {
-  children: JSX.Element;
+  children?: JSX.Element | JSX.Element[];
   title: string;
 }
 
