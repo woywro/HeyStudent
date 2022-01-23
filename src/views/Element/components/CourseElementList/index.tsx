@@ -3,7 +3,6 @@ import { ShowSimilar } from "../ShowSimilar";
 import { Chat } from "../Chat";
 import { ReportError } from "../ReportError";
 import { ItemType } from "../../../../types";
-import styled from "styled-components";
 import { IsInterested } from "../IsInterested";
 import { Accordion } from "../../../../components/Accordion";
 import { Text } from "../../../../components/Text";
@@ -18,7 +17,7 @@ interface Props {
   element: ItemType;
 }
 export const CourseElementList = ({ element }: Props) => {
-  function openWebsite(url) {
+  function openWebsite(url: string) {
     window.open(url, "_blank");
   }
 
