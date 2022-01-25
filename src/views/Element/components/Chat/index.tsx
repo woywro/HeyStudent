@@ -50,9 +50,7 @@ export const Chat = ({ element }: Props) => {
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="napisz wiadomość"
         />
-        <Button type="submit" disabled={!formValue}>
-          wyślij
-        </Button>
+        <Button type="submit">wyślij</Button>
       </SendMessage>
     </Container>
   ) : (

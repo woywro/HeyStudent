@@ -1,15 +1,19 @@
 import { Search } from "../../views/Search";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
-import { useSearchContext } from "../../context/searchContext";
+import { ItemType } from "../../types";
 
-const SearchView = ({ data, find }) => {
-  return <Search data={data} find={find} />;
+interface Props {
+  data: ItemType[];
+}
+
+const SearchView = ({ data }: Props) => {
+  return <Search data={data} />;
 };
 export default SearchView;
 
 export async function getServerSideProps(context) {
-  const array = [];
+  const data: ItemType[] = [];
   const colRef = collection(db, "Courses");
   const q = query(
     colRef,
@@ -19,11 +23,8 @@ export async function getServerSideProps(context) {
   );
   const docSnap = await getDocs(q);
   docSnap.forEach((doc) => {
-    array.push(doc.data());
+    data.push(doc.data());
   });
-  const data = array;
-  const find = context.params.search.toString().replace("-", " ");
-
   if (!data) {
     return {
       notFound: true,

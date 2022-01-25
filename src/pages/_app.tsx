@@ -1,9 +1,7 @@
 import { GlobalStyle } from "../theme/globalStyles";
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { UserContextProvider } from "../context/userContext";
 import { Nav } from "../components/Nav";
-import { createContext } from "react";
 import { FieldsOfStudyContextProvider } from "../context/fieldsOfStudyContext";
 import { LoadingContextProvider } from "../context/loadingContext";
 import { UserDataContextProvider } from "../context/userDataContext";
@@ -11,7 +9,6 @@ import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
 import styled from "styled-components";
 import { theme } from "../theme/theme";
-export const dataContext = createContext();
 
 const StyledApp = styled.div`
   display: flex;
@@ -32,20 +29,18 @@ function Application({ Component, pageProps }) {
         <UserContextProvider>
           <UserDataContextProvider>
             <FieldsOfStudyContextProvider>
-              <div className="App">
-                <StyledApp>
-                  <ThemeProvider theme={theme}>
-                    <GlobalStyle />
-                    <NextNProgress
-                      height={2}
-                      color="#ffc400"
-                      options={{ showSpinner: false }}
-                    />
-                    <Nav />
-                    <Component {...pageProps} />
-                  </ThemeProvider>
-                </StyledApp>
-              </div>
+              <StyledApp>
+                <ThemeProvider theme={theme}>
+                  <GlobalStyle />
+                  <NextNProgress
+                    height={2}
+                    color="#ffc400"
+                    options={{ showSpinner: false }}
+                  />
+                  <Nav />
+                  <Component {...pageProps} />
+                </ThemeProvider>
+              </StyledApp>
             </FieldsOfStudyContextProvider>
           </UserDataContextProvider>
         </UserContextProvider>
