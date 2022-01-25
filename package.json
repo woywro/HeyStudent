@@ -3,29 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/core": "^11.0.0",
-    "@emotion/react": "^11.7.0",
-    "@emotion/styled": "^11.6.0",
-    "@hookform/error-message": "^2.0.0",
-    "@material-ui/icons": "^4.11.2",
-    "@mui/icons-material": "^5.1.0",
-    "@mui/material": "^5.1.1",
-    "@types/jest": "^27.0.3",
     "@types/node": "^17.0.1",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "cra-template": "1.1.2",
     "firebase": "^9.5.0",
     "formik": "^2.2.9",
-    "material-ui-icons": "^1.0.0-beta.36",
     "next": "^12.0.7",
     "nextjs-progressbar": "0.0.13",
     "postcss": "^8.4.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-firebase-hooks": "^4.0.1",
-    "react-hook-form": "^7.20.2",
-    "react-router": "^6.0.2",
     "typescript": "^4.5.4",
     "yup": "^0.32.11"
   },
@@ -57,8 +45,6 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.20",
     "babel-plugin-styled-components": "^2.0.2",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^8.7.0",
     "styled-components": "^5.3.3"
   }

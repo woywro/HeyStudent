@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Typography } from "@mui/material";
 import { ObservedItem } from "../ObservedItem";
-import { Box } from "@mui/system";
-import { CircularProgress } from "@mui/material";
 import { useLoadingContext } from "../../../../context/loadingContext";
 import { useUserContext } from "../../../../context/userContext";
 import { useUserDataContext } from "../../../../context/userDataContext";
@@ -12,6 +9,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { Container } from "./style";
 import { LockedFunction } from "../../../../components/LockedFunction";
 import { Loading } from "../../../../components/Loading";
+import { Text } from "../../../../components/Text";
 
 export const ObservedList = () => {
   const { user } = useUserContext();
@@ -44,9 +42,7 @@ export const ObservedList = () => {
       ) : !user ? (
         <LockedFunction />
       ) : likedArray.length == 0 ? (
-        <Typography variant="subtitle1">
-          Nie obserwujesz żadnych kierunków
-        </Typography>
+        <Text>Nie obserwujesz żadnych kierunków</Text>
       ) : (
         likedArray.map((element) => {
           return (

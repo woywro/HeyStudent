@@ -1,13 +1,11 @@
 import { ListItem } from "../../../../components/ListItem";
-import CircularProgress from "@mui/material/CircularProgress";
-import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
 import { defineSuffix } from "../../../../utils/defineSuffix";
 import { useLoadingContext } from "../../../../context/loadingContext";
 import { useSearchContext } from "../../../../context/searchContext";
 import styled from "styled-components";
 import { Text } from "../../../../components/Text";
 import { Container } from "./style";
+import { Loading } from "../../../../components/Loading";
 
 export const List = ({ elements }) => {
   const { isLoading } = useLoadingContext();
@@ -34,11 +32,7 @@ export const List = ({ elements }) => {
           })}
         </>
       )}
-      {isLoading && (
-        <Box sx={{ width: "100%", height: "100%" }}>
-          <CircularProgress />
-        </Box>
-      )}
+      {isLoading && <Loading />}
     </Container>
   );
 };

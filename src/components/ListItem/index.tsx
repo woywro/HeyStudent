@@ -1,6 +1,3 @@
-import IconButton from "@mui/material/IconButton";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
 import { db } from "../../firebase/firebase";
 import { useUserContext } from "../../context/userContext";
 import { useUserDataContext } from "../../context/userDataContext";
@@ -14,6 +11,7 @@ import {
   CourseCity,
   CourseMatch,
 } from "./style";
+import { Text } from "../Text";
 
 interface Props {
   item: ItemType;
@@ -58,21 +56,11 @@ export const ListItem = ({ item, key }: Props) => {
         <CourseTitle>{item.name.join(" ")}</CourseTitle>
         <CourseUniversity>{item.university}</CourseUniversity>
         <CourseCity>{item.city}</CourseCity>
-        {user &&
+        {!user &&
           (userData.likedItems.includes(item.id) ? (
-            <IconButton color="primary">
-              <StarIcon
-                sx={{ color: "secondary.main" }}
-                onClick={handleStopObserve}
-              />
-            </IconButton>
+            <Text onClick={handleStopObserve}>stop</Text>
           ) : (
-            <IconButton color="primary">
-              <StarBorderIcon
-                sx={{ color: "secondary.main" }}
-                onClick={handleObserve}
-              />
-            </IconButton>
+            <Text onClick={handleObserve}>start</Text>
           ))}
       </StyledListItem>
     </Link>

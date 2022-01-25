@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import React from "react";
 import { createContext } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { doc } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { db } from "../firebase/firebase";
 import { getDoc } from "firebase/firestore";
 
@@ -39,19 +38,17 @@ export const UserDataContextProvider = ({ children }: Props) => {
   const [userData, setUserData] = useState<userData>("");
   const auth = getAuth();
 
-  const [user] = useAuthState(auth);
-
   useEffect(() => {
-    if (user) {
+    if (auth !== undefined) {
       async function getData() {
-        const docRef = doc(db, "Users", user.uid);
+        const docRef = doc(db, "Users", auth.uid);
         const docSnap = await getDoc(docRef);
         const dat = docSnap.data();
         setUserData(dat);
       }
       getData();
     }
-  }, [user]);
+  }, [auth]);
 
   return (
     <userDataContext.Provider value={{ userData, setUserData }}>

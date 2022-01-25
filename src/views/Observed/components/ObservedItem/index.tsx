@@ -1,8 +1,6 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import { useState } from "react";
-import { IconButton } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 import { useCallback } from "react";
 import { useUserContext } from "../../../../context/userContext";
 import { useUserDataContext } from "../../../../context/userDataContext";
@@ -15,6 +13,7 @@ import {
   StyledCourseUniversity,
   StyledCourseCity,
 } from "./style";
+import { Text } from "../../../../components/Text";
 
 interface Props {
   element: ItemType;
@@ -67,12 +66,6 @@ export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
         <StyledCourseTitle>{element.name.join(" ")}</StyledCourseTitle>
         <StyledCourseUniversity>{element.university}</StyledCourseUniversity>
         <StyledCourseCity>{element.city}</StyledCourseCity>
-        <IconButton color="primary">
-          <StarIcon
-            sx={{ color: "secondary.main" }}
-            onClick={handleStopObserve}
-          />
-        </IconButton>
       </StyledObservedItem>
     </Link>
   );

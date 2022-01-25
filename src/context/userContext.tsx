@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { doc } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext } from "react";
@@ -25,7 +24,7 @@ export const UserContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<any>(false);
   const auth = getAuth();
 
-  const [userInfo] = useAuthState(auth);
+  const userInfo = auth;
 
   useEffect(() => {
     setUser(userInfo);
