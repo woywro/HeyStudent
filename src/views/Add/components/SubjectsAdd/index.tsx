@@ -1,7 +1,3 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import { Stack } from "@mui/material";
 import { useFormik } from "formik";
 import styled from "styled-components";
 import { shadow } from "../../../../mixnins/shadow";
@@ -80,7 +76,7 @@ export const SubjectsAdd = ({
   });
   return (
     <Container>
-      <Typography variant="h6">Dodaj przedmioty</Typography>
+      <Text variant="h6">Dodaj przedmioty</Text>
       <StyledForm onSubmit={formik.handleSubmit}>
         {inputs.map((e) => {
           return (

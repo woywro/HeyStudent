@@ -1,14 +1,30 @@
 import { useState, useEffect, useContext } from "react";
 import React from "react";
-import { doc } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext } from "react";
+import { doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { db } from "../firebase/firebase";
+import { getDoc } from "firebase/firestore";
+import { auth } from "../firebase/firebase";
+
+interface userInterface {
+  uid: string;
+  likedItems: string[];
+  name: string;
+  observedSearches: string[];
+  theme: string;
+}
+
+interface userType {
+  user: userInterface;
+  setUser: (arg: any) => void;
+}
 
 interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export const userContext = createContext<any>({});
+export const userContext = createContext<userType>("");
 
 export const useUserContext = () => {
   const context = useContext(userContext);
@@ -21,17 +37,28 @@ export const useUserContext = () => {
 };
 
 export const UserContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<any>(false);
-  const auth = getAuth();
-
-  const userInfo = auth;
+  const [user, setUser] = useState<any>("");
 
   useEffect(() => {
-    setUser(userInfo);
-    console.log(userInfo);
-  }, [userInfo]);
+    async function getData() {
+      const docRef = doc(db, "Users", auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      const dat = docSnap.data();
+      setUser(dat);
+      console.log(auth.currentUser.uid);
+    }
+    auth.onAuthStateChanged(() => {
+      if (auth.currentUser !== null) {
+        getData();
+      } else {
+        setUser("");
+      }
+    });
+  }, [auth]);
 
-  const value = { user, setUser };
-
-  return <userContext.Provider value={value}>{children}</userContext.Provider>;
+  return (
+    <userContext.Provider value={{ user, setUser }}>
+      {children}
+    </userContext.Provider>
+  );
 };

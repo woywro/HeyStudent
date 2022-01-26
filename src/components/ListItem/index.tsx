@@ -1,9 +1,10 @@
 import { db } from "../../firebase/firebase";
 import { useUserContext } from "../../context/userContext";
-import { useUserDataContext } from "../../context/userDataContext";
 import Link from "next/link";
 import { updateDoc, doc } from "firebase/firestore";
 import { ItemType } from "../../types";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase/firebase";
 import {
   StyledListItem,
   CourseTitle,
@@ -19,23 +20,22 @@ interface Props {
 }
 
 export const ListItem = ({ item, key }: Props) => {
-  const ROUTE_POST_ID = "/element/[id]";
-  const { user } = useUserContext();
-  const { setUserData, userData } = useUserDataContext();
+  const ROUTE_POST_ID = "/course/[id]";
+  const { user, setUser } = useUserContext();
 
   async function handleObserve() {
-    let a = userData.likedItems;
+    let a = user.likedItems;
     a.push(item.id);
-    setUserData({ likedItems: a });
+    setUser({ likedItems: a });
     await updateDoc(doc(db, "Users", user.uid), {
       likedItems: a,
     });
   }
   async function handleStopObserve() {
-    const newArray: string[] = userData.likedItems.filter(
+    const newArray: string[] = user.likedItems.filter(
       (e: string) => e !== item.id
     );
-    setUserData({ likedItems: newArray });
+    setUser({ likedItems: newArray });
     await updateDoc(doc(db, "Users", user.uid), {
       likedItems: newArray,
     });
@@ -56,8 +56,8 @@ export const ListItem = ({ item, key }: Props) => {
         <CourseTitle>{item.name.join(" ")}</CourseTitle>
         <CourseUniversity>{item.university}</CourseUniversity>
         <CourseCity>{item.city}</CourseCity>
-        {!user &&
-          (userData.likedItems.includes(item.id) ? (
+        {user &&
+          (user.likedItems.includes(item.id) ? (
             <Text onClick={handleStopObserve}>stop</Text>
           ) : (
             <Text onClick={handleObserve}>start</Text>

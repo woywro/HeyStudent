@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { ObservedItem } from "../ObservedItem";
 import { useLoadingContext } from "../../../../context/loadingContext";
 import { useUserContext } from "../../../../context/userContext";
-import { useUserDataContext } from "../../../../context/userDataContext";
 import { db } from "../../../../firebase/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Container } from "./style";
@@ -13,17 +12,16 @@ import { Text } from "../../../../components/Text";
 
 export const ObservedList = () => {
   const { user } = useUserContext();
-  const { userData } = useUserDataContext();
   const [likedArray, setLikedArray] = useState([]);
   const { isLoading, setLoading } = useLoadingContext();
 
   useEffect(() => {
-    if (user && userData.likedItems.length !== 0) {
+    if (user && user.likedItems.length !== 0) {
       const getData = async () => {
         setLoading(true);
         const array: any[] = [];
         const ref = collection(db, "Courses");
-        const q = query(ref, where("id", "in", userData.likedItems));
+        const q = query(ref, where("id", "in", user.likedItems));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           array.push(doc.data());
@@ -33,7 +31,7 @@ export const ObservedList = () => {
       };
       getData();
     }
-  }, [userData]);
+  }, [user]);
 
   return (
     <Container>

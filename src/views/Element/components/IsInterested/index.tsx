@@ -2,7 +2,6 @@ import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import { defineSuffix } from "../../../../utils/defineSuffix";
-import { useUserDataContext } from "../../../../context/userDataContext";
 import { useUserContext } from "../../../../context/userContext";
 import { ItemType } from "../../../../types";
 import { Button } from "../../../../components/Button";
@@ -14,16 +13,15 @@ interface Props {
 }
 
 export const IsInterested = ({ data }: Props) => {
-  const { user } = useUserContext();
-  const { userData, setUserData } = useUserDataContext([]);
+  const { user, setUser } = useUserContext();
   const [interested, setInterested] = useState(data.willStudy.length);
 
   const [array, setArray] = useState(data.willStudy);
 
   const handleObserveCourse = async () => {
-    let a = userData.likedItems;
+    let a = user.likedItems;
     a.push(data.id);
-    setUserData({ likedItems: a });
+    setUser({ likedItems: a });
     await updateDoc(doc(db, "Users", user.uid), {
       likedItems: a,
     });

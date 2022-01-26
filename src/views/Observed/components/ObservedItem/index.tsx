@@ -3,7 +3,6 @@ import { db } from "../../../../firebase/firebase";
 import { useState } from "react";
 import { useCallback } from "react";
 import { useUserContext } from "../../../../context/userContext";
-import { useUserDataContext } from "../../../../context/userDataContext";
 import Link from "next/link";
 import { ItemType } from "../../../../types";
 import { ChangeEvent } from "react";
@@ -14,6 +13,7 @@ import {
   StyledCourseCity,
 } from "./style";
 import { Text } from "../../../../components/Text";
+import { Button } from "../../../../components/Button";
 
 interface Props {
   element: ItemType;
@@ -22,9 +22,8 @@ interface Props {
 }
 
 export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
-  const ROUTE_POST_ID = "element/[id]";
-  const { userData, setUserData } = useUserDataContext();
-  const { user } = useUserContext();
+  const ROUTE_POST_ID = "course/[id]";
+  const { user, setUser } = useUserContext();
   const [array, setArray] = useState(element.willStudy);
 
   const handleDislikeCourse = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +38,8 @@ export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
 
   const handleStopObserve = useCallback((e) => {
     e.stopPropagation();
-    const newArray = userData.likedItems.filter((x) => x !== element.id);
-    setUserData({ likedItems: newArray });
+    const newArray = user.likedItems.filter((x) => x !== element.id);
+    setUser({ likedItems: newArray });
     setLikedArray(likedArray.filter((z) => z.id !== element.id));
     updateDoc(doc(db, "Users", user.uid), {
       likedItems: newArray,
@@ -66,6 +65,7 @@ export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
         <StyledCourseTitle>{element.name.join(" ")}</StyledCourseTitle>
         <StyledCourseUniversity>{element.university}</StyledCourseUniversity>
         <StyledCourseCity>{element.city}</StyledCourseCity>
+        <Button onClick={handleStopObserve}>x</Button>
       </StyledObservedItem>
     </Link>
   );

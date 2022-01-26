@@ -1,10 +1,9 @@
 import { GlobalStyle } from "../theme/globalStyles";
 import { ThemeProvider } from "styled-components";
-import { UserContextProvider } from "../context/userContext";
 import { Nav } from "../components/Nav";
 import { FieldsOfStudyContextProvider } from "../context/fieldsOfStudyContext";
 import { LoadingContextProvider } from "../context/loadingContext";
-import { UserDataContextProvider } from "../context/userDataContext";
+import { UserContextProvider } from "../context/userContext";
 import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
 import styled from "styled-components";
@@ -27,22 +26,20 @@ function Application({ Component, pageProps }) {
     <LoadingContextProvider>
       <SearchContextProvider>
         <UserContextProvider>
-          <UserDataContextProvider>
-            <FieldsOfStudyContextProvider>
-              <StyledApp>
-                <ThemeProvider theme={theme}>
-                  <GlobalStyle />
-                  <NextNProgress
-                    height={2}
-                    color="#ffc400"
-                    options={{ showSpinner: false }}
-                  />
-                  <Nav />
-                  <Component {...pageProps} />
-                </ThemeProvider>
-              </StyledApp>
-            </FieldsOfStudyContextProvider>
-          </UserDataContextProvider>
+          <FieldsOfStudyContextProvider>
+            <StyledApp>
+              <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <NextNProgress
+                  height={2}
+                  color="#ffc400"
+                  options={{ showSpinner: false }}
+                />
+                <Nav />
+                <Component {...pageProps} />
+              </ThemeProvider>
+            </StyledApp>
+          </FieldsOfStudyContextProvider>
         </UserContextProvider>
       </SearchContextProvider>
     </LoadingContextProvider>
