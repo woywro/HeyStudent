@@ -3,8 +3,6 @@ import { useUserContext } from "../../context/userContext";
 import Link from "next/link";
 import { updateDoc, doc } from "firebase/firestore";
 import { ItemType } from "../../types";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase/firebase";
 import {
   StyledListItem,
   CourseTitle,
@@ -45,7 +43,7 @@ export const ListItem = ({ item, key }: Props) => {
     <Link
       href={{
         pathname: ROUTE_POST_ID,
-        query: { id: item.id },
+        query: { id: item.id.toString() },
       }}
       passHref
     >

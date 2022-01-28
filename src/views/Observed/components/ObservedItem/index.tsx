@@ -57,7 +57,7 @@ export const ObservedItem = ({ element, likedArray, setLikedArray }: Props) => {
     <Link
       href={{
         pathname: ROUTE_POST_ID,
-        query: { id: element.id },
+        query: { id: element.id.toString() },
       }}
       passHref
     >
