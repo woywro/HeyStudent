@@ -33,6 +33,12 @@ export const Nav = ({ children }: Props) => {
           Strona główna
         </NavItem>
         <NavItem
+          onClick={() => router.push("/posts")}
+          isActive={router.pathname == "/posts" ? true : false}
+        >
+          blog
+        </NavItem>
+        <NavItem
           onClick={() => router.push("/observed")}
           isActive={router.pathname == "/observed" ? true : false}
         >

@@ -16,8 +16,8 @@ export const StyledTopBar = styled.nav`
     background: #039be5;
   }
   @media only screen and ${breakpoints.device.lg} {
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
     justify-content: space-around;
     background: white;
   }

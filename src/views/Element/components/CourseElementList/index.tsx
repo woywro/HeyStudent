@@ -3,7 +3,7 @@ import { ShowSimilar } from "../ShowSimilar";
 // import { Chat } from "../Chat";
 import { ReportError } from "../ReportError";
 import { ItemType } from "../../../../types";
-// import { IsInterested } from "../IsInterested";
+import { IsInterested } from "../IsInterested";
 import { Accordion } from "../../../../components/Accordion";
 import { Text } from "../../../../components/Text";
 import {
@@ -28,7 +28,7 @@ export const CourseElementList = ({ element }: Props) => {
     <StyledCourseElementList>
       <StyledCourseElement>
         <StyledCourseElementTitle>Zainteresowanie</StyledCourseElementTitle>
-        {/* <IsInterested data={element} /> */}
+        <IsInterested data={element} />
       </StyledCourseElement>
       <StyledCourseElement>
         <StyledCourseElementTitle>
