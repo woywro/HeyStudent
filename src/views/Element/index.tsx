@@ -1,7 +1,7 @@
 import { CourseElementList } from "./components/CourseElementList";
 import { PageTopBar } from "../../components/PageTopBar";
 import { ItemType } from "../../types";
-import { CourseText, Container } from "./style";
+import { CourseText, Container } from "../Blog/style";
 
 interface Props {
   data: ItemType;

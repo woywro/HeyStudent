@@ -10,7 +10,7 @@ export const StyledListItem = styled.li`
   justify-items: center;
   align-items: center;
   position: relative;
-  margin: 15px;
+  margin: 10px;
   padding: 10px;
   cursor: pointer;
   @media only screen and ${breakpoints.device.xs} {

@@ -36,7 +36,7 @@ export const Nav = ({ children }: Props) => {
           onClick={() => router.push("/posts")}
           isActive={router.pathname == "/posts" ? true : false}
         >
-          blog
+          Blog
         </NavItem>
         <NavItem
           onClick={() => router.push("/observed")}

@@ -1,10 +1,5 @@
 import styled from "styled-components";
 import breakpoints from "../../theme/breakpoints";
-export const CourseText = styled.p`
-  color: white;
-  font-size: 20px;
-  margin: 5px;
-`;
 
 export const Container = styled.div`
   display: flex;
