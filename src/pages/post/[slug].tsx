@@ -62,10 +62,6 @@ const Title = styled.h1`
 `;
 
 const PostContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-flow: column;
   font-size: 16px;
   padding: 20px;
   @media only screen and ${breakpoints.device.xs} {
