@@ -13,7 +13,7 @@ export const StyledTopBar = styled.nav`
   z-index: 10;
   @media only screen and ${breakpoints.device.xs} {
     justify-content: space-between;
-    background: #039be5;
+    background: ${({ theme }) => theme.colors.primary};
   }
   @media only screen and ${breakpoints.device.lg} {
     padding-left: 10%;

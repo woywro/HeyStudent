@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import breakpoint from "../../theme/breakpoints";
 import { useRouter } from "next/router";
 import { useUserContext } from "../../context/userContext";
 import { Button } from "../Button";
@@ -34,6 +32,7 @@ export const MobileNav = ({ open, setOpen }: Props) => {
     <Container open={open}>
       <NavItems>
         <NavItem onClick={() => router.push("/")}>Strona główna</NavItem>
+        <NavItem onClick={() => router.push("/posts")}>Blog</NavItem>
         <NavItem onClick={() => router.push("/observed")}>
           Obserwowane kierunki
         </NavItem>

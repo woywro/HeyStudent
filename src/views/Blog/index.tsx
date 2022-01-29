@@ -6,7 +6,7 @@ import { PostList } from "./style";
 export const Blog = ({ posts }) => {
   return (
     <Container>
-      <PageTopBar title="blog" />
+      <PageTopBar title="Blog" />
       <PostList>
         {posts.map((post) => (
           <PostItem post={post} />

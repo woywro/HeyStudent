@@ -4,21 +4,22 @@ import { shadow } from "../../mixnins/shadow";
 
 export const StyledListItem = styled.li`
   border-radius: 10px;
-  width: 100%;
   ${shadow}
   display: inline-grid;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
   position: relative;
   margin: 10px;
   padding: 10px;
   cursor: pointer;
   @media only screen and ${breakpoints.device.xs} {
-    grid-template-columns: 1fr 2fr 1fr 1fr;
+    grid-template-columns: 3fr 2fr 1fr;
+    width: 100%;
   }
   @media only screen and ${breakpoints.device.lg} {
-    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+    grid-template-columns: 3fr 3fr 3fr 1fr;
     grid-template-rows: 1fr;
+    width: 80%;
   }
 `;
 export const CourseTitle = styled.h1`

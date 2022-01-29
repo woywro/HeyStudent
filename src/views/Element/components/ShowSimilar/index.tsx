@@ -45,20 +45,29 @@ export const ShowSimilar = ({ element }: Props) => {
       });
       const arrayFiltered: any[] = array.filter((e) => e.id !== element.id);
       setSimilar(arrayFiltered);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     },
     [element]
   );
 
   return (
     <Container>
-      <Button
-        onClick={() =>
-          search("Courses", "category", "array-contains-any", element.category)
-        }
-      >
-        pokaż podobne kierunki
-      </Button>
+      {!isLoading && (
+        <Button
+          onClick={() =>
+            search(
+              "Courses",
+              "category",
+              "array-contains-any",
+              element.category
+            )
+          }
+        >
+          pokaż podobne kierunki
+        </Button>
+      )}
       {isLoading ? (
         <Loading />
       ) : (

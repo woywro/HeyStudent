@@ -45,7 +45,7 @@ export const UserContextProvider = ({ children }: Props) => {
       const docSnap = await getDoc(docRef);
       const dat = docSnap.data();
       setUser(dat);
-      console.log(auth.currentUser.uid);
+      console.log(dat);
     }
     auth.onAuthStateChanged(() => {
       if (auth.currentUser !== null) {

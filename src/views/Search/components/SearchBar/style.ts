@@ -35,8 +35,9 @@ export const ClearButton = styled.button`
   background: none;
   border: none;
   margin: 10px;
-  cursor: pointer;
+  opacity: 0.3;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export const Row = styled.div`
