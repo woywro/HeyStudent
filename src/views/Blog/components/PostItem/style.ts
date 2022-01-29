@@ -1,23 +1,33 @@
 import styled from "styled-components";
 import breakpoints from "../../../../theme/breakpoints";
 import { shadow } from "../../../../mixnins/shadow";
+import { Text } from "../../../../components/Text";
 
 export const StyledPostItem = styled.li`
   border-radius: 10px;
   width: 100%;
   ${shadow}
-  display: inline-grid;
-  justify-items: center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  margin: 15px;
-  padding: 10px;
+  flex-flow: column;
+  margin: 10px;
   cursor: pointer;
+  padding: 15px;
+`;
+
+export const Title = styled(Text)`
+  margin: 5px;
   @media only screen and ${breakpoints.device.xs} {
-    grid-template-columns: 1fr 2fr 1fr 1fr;
+    font-size: 22px;
   }
   @media only screen and ${breakpoints.device.lg} {
-    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
-    grid-template-rows: 1fr;
+    font-size: 28px;
   }
+`;
+
+export const ImageWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  height: 120px;
 `;

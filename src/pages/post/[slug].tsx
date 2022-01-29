@@ -1,5 +1,6 @@
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
+import Head from "next/head";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -7,19 +8,44 @@ import Image from "next/image";
 import imageSize from "rehype-img-size";
 import styled from "styled-components";
 
+const ImageWrapper = styled.div`
+  margin: 10px;
+`;
+
+const StyledPost = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const components = {
   img: (props) => (
-    // height and width are part of the props, so they get automatically passed here with {...props}
-    <Image {...props} layout="responsive" loading="lazy" />
+    <ImageWrapper>
+      <Image {...props} layout="responsive" loading="lazy" />
+    </ImageWrapper>
   ),
 };
 
-const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
+const PostPage = ({
+  frontMatter: { title, date, description, thumbnail },
+  mdxSource,
+}) => {
   return (
-    <div>
-      <h1>{title}</h1>
+    <StyledPost>
+      <Head>
+        <meta name="description" content={description} key="description" />
+        <meta
+          property="og:description"
+          content={description}
+          key="ogDescription"
+        />
+      </Head>
+      <Image src={thumbnail} width="600px" height="200px" objectFit="cover" />
       <MDXRemote {...mdxSource} components={components} />
-    </div>
+    </StyledPost>
   );
 };
 
@@ -47,8 +73,6 @@ const getStaticProps = async ({ params: { slug } }) => {
   const { data: frontMatter, content } = matter(markdownWithMeta);
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      // use the image size plugin, you can also specify which folder to load images from
-      // in my case images are in /public/images/, so I just prepend 'public'
       rehypePlugins: [[imageSize, { dir: "public" }]],
     },
   });

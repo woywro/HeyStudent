@@ -13,3 +13,16 @@ export const Container = styled.div`
     width: 70%;
   }
 `;
+
+export const PostList = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+  align-items: center;
+  @media only screen and ${breakpoints.device.xs} {
+    width: 100%;
+  }
+  @media only screen and ${breakpoints.device.lg} {
+    width: 70%;
+  }
+`;
