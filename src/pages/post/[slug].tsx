@@ -3,12 +3,22 @@ import { MDXRemote } from "next-mdx-remote";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Image from "next/image";
+import imageSize from "rehype-img-size";
+import styled from "styled-components";
+
+const components = {
+  img: (props) => (
+    // height and width are part of the props, so they get automatically passed here with {...props}
+    <Image {...props} layout="responsive" loading="lazy" />
+  ),
+};
 
 const PostPage = ({ frontMatter: { title, date }, mdxSource }) => {
   return (
     <div>
       <h1>{title}</h1>
-      <MDXRemote {...mdxSource} />
+      <MDXRemote {...mdxSource} components={components} />
     </div>
   );
 };
@@ -35,7 +45,13 @@ const getStaticProps = async ({ params: { slug } }) => {
   );
 
   const { data: frontMatter, content } = matter(markdownWithMeta);
-  const mdxSource = await serialize(content);
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      // use the image size plugin, you can also specify which folder to load images from
+      // in my case images are in /public/images/, so I just prepend 'public'
+      rehypePlugins: [[imageSize, { dir: "public" }]],
+    },
+  });
 
   return {
     props: {

@@ -13,12 +13,12 @@ import { useLoadingContext } from "../../../../context/loadingContext";
 import { ItemType } from "../../../../types";
 import breakpoint from "../../../../theme/breakpoints";
 import styled from "styled-components";
-import computer from "../../../../../public/static/1.png";
-import tech from "../../../../../public/static/2.png";
-import medical from "../../../../../public/static/3.png";
-import gdansk from "../../../../../public/static/4.png";
-import poznan from "../../../../../public/static/5.png";
-import krakow from "../../../../../public/static/6.png";
+import computer from "../../../../../public/images/1.png";
+import tech from "../../../../../public/images/2.png";
+import medical from "../../../../../public/images/3.png";
+import gdansk from "../../../../../public/images/4.png";
+import poznan from "../../../../../public/images/5.png";
+import krakow from "../../../../../public/images/6.png";
 import { CardLink } from "../CardLink";
 import { StyledHomeList, Category, Title } from "./style";
 
