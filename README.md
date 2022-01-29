@@ -1,3 +1,5 @@
+![alt text](https://github.com/woywro/HeyStudent.REACT/blob/master/screenshots/banner.png)
+
 # HeyStudent - find your learning path
 
 This project is made to simplify finding your dream field of study. You can find courses by tags, cities and categories 
