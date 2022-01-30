@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ShowSimilar } from "../ShowSimilar";
-// import { Chat } from "../Chat";
+import { Chat } from "../Chat";
 import { ReportError } from "../ReportError";
 import { ItemType } from "../../../../types";
 import { IsInterested } from "../IsInterested";

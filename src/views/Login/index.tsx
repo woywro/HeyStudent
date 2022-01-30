@@ -11,11 +11,9 @@ import { LoginForm, Container } from "./style";
 import { auth } from "../../firebase/firebase";
 
 export const Login = () => {
-  // const auth = getAuth();
   const router = useRouter();
   const [error, setError] = useState();
   const { setLoading } = useLoadingContext();
-  // const [user] = useAuthState(auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,26 +23,16 @@ export const Login = () => {
       const errorMessage = error.message;
       setError(errorMessage);
     });
-    router.push("/");
-    setLoading(false);
+    if (auth.currentUser !== null) {
+      router.push("/");
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(email, password);
   };
-
-  // useEffect(() => {
-  //   if (auth.currentUser !== null) {
-  //     router.push("/");
-  //     setLoading(false);
-  //   }
-  // }, [auth]);
-
-  // auth.onAuthStateChanged(() => {
-  //   router.push("/");
-  //   setLoading(false);
-  // });
 
   return (
     <Container>

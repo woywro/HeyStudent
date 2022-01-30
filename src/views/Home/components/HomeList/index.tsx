@@ -74,7 +74,7 @@ export const HomeList = () => {
           title="Informatyka Gdańsk"
           toSearch={"informatyka gdańsk"}
           text={"Najciekawsze kierunki informatyczne w Gdańsku"}
-          bg={2}
+          bg={0}
           grStart={4}
           grEnd={5}
         />
@@ -98,7 +98,7 @@ export const HomeList = () => {
           title="Informatyczne"
           toSearch={"informatyczne"}
           text={"Najciekawsze kierunki informatyczne"}
-          bg={4}
+          bg={0}
           grStart={1}
           grEnd={2}
         />

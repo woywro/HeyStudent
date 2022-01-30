@@ -30,7 +30,7 @@ export const Card = styled.div`
 
 export const CardTitle = styled.h1`
   padding: 10px;
-  font-size: 35px;
+  font-size: 28px;
 `;
 export const CardText = styled.h1`
   padding: 10px;

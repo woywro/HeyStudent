@@ -3,7 +3,7 @@ import { shadow } from "../../../../mixnins/shadow";
 import breakpoints from "../../../../theme/breakpoints";
 
 export const Title = styled.h1`
-  font-size: 45px;
+  font-size: 35px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #696969;
