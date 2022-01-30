@@ -41,3 +41,16 @@ interface subjects {
   name: string;
   year: string;
 }
+
+interface frontMatter {
+  date: string;
+  description: string;
+  tags: string[];
+  thumbnail: string;
+  title: string;
+}
+
+export interface blogPost {
+  frontMatter: frontMatter;
+  slug: string;
+}
