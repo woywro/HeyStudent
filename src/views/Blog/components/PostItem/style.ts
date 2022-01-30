@@ -8,21 +8,22 @@ export const StyledPostItem = styled.li`
   width: 100%;
   ${shadow}
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-flow: column;
   margin: 10px;
   cursor: pointer;
   padding: 15px;
+  height: 100%;
 `;
 
 export const Title = styled(Text)`
   margin: 5px;
   @media only screen and ${breakpoints.device.xs} {
-    font-size: 22px;
+    font-size: 18px;
   }
   @media only screen and ${breakpoints.device.lg} {
-    font-size: 28px;
+    font-size: 20px;
   }
 `;
 

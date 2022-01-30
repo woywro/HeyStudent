@@ -2,6 +2,7 @@ import { StyledPostItem, Title, ImageWrapper } from "./style";
 import Link from "next/link";
 import Image from "next/image";
 import { blogPost } from "../../../../types";
+import { Text } from "../../../../components/Text";
 
 interface Props {
   post: blogPost;
@@ -20,8 +21,8 @@ export const PostItem = ({ post }: Props) => {
             loading="lazy"
           />
         </ImageWrapper>
-        <Title>{post.frontMatter.title}</Title>
-        <p>{post.frontMatter.date}</p>
+        <Text>{post.frontMatter.title}</Text>
+        <Text size="small">{post.frontMatter.date}</Text>
       </StyledPostItem>
     </Link>
   );

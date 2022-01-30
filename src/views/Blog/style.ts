@@ -15,14 +15,16 @@ export const Container = styled.div`
 `;
 
 export const PostList = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-flow: column;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
   align-items: center;
   @media only screen and ${breakpoints.device.xs} {
     width: 100%;
+    grid-template-columns: 1fr;
   }
   @media only screen and ${breakpoints.device.lg} {
     width: 70%;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
