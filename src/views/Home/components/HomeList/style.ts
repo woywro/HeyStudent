@@ -16,10 +16,10 @@ export const Category = styled.li`
     display: flex;
     flex-flow: column;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
+    gap: 10px;
     width: 80%;
   }
 `;

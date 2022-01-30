@@ -9,7 +9,7 @@ export const Container = styled.div`
   @media only screen and ${breakpoints.device.xs} {
     width: 100%;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     width: 70%;
   }
 `;
@@ -23,8 +23,12 @@ export const PostList = styled.div`
     width: 100%;
     grid-template-columns: 1fr;
   }
+  @media only screen and ${breakpoints.device.sm} {
+    width: 90%;
+    grid-template-columns: 1fr 1fr;
+  }
   @media only screen and ${breakpoints.device.lg} {
-    width: 70%;
+    width: 80%;
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;

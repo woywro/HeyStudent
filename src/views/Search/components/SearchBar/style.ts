@@ -13,8 +13,11 @@ export const StyledSearchBar = styled.div`
   @media only screen and ${breakpoints.device.xs} {
     width: 100%;
   }
+  @media only screen and ${breakpoints.device.sm} {
+    width: 80%;
+  }
   @media only screen and ${breakpoints.device.lg} {
-    width: 60%;
+    width: 70%;
   }
 `;
 
@@ -25,7 +28,7 @@ export const StyledNameSearch = styled.div`
   @media only screen and ${breakpoints.device.xs} {
     flex-flow: column;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     flex-flow: row;
   }
 `;

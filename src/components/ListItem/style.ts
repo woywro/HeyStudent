@@ -6,7 +6,7 @@ export const StyledListItem = styled.li`
   border-radius: 10px;
   ${shadow}
   display: inline-grid;
-  justify-items: start;
+  justify-items: center;
   align-items: center;
   position: relative;
   margin: 10px;
@@ -16,7 +16,7 @@ export const StyledListItem = styled.li`
     grid-template-columns: 3fr 2fr 1fr;
     width: 100%;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     grid-template-columns: 3fr 3fr 3fr 1fr;
     grid-template-rows: 1fr;
     width: 80%;

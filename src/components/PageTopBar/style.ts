@@ -18,7 +18,7 @@ export const StyledPageTopBar = styled.div`
     border-top-left-radius: 0;
     margin: 0;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     margin: 20px;
     border-radius: 10px;
   }

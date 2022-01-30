@@ -9,7 +9,7 @@ export const StyledSearch = styled.div`
   @media only screen and ${breakpoints.device.xs} {
     width: 100%;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     width: 70%;
   }
 `;

@@ -6,7 +6,7 @@ export const StyledObservedItem = styled.div`
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: inline-grid;
-  justify-items: start;
+  justify-items: center;
   align-items: center;
   position: relative;
   margin-bottom: 10px;
@@ -31,6 +31,9 @@ export const StyledCourseUniversity = styled.p`
 export const StyledCourseCity = styled.p`
   font-size: 15px;
   @media only screen and ${breakpoints.device.xs} {
+    display: none;
+  }
+  @media only screen and ${breakpoints.device.sm} {
     display: none;
   }
   @media only screen and ${breakpoints.device.lg} {

@@ -15,9 +15,13 @@ export const StyledTopBar = styled.nav`
     justify-content: space-between;
     background: ${({ theme }) => theme.colors.primary};
   }
+  @media only screen and ${breakpoints.device.sm} {
+    width: 100%;
+    justify-content: space-around;
+    background: white;
+  }
   @media only screen and ${breakpoints.device.lg} {
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 80%;
     justify-content: space-around;
     background: white;
   }
@@ -26,6 +30,7 @@ export const StyledTopBar = styled.nav`
 export const NavItem = styled.a<{ isActive: boolean }>`
   text-decoration: none;
   font-size: 15px;
+  text-align: center;
   color: black;
   cursor: pointer;
   ${({ isActive }) =>
@@ -42,7 +47,7 @@ export const NavItems = styled.li`
   @media only screen and ${breakpoints.device.xs} {
     display: none;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     display: flex;
   }
 `;
@@ -53,7 +58,7 @@ export const Title = styled.h1`
   @media only screen and ${breakpoints.device.xs} {
     color: white;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     color: black;
   }
 `;
@@ -62,7 +67,7 @@ export const SignButton = styled(Button)`
   @media only screen and ${breakpoints.device.xs} {
     display: none;
   }
-  @media only screen and ${breakpoints.device.lg} {
+  @media only screen and ${breakpoints.device.sm} {
     display: flex;
   }
 `;
