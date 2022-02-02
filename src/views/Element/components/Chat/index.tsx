@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../../../../firebase/firebase";
 import { ChatMessage } from "../ChatMessage";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { collection, addDoc, query, limit, orderBy } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  limit,
+  orderBy,
+} from "firebase/firestore";
 import { useUserContext } from "../../../../context/userContext";
 import { ItemType } from "../../../../types";
 import { Input } from "../../../../components/Input";
@@ -15,11 +21,22 @@ interface Props {
 }
 
 export const Chat = ({ element }: Props) => {
+  const [messages, setMessages] = useState();
   const messagesRef = collection(db, `Chats/${element.id}/messages`);
-  const q = query(messagesRef, orderBy("createdAt"), limit(6));
-  const [messages] = useCollectionData(q, {
-    idField: "id",
-  });
+
+  async function getData() {
+    const array = [];
+    const q = query(messagesRef, orderBy("createdAt"), limit(6));
+    const docSnap = await getDocs(q);
+    docSnap.forEach((doc) => {
+      array.push(doc.data());
+    });
+    setMessages(array);
+  }
+  useEffect(() => {
+    getData();
+  }, []);
+
   const { user } = useUserContext();
 
   const [formValue, setFormValue] = useState("");
@@ -35,7 +52,14 @@ export const Chat = ({ element }: Props) => {
       createdAt: time,
       course: element.id,
     });
+    const newMsg = {
+      text: formValue,
+      uid: user.uid,
+      createdAt: time,
+      course: element.id,
+    };
     setFormValue("");
+    setMessages([...messages, newMsg]);
   };
 
   return user ? (

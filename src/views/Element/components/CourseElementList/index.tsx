@@ -79,7 +79,7 @@ export const CourseElementList = ({ element }: Props) => {
       </StyledCourseElement>
       <StyledCourseElement>
         <StyledCourseElementTitle>czat</StyledCourseElementTitle>
-        {/* <Chat element={element} /> */}
+        <Chat element={element} />
       </StyledCourseElement>
     </StyledCourseElementList>
   );
