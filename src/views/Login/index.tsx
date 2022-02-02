@@ -29,11 +29,13 @@ export const Login = () => {
       const errorMessage = error.message;
       setError(errorMessage);
     });
+  };
+
+  auth.onAuthStateChanged(() => {
     if (auth.currentUser !== null) {
       router.push("/");
-      setLoading(false);
     }
-  };
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
