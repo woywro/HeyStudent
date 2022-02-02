@@ -54,3 +54,10 @@ export interface blogPost {
   frontMatter: frontMatter;
   slug: string;
 }
+
+export interface CardLinkInterface {
+  title: string;
+  toSearch: string;
+  text: string;
+  bg: number;
+}

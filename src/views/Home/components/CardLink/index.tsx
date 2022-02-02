@@ -2,16 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Card, CardTitle, CardText } from "./style";
 import { Text } from "../../../../components/Text";
-
-interface Props {
-  title: string;
-  toSearch: string;
-  text: string;
-  bg: number;
-  grStart: number;
-  grEnd: number;
-}
-
+import { CardLinkInterface } from "../../../../types";
 const backgrounds = [
   "white",
   "radial-gradient(#76b2fe, #b69efe)",
@@ -21,14 +12,7 @@ const backgrounds = [
   "radial-gradient(#60efbc, #58d5c9)",
 ];
 
-export const CardLink = ({
-  title,
-  toSearch,
-  text,
-  bg,
-  grStart,
-  grEnd,
-}: Props) => {
+export const CardLink = ({ title, toSearch, text, bg }: CardLinkInterface) => {
   const router = useRouter();
   const defineRoute = () => {
     if (router.pathname == "/") {
@@ -46,7 +30,7 @@ export const CardLink = ({
       }}
       passHref
     >
-      <Card bg={backgrounds[bg]} grStart={grStart} grEnd={grEnd}>
+      <Card bg={backgrounds[bg]}>
         <CardTitle>{title}</CardTitle>
         <CardText>{text}</CardText>
       </Card>

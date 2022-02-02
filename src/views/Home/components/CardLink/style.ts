@@ -2,13 +2,12 @@ import styled from "styled-components";
 import breakpoints from "../../../../theme/breakpoints";
 export const Card = styled.div`
   padding: 10px;
-  grid-column-start: ${(props) => props.grStart};
-  grid-column-end: ${(props) => props.grEnd};
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  flex-flow: column;
   cursor: pointer;
   color: ${(props) => (props.bg == "white" ? "#696969" : "white")};
   background: ${(props) => props.bg};
@@ -20,7 +19,6 @@ export const Card = styled.div`
     flex-flow: column;
   }
   @media only screen and ${breakpoints.device.sm} {
-    flex-flow: row;
   }
   &:hover {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);

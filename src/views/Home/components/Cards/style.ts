@@ -26,7 +26,7 @@ export const Grid = styled.div`
   }
   @media only screen and ${breakpoints.device.lg} {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 
