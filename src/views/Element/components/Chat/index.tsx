@@ -33,6 +33,7 @@ export const Chat = ({ element }: Props) => {
     });
     setMessages(array);
   }
+
   useEffect(() => {
     getData();
   }, []);
