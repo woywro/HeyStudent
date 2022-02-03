@@ -8,6 +8,8 @@ import { SearchContextProvider } from "../context/searchContext";
 import NextNProgress from "nextjs-progressbar";
 import styled from "styled-components";
 import { theme } from "../theme/theme";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const StyledApp = styled.div`
   display: flex;
@@ -22,6 +24,7 @@ const StyledApp = styled.div`
 `;
 
 function Application({ Component, pageProps }) {
+  const router = useRouter();
   return (
     <LoadingContextProvider>
       <SearchContextProvider>
@@ -36,7 +39,28 @@ function Application({ Component, pageProps }) {
                   options={{ showSpinner: false }}
                 />
                 <Nav />
-                <Component {...pageProps} />
+                <motion.div
+                  key={router.route}
+                  initial="pageInitial"
+                  animate="pageAnimate"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  variants={{
+                    pageInitial: {
+                      opacity: 0,
+                    },
+                    pageAnimate: {
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <Component {...pageProps} />
+                </motion.div>
               </ThemeProvider>
             </StyledApp>
           </FieldsOfStudyContextProvider>
