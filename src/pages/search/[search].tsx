@@ -14,23 +14,60 @@ export default SearchView;
 
 export async function getServerSideProps(context) {
   const data: ItemType[] = [];
-  const colRef = collection(db, "Courses");
-  const q = query(
-    colRef,
-    where("tags", "array-contains-any", [
-      context.params.search.toString().replace("-", " "),
-    ])
-  );
-  const docSnap = await getDocs(q);
-  docSnap.forEach((doc) => {
-    data.push(doc.data());
-  });
-  if (!data) {
+  const tagArray = context.params.search.replace("-", " ").split(" ");
+  if (tagArray.length == 1) {
+    const colRef = collection(db, "Courses");
+    const q = query(colRef, where(`tags1.${tagArray[0]}`, "==", true));
+    const docSnap = await getDocs(q);
+    docSnap.forEach((doc) => {
+      data.push(doc.data());
+    });
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    }
     return {
-      notFound: true,
+      props: { data },
+    };
+  } else if (tagArray.length == 2) {
+    const colRef = collection(db, "Courses");
+    const q = query(
+      colRef,
+      where(`tags1.${tagArray[0]}`, "==", true),
+      where(`tags1.${tagArray[1]}`, "==", true)
+    );
+    const docSnap = await getDocs(q);
+    docSnap.forEach((doc) => {
+      data.push(doc.data());
+    });
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: { data },
+    };
+  } else if (tagArray.length == 3) {
+    const colRef = collection(db, "Courses");
+    const q = query(
+      colRef,
+      where(`tags1.${tagArray[0]}`, "==", true),
+      where(`tags1.${tagArray[1]}`, "==", true),
+      where(`tags1.${tagArray[2]}`, "==", true)
+    );
+    const docSnap = await getDocs(q);
+    docSnap.forEach((doc) => {
+      data.push(doc.data());
+    });
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: { data },
     };
   }
-  return {
-    props: { data },
-  };
 }
