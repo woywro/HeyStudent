@@ -2,12 +2,11 @@ import { ListItem } from "../../../../components/ListItem";
 import { defineSuffix } from "../../../../utils/defineSuffix";
 import { useLoadingContext } from "../../../../context/loadingContext";
 import { useSearchContext } from "../../../../context/searchContext";
-import styled from "styled-components";
 import { Text } from "../../../../components/Text";
 import { Container } from "./style";
 import { Loading } from "../../../../components/Loading";
 
-export const List = ({ elements }) => {
+export const List = () => {
   const { isLoading } = useLoadingContext();
   const { searched } = useSearchContext();
   return (
@@ -18,13 +17,13 @@ export const List = ({ elements }) => {
       ) : (
         <>
           <Text size="small">
-            znaleziono {searched.length}{" "}
+            znaleziono {searched.length}
             {defineSuffix(
               searched.length,
               "kierunek spełniający",
               "kierunki spełniające",
               "kierunków spełniających"
-            )}{" "}
+            )}
             kryteria
           </Text>
           {searched.map((item) => {

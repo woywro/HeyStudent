@@ -1,6 +1,6 @@
 import { Input } from "../../../../components/Input";
 import { Button } from "../../../../components/Button";
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { Text } from "../../../../components/Text";
 import { shadow } from "../../../../mixnins/shadow";
@@ -40,14 +40,12 @@ export const AddTags = ({ tags, setTags }) => {
     (e) => {
       e.preventDefault();
       setTags([...tags, inputValue]);
-      console.log(inputValue);
     },
     [inputValue]
   );
 
   const handleDeleteTag = (e) => {
-    console.log(e);
-    const filtered = tags.filter((x) => x !== e.target.textContent);
+    const filtered = tags.filter((x: string) => x !== e.target.textContent);
     setTags(filtered);
   };
 

@@ -33,8 +33,6 @@ export async function getServerSideProps(context) {
         where(`tags1.${tagArray[1]}`, "==", true),
         where(`tags1.${tagArray[2]}`, "==", true)
       );
-    } else {
-      return;
     }
   };
 

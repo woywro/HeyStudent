@@ -5,11 +5,7 @@ import { useRouter } from "next/router";
 import { Burger } from "../Burger";
 import { StyledTopBar, Title, NavItems, NavItem, SignButton } from "./style";
 
-interface Props {
-  children: JSX.Element;
-}
-
-export const Nav = ({ children }: Props) => {
+export const Nav = () => {
   const router = useRouter();
   const { user } = useUserContext();
   const handleLogin = useCallback(() => {
@@ -22,7 +18,6 @@ export const Nav = ({ children }: Props) => {
 
   return (
     <StyledTopBar>
-      {children}
       <Title onClick={() => router.push("/")}>HeyStudent</Title>
       <Burger />
       <NavItems>

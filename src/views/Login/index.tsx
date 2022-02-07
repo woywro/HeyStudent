@@ -19,11 +19,10 @@ import { StyledInput } from "./style";
 export const Login = () => {
   const router = useRouter();
   const [error, setError] = useState();
-  const { setLoading } = useLoadingContext();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const signIn = (email, password) => {
+  const signIn = (email: string, password: string) => {
     console.log(email);
     signInWithEmailAndPassword(auth, email, password).catch((error) => {
       const errorMessage = error.message;

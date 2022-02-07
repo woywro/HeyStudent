@@ -9,7 +9,6 @@ interface Props {
 }
 
 export const Blog = ({ posts }: Props) => {
-  console.log(posts);
   return (
     <Container>
       <PageTopBar title="Blog" />
