@@ -36,7 +36,7 @@ choosen course, you can use chat to ask questions. As a logged user you can also
 
 ## Problems :confused:
 
-The biggest problem during coding this app was how to solve the problem of querying firebase. Since firebase doesn't support anything like 'array-contains-all' or multiple querying at once, there were only few options to sort it out. The option I choose was to keep all possible search combinations in tags array in each document. It's not the most elegant solution but until our app grows bigger it will be workng great.
+The biggest problem I faced with during coding this app was the problem of querying firebase. Since it doesn't support anything like array-contains-all or anything similar to sql like, there were only few options to sort it out. At first I'd choosen to keep all possible search combinations as array but it was hard to maintain. Eventually all tags are kept as objects where each tag has a boolean value set to true. This allows to use multiple where clauses which are equal to searched words count.
 
 ## Live 🧪
 
