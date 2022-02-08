@@ -12,7 +12,7 @@ interface Props {
   children?: JSX.Element | JSX.Element[];
 }
 
-export const fieldsOfStudyContext = createContext<fosType>({});
+export const fieldsOfStudyContext = createContext<fosType | {}>({});
 
 export const useFieldsOfStudyContext = () => {
   const context = useContext(fieldsOfStudyContext);

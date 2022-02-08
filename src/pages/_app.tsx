@@ -41,7 +41,6 @@ function Application({ Component, pageProps }) {
                     color="#ffc400"
                     options={{ showSpinner: false }}
                   />
-                  <NotificationBar />
                   <Nav />
                   <motion.div
                     key={router.route}

@@ -11,7 +11,7 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export const loadingContext = createContext<loadingType>({});
+export const loadingContext = createContext<loadingType | {}>({});
 
 export const useLoadingContext = () => {
   const context = useContext(loadingContext);

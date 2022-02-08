@@ -24,7 +24,7 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export const userContext = createContext<userType>("");
+export const userContext = createContext<userType | {}>("");
 
 export const useUserContext = () => {
   const context = useContext(userContext);

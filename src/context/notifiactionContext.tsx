@@ -11,7 +11,9 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export const NotificationContext = createContext<notificationInterface>([]);
+export const NotificationContext = createContext<notificationInterface | {}>(
+  []
+);
 
 export const useNotificationContext = () => {
   const context = useContext(NotificationContext);
