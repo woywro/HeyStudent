@@ -16,7 +16,7 @@ export const IsInterested = ({ data }: Props) => {
   const { user, setUser } = useUserContext();
   const [interested, setInterested] = useState(data.willStudy.length);
 
-  const [array, setArray] = useState(data.willStudy);
+  const [willStudy, setWillStudy] = useState(data.willStudy);
 
   const handleObserveCourse = async () => {
     let a = user.likedItems;
@@ -28,29 +28,22 @@ export const IsInterested = ({ data }: Props) => {
   };
 
   const handleLikeCourse = async () => {
-    if (!array.map((e) => e.uid).includes(user.uid)) {
-      let newArray = array.slice();
-      const newUser = {
-        uid: user.uid,
-      };
-      newArray.push(newUser);
-      setArray(newArray);
-      const docRef = doc(db, "Courses", data.id);
-      updateDoc(docRef, { willStudy: newArray });
-      setInterested(newArray.length);
-      handleObserveCourse();
-      const docRef1 = doc(db, "Courses", data.id);
-      updateDoc(docRef1, { willStudyCount: -newArray.length });
-    }
+    const newUser = {
+      uid: user.uid,
+    };
+    const newArray = [...willStudy, newUser];
+    const docRef = doc(db, "Courses", data.id);
+    updateDoc(docRef, { willStudy: newArray });
+    setInterested(newArray.length);
+    setWillStudy(newArray);
+    handleObserveCourse();
   };
 
   const handleDislikeCourse = () => {
-    let newArray = array.filter((e) => e.uid !== user.uid);
+    let newArray = willStudy.filter((e) => e.uid !== user.uid);
     const docRef = doc(db, "Courses", data.id);
     updateDoc(docRef, { willStudy: newArray });
-    const docRef1 = doc(db, "Courses", data.id);
-    updateDoc(docRef1, { willStudyCount: -newArray.length });
-    setArray(newArray);
+    setWillStudy(newArray);
     setInterested(newArray.length);
   };
 
@@ -67,7 +60,7 @@ export const IsInterested = ({ data }: Props) => {
       </Text>
       {user && (
         <>
-          {array.map((e) => e.uid).includes(user.uid) ? (
+          {willStudy.map((e) => e.uid).includes(user.uid) ? (
             <>
               <Text>Jesteś zainteresowany tym kierunkiem!</Text>
               <Button onClick={handleDislikeCourse}>

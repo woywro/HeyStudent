@@ -9,7 +9,6 @@ import {
   CourseTitle,
   CourseUniversity,
   CourseCity,
-  CourseMatch,
 } from "./style";
 import { Text } from "../Text";
 import { useCallback } from "react";
