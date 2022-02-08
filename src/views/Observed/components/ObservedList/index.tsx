@@ -15,20 +15,21 @@ export const ObservedList = () => {
   const [likedArray, setLikedArray] = useState([]);
   const { isLoading, setLoading } = useLoadingContext();
 
+  const getData = async () => {
+    setLoading(true);
+    const array: any[] = [];
+    const ref = collection(db, "Courses");
+    const q = query(ref, where("id", "in", user.likedItems));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      array.push(doc.data());
+    });
+    setLikedArray(array);
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (user && user.likedItems.length !== 0) {
-      const getData = async () => {
-        setLoading(true);
-        const array: any[] = [];
-        const ref = collection(db, "Courses");
-        const q = query(ref, where("id", "in", user.likedItems));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          array.push(doc.data());
-        });
-        setLikedArray(array);
-        setLoading(false);
-      };
       getData();
     }
   }, [user]);

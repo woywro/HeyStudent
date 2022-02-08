@@ -62,8 +62,8 @@ export const ListItem = ({ item, key }: Props) => {
         <CourseTitle>{item.name.join(" ")}</CourseTitle>
         <CourseUniversity>{item.university}</CourseUniversity>
         <CourseCity>{item.city}</CourseCity>
-        {user &&
-          (user.likedItems.includes(item.id) ? (
+        {user && user.likedItems.length < 9 ? (
+          user.likedItems.includes(item.id) ? (
             <Text onClick={handleStopObserve}>
               <AiFillHeart />
             </Text>
@@ -71,7 +71,10 @@ export const ListItem = ({ item, key }: Props) => {
             <Text onClick={handleObserve}>
               <AiOutlineHeart />
             </Text>
-          ))}
+          )
+        ) : (
+          <Text>x</Text>
+        )}
       </StyledListItem>
     </Link>
   );
