@@ -9,11 +9,10 @@ import {
   Divider,
   AccordionInside,
 } from "./style";
-import { SubjectInterface } from "../../interfaces/SubjectInterface";
 
 interface Props {
   title: string;
-  content: SubjectInterface;
+  content: any;
 }
 
 export const Accordion = ({ title, content }: Props) => {

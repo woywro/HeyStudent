@@ -17,7 +17,7 @@ export const Search = ({ data }: Props) => {
       <PageTopBar title="wyszukiwanie">
         <SearchBar />
       </PageTopBar>
-      <List elements={data} />
+      <List />
     </StyledSearch>
   );
 };

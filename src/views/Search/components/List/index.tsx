@@ -5,6 +5,7 @@ import { useSearchContext } from "../../../../context/searchContext";
 import { Text } from "../../../../components/Text";
 import { Container } from "./style";
 import { Loading } from "../../../../components/Loading";
+import { ItemType } from "../../../../types";
 
 export const List = () => {
   const { isLoading } = useLoadingContext();
@@ -26,7 +27,7 @@ export const List = () => {
             )}
             kryteria
           </Text>
-          {searched.map((item) => {
+          {searched.map((item: ItemType) => {
             return <ListItem key={item.id} item={item} />;
           })}
         </>

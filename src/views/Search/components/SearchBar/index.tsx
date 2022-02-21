@@ -12,11 +12,14 @@ import {
 } from "../../../../components/ToogleButtonGroup";
 
 import { StyledSearchBar, StyledNameSearch, ClearButton, Row } from "./style";
+import { ItemType } from "../../../../types";
 
 export const SearchBar = () => {
   let router = useRouter();
+  const [input, setInput] = useState("");
   const [sort, setSort] = useState("random");
   const { searched, setSearched } = useSearchContext();
+  const { isLoading, setLoading } = useLoadingContext();
 
   const handleInputChange = (e) => {
     e.preventDefault();
@@ -28,13 +31,18 @@ export const SearchBar = () => {
     (sort) => {
       if (sort == "alphabetical") {
         const sorted = JSON.parse(
-          JSON.stringify(searched.sort((a, b) => b.name[0] < a.name[0]))
+          JSON.stringify(
+            searched.sort((a: ItemType, b: ItemType) => b.name[0] < a.name[0])
+          )
         );
         setSearched(sorted);
       } else if (sort == "popularity") {
         const sorted = JSON.parse(
           JSON.stringify(
-            searched.sort((a, b) => b.willStudy.length - a.willStudy.length)
+            searched.sort(
+              (a: ItemType, b: ItemType) =>
+                b.willStudy.length - a.willStudy.length
+            )
           )
         );
         setSearched(sorted);
@@ -47,9 +55,6 @@ export const SearchBar = () => {
     },
     [sort, searched]
   );
-
-  const [input, setInput] = useState("");
-  const { isLoading, setLoading } = useLoadingContext();
 
   useEffect(() => {
     if (router.pathname !== "/") {

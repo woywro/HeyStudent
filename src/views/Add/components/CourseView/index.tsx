@@ -12,7 +12,6 @@ import { Button } from "../../../../components/Button";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import * as Yup from "yup";
-import { ErrorSharp } from "@material-ui/icons";
 import { Text } from "../../../../components/Text";
 import { AddTags } from "../AddTags";
 
