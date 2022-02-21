@@ -10,8 +10,7 @@ import styled from "styled-components";
 import { theme } from "../theme/theme";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { NotificationBar } from "../components/NotificationBar";
-import { NotificationContextProvider } from "../context/notifiactionContext";
+import { AppProps } from "next/app";
 
 const StyledApp = styled.div`
   display: flex;
@@ -25,51 +24,49 @@ const StyledApp = styled.div`
   padding: 0;
 `;
 
-function Application({ Component, pageProps }) {
+function Application({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <LoadingContextProvider>
-      <NotificationContextProvider>
-        <SearchContextProvider>
-          <UserContextProvider>
-            <FieldsOfStudyContextProvider>
-              <StyledApp>
-                <ThemeProvider theme={theme}>
-                  <GlobalStyle />
-                  <NextNProgress
-                    height={2}
-                    color="#ffc400"
-                    options={{ showSpinner: false }}
-                  />
-                  <Nav />
-                  <motion.div
-                    key={router.route}
-                    initial="pageInitial"
-                    animate="pageAnimate"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                    variants={{
-                      pageInitial: {
-                        opacity: 0,
-                      },
-                      pageAnimate: {
-                        opacity: 1,
-                      },
-                    }}
-                  >
-                    <Component {...pageProps} />
-                  </motion.div>
-                </ThemeProvider>
-              </StyledApp>
-            </FieldsOfStudyContextProvider>
-          </UserContextProvider>
-        </SearchContextProvider>
-      </NotificationContextProvider>
+      <SearchContextProvider>
+        <UserContextProvider>
+          <FieldsOfStudyContextProvider>
+            <StyledApp>
+              <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <NextNProgress
+                  height={2}
+                  color="#ffc400"
+                  options={{ showSpinner: false }}
+                />
+                <Nav />
+                <motion.div
+                  key={router.route}
+                  initial="pageInitial"
+                  animate="pageAnimate"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  variants={{
+                    pageInitial: {
+                      opacity: 0,
+                    },
+                    pageAnimate: {
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <Component {...pageProps} />
+                </motion.div>
+              </ThemeProvider>
+            </StyledApp>
+          </FieldsOfStudyContextProvider>
+        </UserContextProvider>
+      </SearchContextProvider>
     </LoadingContextProvider>
   );
 }

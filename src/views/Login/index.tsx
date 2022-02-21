@@ -1,7 +1,6 @@
 import { signInWithGoogle } from "../../firebase/firebase";
 import { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useLoadingContext } from "../../context/loadingContext";
 import { useRouter } from "next/router";
 import { Button } from "../../components/Button";
 import { Text } from "../../components/Text";
@@ -15,7 +14,6 @@ import {
 } from "./style";
 import { auth } from "../../firebase/firebase";
 import { StyledInput } from "./style";
-import { useNotificationContext } from "../../context/notifiactionContext";
 
 export const Login = () => {
   const router = useRouter();

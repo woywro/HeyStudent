@@ -12,7 +12,6 @@ import {
   StyledCourseUniversity,
   StyledCourseCity,
 } from "./style";
-import { Text } from "../../../../components/Text";
 import { Button } from "../../../../components/Button";
 
 interface Props {

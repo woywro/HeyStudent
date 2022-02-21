@@ -17,7 +17,7 @@ interface userInterface {
 
 interface userType {
   user: userInterface;
-  setUser: (arg: any) => void;
+  setUser: (arg: userInterface) => void;
 }
 
 interface Props {

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import breakpoints from "../../../../theme/breakpoints";
 
-export const StyledObservedItem = styled.div`
+export const StyledObservedItem = styled.div<{ hasBorder: string }>`
   border-radius: 10px;
   width: 100%;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
