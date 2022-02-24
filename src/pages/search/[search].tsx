@@ -19,19 +19,19 @@ export async function getServerSideProps(context) {
   const createQuery = () => {
     const colRef = collection(db, "Courses");
     if (tagArray.length == 1) {
-      return query(colRef, where(`tags1.${tagArray[0]}`, "==", true));
+      return query(colRef, where(`tags.${tagArray[0]}`, "==", true));
     } else if (tagArray.length == 2) {
       return query(
         colRef,
-        where(`tags1.${tagArray[0]}`, "==", true),
-        where(`tags1.${tagArray[1]}`, "==", true)
+        where(`tags.${tagArray[0]}`, "==", true),
+        where(`tags.${tagArray[1]}`, "==", true)
       );
     } else if (tagArray.length == 3) {
       return query(
         colRef,
-        where(`tags1.${tagArray[0]}`, "==", true),
-        where(`tags1.${tagArray[1]}`, "==", true),
-        where(`tags1.${tagArray[2]}`, "==", true)
+        where(`tags.${tagArray[0]}`, "==", true),
+        where(`tags.${tagArray[1]}`, "==", true),
+        where(`tags.${tagArray[2]}`, "==", true)
       );
     }
   };
