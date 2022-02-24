@@ -5,7 +5,7 @@ import {
   StyledCourseElement,
   StyledCourseElementTitle,
 } from "./style";
-import { useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { Input } from "../../../../components/Input";
 import { SubjectsAdd } from "../SubjectsAdd";
 import { Button } from "../../../../components/Button";

@@ -18,13 +18,13 @@ export const List = () => {
       ) : (
         <>
           <Text size="small">
-            znaleziono {searched.length}
+            znaleziono {searched.length}{" "}
             {defineSuffix(
               searched.length,
               "kierunek spełniający",
               "kierunki spełniające",
               "kierunków spełniających"
-            )}
+            )}{" "}
             kryteria
           </Text>
           {searched.map((item: ItemType) => {
